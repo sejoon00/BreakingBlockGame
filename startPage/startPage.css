@@ -1,0 +1,38 @@
+#gameStartBtn {
+  width: 200px;
+  height: 50px;
+}
+
+#startPage {
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+#logo {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+#spacebar {
+  color: #d9cf4a;
+  letter-spacing: 6px;
+  margin-bottom: 50px;
+  font-weight: bold;
+  font-size: 2.2em;
+}
+
+.text {
+  font-size: 1em;
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  letter-spacing: 5px;
+  color: #c92a34;
+}

@@ -1,0 +1,16 @@
+#game1 {
+  display: none;
+}
+
+#game1_backgroundImg {
+  width: 100%;
+  display: block;
+}
+
+#game1_canvas {
+  border: 2px solid white;
+  width: 960px;
+  height: 700px;
+  background-image: url("./game1Background.png");
+  background-repeat: no-repeat;
+}

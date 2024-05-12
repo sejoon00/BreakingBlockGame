@@ -1,0 +1,22 @@
+#selectGame {
+  display: none;
+  margin: 0 auto;
+}
+
+#text2 {
+  color: #fff;
+  font-family: "Pixelify Sans", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  margin: 50px 0;
+}
+
+#selectgame_image {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#game1Btn,
+#game2Btn {
+  margin-bottom: 20px;
+}
