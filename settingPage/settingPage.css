@@ -1,20 +1,34 @@
 #settingPage {
   display: none;
+  height: 500px;
+}
+
+#text3 {
+  color: #e90d0d;
+  font-family: "Pixelify Sans", sans-serif;
+  text-align: center;
+  font-size: 5em;
+  margin: 50px 0;
 }
 
 #charactercontainer {
+  display: flex;
   width: 100%;
-  height: 300px;
-
-  border: 1px solid #e21111;
+  height: 100%;
 }
 
-button .left {
-  width: 50%;
-  float: left;
+#charactercontainer .left,
+#charactercontainer .right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%; 
 }
 
-button .right {
-  width: 50%;
-  float: left;
+#charactercontainer .left img,
+#charactercontainer .right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
 }

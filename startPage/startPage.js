@@ -7,7 +7,7 @@ document.querySelector("main").insertAdjacentHTML(
   `
   <section id="startPage">
     <div id="logo">
-      <img src="./startPage/ralphLogo.png" width="300" height="300"></img>
+      <img src="./startPage/ralphLogo.png" width="300" height="250"></img>
     </div>
     <div id="spacebar">PRESS SPACEBAR</div>
 		<div class="text">WEB PROGRAMMING TEAM 8<br>MINSEOK SEJUN KUNYONG EUNSEO</div>
@@ -32,6 +32,7 @@ document.addEventListener(
 
 //은서
 let id;
+StartPagePlayAudio();
 changeColor();
 
 //
@@ -49,9 +50,12 @@ function moveToStagePage() {
 function changeColor() {
   id = setInterval(flashText, 1000);
 }
-
 function flashText() {
   let elem = document.querySelector("#spacebar");
   let currentColor = elem.style.color;
   elem.style.color = currentColor === "rgb(217, 207, 74)" ? "white" : "#d9cf4a";
+}
+function StartPagePlayAudio() {
+  var audio = new Audio("./sound/WreckItRalph_StartPage.mp3");
+  audio.play();
 }

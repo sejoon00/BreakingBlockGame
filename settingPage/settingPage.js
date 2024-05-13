@@ -5,15 +5,18 @@ document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
     <div id="settingPage">
-        <div id = "charactercontainer">
-            <button class = "left" onclick="goToGame1ByRalph()">
-            <img src = "ralph.png">랄프</button>
-            <button class = "right" onclick="goToGame1ByVanellope()">
-            <img src = "lockedvanellope.png">바넬로피</button>
+      <div id = "text3">Choose your Character!</div>
+        <div id = "charactercontainer">  
+          <button class = "left" onclick="goToGame1ByRalph()">
+          <img src = "./stagePage/Hero'sDuty.png">
+          <button class = "right" onclick="goToGame1ByVanellope()">
+          <img src = "./stagePage/Hero'sDuty.png">
         </div>
     </div>
 `
 );
+
+
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/

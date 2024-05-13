@@ -10,9 +10,9 @@ document.querySelector("main").insertAdjacentHTML(
         Select Stage!
       </div>
       <div id="selectgame_image">
-        <img src="./stagePage/WreckItRalph.png" width="700" id="game1Btn" onclick=goToSettingPageForGame1()>
-        <img src="./stagePage/SugarRush.png" width="700" id="game2Btn" onclick=goToSettingPageForGame2()>
-        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Btn" onclick=goToSettingPageForGame3()>
+        <img src="./stagePage/WreckItRalph.png" width="700" id="game1Img" onclick=goToSettingPageForGame1() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+        <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onclick=goToSettingPageForGame2()>
+        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onclick=goToSettingPageForGame3()>
       </div>
     </div>
     `
@@ -42,4 +42,16 @@ function goToSettingPageForGame3() {
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game3";
   pageState = "Gaming";
+}
+
+//은서
+function imgOnMouseIn(elem) {
+  elem.style.width= "750px";
+}
+function imgOnMouseOut(elem) {
+  elem.style.width= "";
+}
+function StagePagePlayAudio() {
+  let audio = new Audio("./sound/WreckItRalph_StartPage.mp3");
+  audio.play();
 }
