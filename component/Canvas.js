@@ -8,6 +8,7 @@ class Canvas {
     this.ballInitialY;
     this.balls = []; // 공 리스트 초기화
     this.blocks = []; // 블록 리스트 초기화
+    this.paddle;    //막대기 추가
 
     this.backgroundimage.onload = () => {
       this.canvas.width = this.backgroundimage.width;
@@ -38,6 +39,11 @@ class Canvas {
   //게임 내 요소들을 초기화합니다.
   initGameElements() {
     this.balls.push(new Ball(this.ballInitialX, this.ballInitialY, 4, -4, 10, "#0095DD"));
+    this.balls.push(new Ball(this.ballInitialX, this.ballInitialY, 4, -4, 10, "#0095DD"));
+    
+
+    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    this.paddle.bindMouseMove();
   
     // 블록의 시작 y 위치
     let startY = 110; 
@@ -84,8 +90,10 @@ class Canvas {
       });
       this.balls.forEach(ball => {
         ball.draw(this.context);
-        ball.update(this.canvas, this.blocks);
+        ball.update(this.canvas, this.blocks,this.paddle);
       });
+
+      this.paddle.draw(); // 막대기 그리기 추가
       
       requestAnimationFrame(update);
     };

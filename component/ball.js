@@ -16,7 +16,7 @@ class Ball {
     ctx.closePath();
   }
 
-  update(canvas, blocks) {
+  update(canvas, blocks, paddle) {
     // 캔버스 경계 체크하여 방향 반전
     if (this.x + this.dx > canvas.width - this.radius || this.x + this.dx < this.radius) {
       this.dx = -this.dx;
@@ -31,6 +31,14 @@ class Ball {
         // 충돌 처리는 isHit 내에서 수행됨
       }
     });
+
+    if (paddle.isHitPaddle(this)) {
+      // 패들과의 충돌 처리
+    }
+
+    
+
+
 
     // 공 위치 업데이트
     this.x += this.dx;
