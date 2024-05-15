@@ -4,15 +4,17 @@
 document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
-    <div id="settingPage">
+  <div id="settingPage">
       <div id = "text3">Choose your Character!</div>
         <div id = "charactercontainer">  
           <button class = "left" onclick="goToGame1ByRalph()">
-          <img src = "./stagePage/Hero'sDuty.png">
+          <img src = "./source/selectRalph.png">
           <button class = "right" onclick="goToGame1ByVanellope()">
-          <img src = "./stagePage/Hero'sDuty.png">
+          <img src = "./source/lockedVanellope.png">
         </div>
+        <div id="lockMessage">Character is locked!</div>
     </div>
+  
 `
 );
 
@@ -30,6 +32,7 @@ function moveToGame() {
 }
 
 function goToGame1ByRalph() {
+  pageState = "Gaming";   //게임중으로 상태 변경
   document.querySelector("#game1").style.display = "block";
   document.querySelector("#settingPage").style.display = "none";
   pageState = "Gaming";
@@ -38,13 +41,14 @@ function goToGame1ByRalph() {
 }
 // 곤용 잠금해제 되었을 떄만 사용가능
 function goToGame1ByVanellope() {
-  if (isCharacter == "true") {
+  pageState = "Gaming";   //게임중으로 상태 변경
+  if (isCharacter === "true") {
     document.querySelector("#game1").style.display = "block";
     document.querySelector("#settingPage").style.display = "none";
     pageState = "Gaming";
     selectCharacter = "Vanellope";
     setGame1CanvasSize();
-  } else if (isCharacter == "false") {
-    alert("Character is locked");
+  } else  {
+    document.querySelector("#lockMessage").style.display = "block";
   }
 }

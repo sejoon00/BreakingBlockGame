@@ -24,3 +24,10 @@ function setGame1() {
   canvas.appendTo(game1);
 }
 
+function endGame1(){
+  let game1 = document.querySelector("#game1");
+  canvas.removeFrom(game1);
+}
+
+
+

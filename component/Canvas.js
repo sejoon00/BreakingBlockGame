@@ -36,6 +36,13 @@ class Canvas {
     element.appendChild(this.canvas);
   }
 
+  removeFrom(element) {
+    if (typeof element === "string") {
+        element = document.querySelector(element);
+    }
+    element.removeChild(this.canvas);
+  }
+
   //게임 내 요소들을 초기화합니다.
   initGameElements() {
     this.balls.push(new Ball(this.ballInitialX, this.ballInitialY, 4, -4, 10, "#0095DD"));

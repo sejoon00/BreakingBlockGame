@@ -54,5 +54,6 @@ function setGameHide() {
   document.querySelector("#game2 ").style.display = "none";
   document.querySelector("#game3").style.display = "none";
   document.querySelector("#escPage").style.display = "none";
+
   pageState = "startPage";
 }

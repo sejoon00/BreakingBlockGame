@@ -57,7 +57,8 @@ class Block {
       } else if (collideBottom && ball.dy < 0) {
         this.hitBottom(ball);
       }
-      
+      // let blockAudio = new Audio('./source/.mp3');
+      // blockAudio.play();
       return true;
     }
     return false;

@@ -25,14 +25,19 @@ document.addEventListener(
     if (event.code === "Space") {
       moveToStagePage();
       event.preventDefault(); // 스페이스바의 기본 동작을 방지합니다.
+      startPageAudio.pause(); // 노래 중단
     }
   },
   { once: true }
 );
 
+
 //은서
 let id;
-StartPagePlayAudio();
+let startPageAudio = new Audio('./source/WreckItRalph_StartPage.mp3');
+startPageAudio.play();
+startPageAudio.loop = true;
+startPageAudio.volume = 0.05; // 임시 설정
 changeColor();
 
 //
@@ -54,8 +59,4 @@ function flashText() {
   let elem = document.querySelector("#spacebar");
   let currentColor = elem.style.color;
   elem.style.color = currentColor === "rgb(217, 207, 74)" ? "white" : "#d9cf4a";
-}
-function StartPagePlayAudio() {
-  var audio = new Audio("./sound/WreckItRalph_StartPage.mp3");
-  audio.play();
 }

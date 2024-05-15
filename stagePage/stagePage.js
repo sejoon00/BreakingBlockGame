@@ -10,7 +10,7 @@ document.querySelector("main").insertAdjacentHTML(
         Select Stage!
       </div>
       <div id="selectgame_image">
-        <img src="./stagePage/WreckItRalph.png" width="700" id="game1Img" onclick=goToSettingPageForGame1() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+        <img src="./stagePage/WreckItRalph.png" width="700" id="game1Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
         <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onclick=goToSettingPageForGame2()>
         <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onclick=goToSettingPageForGame3()>
       </div>
@@ -21,6 +21,12 @@ document.querySelector("main").insertAdjacentHTML(
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 
+//은서
+document.querySelector("#game1Img").addEventListener('click', () => {
+  goToSettingPageForGame1();
+  // 효과음?
+});
+
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
@@ -29,19 +35,16 @@ function goToSettingPageForGame1() {
   document.querySelector("#settingPage").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game1";
-  pageState = "Gaming";
 }
 function goToSettingPageForGame2() {
   document.querySelector("#settingPage").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game2";
-  pageState = "Gaming";
 }
 function goToSettingPageForGame3() {
   document.querySelector("#settingPage").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game3";
-  pageState = "Gaming";
 }
 
 //은서
@@ -50,8 +53,4 @@ function imgOnMouseIn(elem) {
 }
 function imgOnMouseOut(elem) {
   elem.style.width= "";
-}
-function StagePagePlayAudio() {
-  let audio = new Audio("./sound/WreckItRalph_StartPage.mp3");
-  audio.play();
 }
