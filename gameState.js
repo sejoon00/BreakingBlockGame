@@ -1,4 +1,4 @@
-pageState = "startPage";
+gameState = "none";
 
 selectTargetGame = "";
 

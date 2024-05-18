@@ -11,8 +11,8 @@ document.querySelector("main").insertAdjacentHTML(
       </div>
       <div id="selectgame_image">
         <img src="./stagePage/WreckItRalph.png" width="700" id="game1Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
-        <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onclick=goToSettingPageForGame2()>
-        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onclick=goToSettingPageForGame3()>
+        <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onclick=goToSettingPageForGame2() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onclick=goToSettingPageForGame3() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
       </div>
     </div>
     `
@@ -22,9 +22,12 @@ document.querySelector("main").insertAdjacentHTML(
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 
 //은서
-document.querySelector("#game1Img").addEventListener('click', () => {
+document.querySelector("#game1Img").addEventListener("click", () => {
   goToSettingPageForGame1();
-  // 효과음?
+  let startPageAudio = new Audio(
+    "https://taira-komori.jpn.org/sound_os2/game01/coin01.mp3"
+  ); // 동전 소리
+  startPageAudio.play();
 });
 
 // ---------------------------------- javascript function ----------------------------------
@@ -49,8 +52,8 @@ function goToSettingPageForGame3() {
 
 //은서
 function imgOnMouseIn(elem) {
-  elem.style.width= "750px";
+  elem.style.transform = "scale(1.05)";
 }
 function imgOnMouseOut(elem) {
-  elem.style.width= "";
+  elem.style.transform = "scale(1)";
 }

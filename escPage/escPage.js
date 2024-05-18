@@ -6,8 +6,8 @@ document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
     <div id="escPage">
-        <button onclick=PopDownEscPage()>계속하기</button>
-        <button onclick= setGameHide(); >나가기</button>
+        <button onclick=PopDownEscPage()>Continue</button>
+        <button onclick= setGameHide(); >Exit</button>
     </div>
     `
 );
@@ -30,8 +30,8 @@ document.addEventListener("keydown", (event) => {
 
 //민석
 function PopUpEscPage() {
-  //현재 pageState의 상태가 'Gaming'인 경우에만 ESC 이벤트 발동
-  if (pageState == "Gaming") {
+  //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
+  if (gameState == "Gaming1") {
     document.querySelector("#escPage").style.display = "block";
   }
 }
@@ -50,10 +50,19 @@ function PopDownEscPage() {
 function setGameHide() {
   //나가기 버튼 클릭 시 게임 hide해주고, 난이도 선택 화면으로 돌아가기
   moveToStagePage();
-  document.querySelector("#game1").style.display = "none";
-  document.querySelector("#game2 ").style.display = "none";
+  // document.querySelector("#game1").style.display = "none";
+  document.querySelector("#game2").style.display = "none";
   document.querySelector("#game3").style.display = "none";
   document.querySelector("#escPage").style.display = "none";
-
-  pageState = "startPage";
+  // 특정 요소를 선택하고 제거합니다.
+  let game1 = document.querySelector("#game1");
+  if (game1) {
+    game1.remove();
+  }
+  // canvas 객체 정리
+  if (canvas) {
+    canvas.destroy();
+    canvas = null;
+  }
+  gameState = "none";
 }

@@ -5,12 +5,14 @@ document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
   <div id="settingPage">
-      <div id = "text3">Choose your Character!</div>
-        <div id = "charactercontainer">  
-          <button class = "left" onclick="goToGame1ByRalph()">
-          <img src = "./source/selectRalph.png">
-          <button class = "right" onclick="goToGame1ByVanellope()">
-          <img src = "./source/lockedVanellope.png">
+      <div id="text3">Choose your Character!</div>
+        <div id="charactercontainer">
+          <div class="left" onclick="moveToGameWithRalph()" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+            <img src="./source/selectRalph.png">
+          </div>
+          <div class = "right" onclick="moveToGameWithVanellope" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+            <img src = "./source/lockedVanellope.png">
+          </div>
         </div>
         <div id="lockMessage">Character is locked!</div>
     </div>
@@ -18,37 +20,46 @@ document.querySelector("main").insertAdjacentHTML(
 `
 );
 
-
-
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
-function moveToGame() {
+function moveToGameWithRalph() {
   if (selectTargetGame == "game1") {
+    goToGame1ByRalph();
+  }
+}
+
+function moveToGameWithVanellope() {
+  if (selectTargetGame == "game1") {
+    goToGame1ByVanellope();
   }
 }
 
 function goToGame1ByRalph() {
-  pageState = "Gaming";   //게임중으로 상태 변경
+  gameState = "Gaming1"; //게임중으로 상태 변경
   document.querySelector("#game1").style.display = "block";
   document.querySelector("#settingPage").style.display = "none";
-  pageState = "Gaming";
+  gameState = "Gaming1";
   selectCharacter = "Ralph";
   setGame1();
 }
-// 곤용 잠금해제 되었을 떄만 사용가능
+// 곤용 잠금해제 되었을 때만 사용가능
 function goToGame1ByVanellope() {
-  pageState = "Gaming";   //게임중으로 상태 변경
+  gameState = "Gaming1"; //게임중으로 상태 변경
   if (isCharacter === "true") {
     document.querySelector("#game1").style.display = "block";
     document.querySelector("#settingPage").style.display = "none";
-    pageState = "Gaming";
+    gameState = "Gaming1";
     selectCharacter = "Vanellope";
     setGame1CanvasSize();
-  } else  {
-    document.querySelector("#lockMessage").style.display = "block";
+  } else {
+    const lockMessage = document.querySelector("#lockMessage");
+    lockMessage.style.display = "block";
+    setTimeout(() => {
+      lockMessage.style.display = "none";
+    }, 2000); // Character is locked! 메시지 출력
   }
 }

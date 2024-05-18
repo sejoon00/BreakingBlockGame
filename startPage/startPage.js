@@ -31,13 +31,12 @@ document.addEventListener(
   { once: true }
 );
 
-
 //은서
 let id;
-let startPageAudio = new Audio('./source/WreckItRalph_StartPage.mp3');
+let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
 startPageAudio.play();
 startPageAudio.loop = true;
-startPageAudio.volume = 0.05; // 임시 설정
+startPageAudio.volume = 0.005; // 임시 설정
 changeColor();
 
 //
@@ -47,7 +46,7 @@ changeColor();
 //세준
 function moveToStagePage() {
   document.querySelector("#startPage").style.display = "none";
-  pageState = "stagePage";
+  gameState = "stagePage";
   document.querySelector("#selectGame").style.display = "block";
 }
 

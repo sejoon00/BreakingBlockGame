@@ -1,0 +1,9 @@
+#overPage {
+  display: none;
+}
+
+#result {
+  font-size: 3em;
+  text-align: center;
+  font-family: "Pixelify Sans", sans-serif;
+}

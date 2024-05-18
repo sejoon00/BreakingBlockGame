@@ -9,8 +9,17 @@
 
 #game1_canvas {
   border: 2px solid white;
-  width: 960px;
-  height: 700px;
+
   background-image: url("./game1Background.png");
   background-repeat: no-repeat;
+}
+
+#game1_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black; /* Optional: To have a background color for the container */
 }

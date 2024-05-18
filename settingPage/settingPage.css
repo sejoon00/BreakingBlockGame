@@ -1,20 +1,20 @@
 #settingPage {
   display: none;
-  height: 500px;
+  /* height: 500px; */
 }
 
 #text3 {
   color: #e90d0d;
   font-family: "Pixelify Sans", sans-serif;
   text-align: center;
-  font-size: 5em;
+  font-size: 3em;
   margin: 50px 0;
 }
 
 #charactercontainer {
   display: flex;
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 
 #charactercontainer .left,
@@ -23,28 +23,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100%; 
+  border-radius: 50%;
+  background-color: #fff;
+  /* width: 200px; */
+  /* height: 200px; */
+}
+
+#charactercontainer .right {
+  border-radius: 50%;
+  margin-left: 50px;
 }
 
 #charactercontainer .left img,
 #charactercontainer .right img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
-} 
+  object-fit: cover;
+}
 
-
-#lockedMessage {
+#lockMessage {
   color: #e90d0d;
   font-family: "Pixelify Sans", sans-serif;
   text-align: center;
   font-size: 2em;
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  background-color: rgba(255, 255, 255, 0.8); 
-  padding: 10px 20px; 
-  border-radius: 10px; 
-  display: none; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: none;
 }
