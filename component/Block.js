@@ -102,6 +102,8 @@ class Block {
     return false;
   }
 
+  // 아무거나
+
   draw(ctx) {
     if (this.visible) {
       let image = new Image();
