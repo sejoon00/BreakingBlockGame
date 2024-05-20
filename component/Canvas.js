@@ -29,6 +29,8 @@ class Canvas {
     this.backgroundimage.src = backgroundimageUrl;
   }
 
+  // 주석
+
   drawBackground() {
     this.context.drawImage(
       this.backgroundimage,
@@ -109,38 +111,47 @@ class Canvas {
     this.paddle.bindMouseMove();
 
     // 블록의 시작 y 위치
-    let startY = 130;
-    const blockWidth = 40;
-    const blockHeight = 70;
-    const blockSpacingX = 40; // 블록 간 x 간격
-    const blockSpacingY = 60; // 블록 간 y 간격
+    let startY = 116;
+    const blockWidth = 38;
+    const blockHeight = 28;
+    const blockSpacingX = 45; // 블록 간 x 간격
+    const blockSpacingY = 30; // 블록 간 y 간격 
 
     // 블록 배치
     for (let row = 0; row < 4; row++) {
-      let startX = 300; // 블록의 시작 x 위치
-      let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
-
-      for (let i = 0; i < numBlocks; i++) {
-        this.blocks.push(
-          new Block(
-            startX,
-            startY,
-            blockWidth,
-            blockHeight,
-            this.increaseBrokenBlocks.bind(this)
-          )
-        );
-        // 간격 조정
-        if (row >= 2 && i == 1) {
-          startX += blockWidth + 120; // 2번과 3번 블록 사이 100px 간격
-        } else {
-          startX += blockWidth + blockSpacingX; // 나머지 블록 간 기본 간격
+      for (let innerRow = 0; innerRow < 2; innerRow++) {
+        let startX = 297; // 블록의 시작 x 위치
+        let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
+  
+        for (let i = 0; i < numBlocks; i++) {
+          this.blocks.push(
+            new Block(
+              startX,
+              startY,
+              blockWidth,
+              blockHeight,
+              this.increaseBrokenBlocks.bind(this)
+            )
+          );
+          // x좌표 조정
+          if(i===0)
+            startX += blockWidth + 40;
+          else
+          startX += blockWidth + blockSpacingX;
+          if(row > 1 && i === 1)
+            startX += blockWidth + blockSpacingX;
         }
+        // 다음 행으로 이동
+        startY += blockHeight + 5; // innerRow 5px 간격
       }
-
-      // 다음 행으로 이동
-      startY += blockHeight + blockSpacingY; // 1번 행과 2번 행 사이 100px 간격
+      startY += blockHeight + blockSpacingY; // Row 30px 간격
+      if (row === 1)
+         startY -= 5;
+      if (row === 2)
+        startY -= 16;
     }
+
+    // 생명 배치
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
         new Life(this.canvas, "../source/full_heart.png", 30, 10 + i * 40, 10)
