@@ -104,7 +104,8 @@ class Canvas {
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
     );
     console.log(this.balls);
-    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    // 매개변수 하나 추가 -곤용- 3번쨰 height도 크게
+    this.paddle = new Paddle(this.canvas, 100, 10, 40, selectedCharacter);
 
     this.paddle.bindMouseMove();
 
