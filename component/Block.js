@@ -105,7 +105,9 @@ class Block {
   draw(ctx) {
     if (this.visible) {
       ctx.fillStyle = "#FF5733"; // 블록 색상 설정
+      //충돌나지렁
       ctx.fillRect(this.x, this.y, this.width, this.height);
+      //하이하이
     }
   }
 }
