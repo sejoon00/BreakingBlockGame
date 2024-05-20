@@ -104,12 +104,19 @@ class Block {
 
   draw(ctx) {
     if (this.visible) {
+<<<<<<< HEAD
       let image = new Image();
       image.src = './source/window.png';
 
       ctx.drawImage(image, this.x, this.y, this.width, this.height);
       // ctx.fillStyle = "#FF5733"; // 블록 색상 설정
       // ctx.fillRect(this.x, this.y, this.width, this.height);
+=======
+      ctx.fillStyle = "#FF5733"; // 블록 색상 설정
+      //충돌나지렁
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+      //하이하이
+>>>>>>> origin/master
     }
   }
 }
