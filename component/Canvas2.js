@@ -1,9 +1,9 @@
 class Canvas {
   constructor(backgroundimageUrl) {
     this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game1_canvas";
-    this.context = this.canvas.getContext("2d");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'game1_canvas';
+    this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
     this.ballInitialY;
@@ -15,7 +15,7 @@ class Canvas {
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
 
-    window.addEventListener("resize", this.resizeCanvas.bind(this));
+    window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
@@ -30,6 +30,7 @@ class Canvas {
   }
 
   // 주석
+  // game2 init
 
   drawBackground() {
     this.context.drawImage(
@@ -41,7 +42,7 @@ class Canvas {
     );
   }
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game1'));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -50,14 +51,14 @@ class Canvas {
   }
 
   appendTo(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.appendChild(this.canvas);
   }
 
   removeFrom(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.removeChild(this.canvas);
@@ -66,10 +67,10 @@ class Canvas {
   // 점수 증가 함수
   increaseScore() {
     this.score += 100; // 점수를 10 증가시킵니다.
-    console.log("score");
+    console.log('score');
   }
   decreaseLife() {
-    console.log("생명-1");
+    console.log('생명-1');
 
     if (this.lifes.length > 0) {
       this.lifes.pop(); // 생명 배열에서 하나를 제거합니다.
@@ -78,11 +79,11 @@ class Canvas {
 
   // 점수를 화면에 표시하는 함수
   drawScore() {
-    this.context.font = "24px Arial";
-    this.context.fillStyle = "yellow";
+    this.context.font = '24px Arial';
+    this.context.fillStyle = 'yellow';
     // this.context.strokeStyle = "black";
     this.context.lineWidth = 2;
-    this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
+    this.context.fillText('Score: ' + this.score, this.canvas.width - 150, 35);
     // this.context.strokeText(
     //   "Score: " + this.score,
     //   this.canvas.width - 150,
@@ -92,7 +93,7 @@ class Canvas {
 
   destroy() {
     // 리소스 정리 코드
-    window.removeEventListener("resize", this.resizeCanvas.bind(this));
+    window.removeEventListener('resize', this.resizeCanvas.bind(this));
     this.balls = [];
     this.blocks = [];
     this.items = [];
@@ -103,7 +104,7 @@ class Canvas {
   //게임 내 요소들을 초기화합니다.
   initGameElements() {
     this.balls.push(
-      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
+      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
     console.log(this.balls);
     this.paddle = new Paddle(this.canvas, 100, 10, 10);
@@ -115,14 +116,14 @@ class Canvas {
     const blockWidth = 38;
     const blockHeight = 28;
     const blockSpacingX = 45; // 블록 간 x 간격
-    const blockSpacingY = 30; // 블록 간 y 간격 
+    const blockSpacingY = 30; // 블록 간 y 간격
 
     // 블록 배치
     for (let row = 0; row < 4; row++) {
       for (let innerRow = 0; innerRow < 2; innerRow++) {
         let startX = 297; // 블록의 시작 x 위치
         let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
-  
+
         for (let i = 0; i < numBlocks; i++) {
           this.blocks.push(
             new Block(
@@ -134,27 +135,22 @@ class Canvas {
             )
           );
           // x좌표 조정
-          if(i===0)
-            startX += blockWidth + 40;
-          else
-          startX += blockWidth + blockSpacingX;
-          if(row > 1 && i === 1)
-            startX += blockWidth + blockSpacingX;
+          if (i === 0) startX += blockWidth + 40;
+          else startX += blockWidth + blockSpacingX;
+          if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
         }
         // 다음 행으로 이동
         startY += blockHeight + 5; // innerRow 5px 간격
       }
       startY += blockHeight + blockSpacingY; // Row 30px 간격
-      if (row === 1)
-         startY -= 5;
-      if (row === 2)
-        startY -= 16;
+      if (row === 1) startY -= 5;
+      if (row === 2) startY -= 16;
     }
 
     // 생명 배치
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
-        new Life(this.canvas, "../source/full_heart.png", 30, 10 + i * 40, 10)
+        new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
   }
