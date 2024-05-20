@@ -4,7 +4,7 @@ class Paddle {
     this.width = width;
     this.height = height;
     this.x = (this.canvas.width - this.width) / 2; // 막대기의 초기 X 위치
-    this.y = this.canvas.height - this.height - 20; // 막대기의 Y 위치
+    this.y = this.canvas.height - this.height - 30; // 막대기의 Y 위치
     this.speed = speed;
     //곤용
     this.image = new Image();
