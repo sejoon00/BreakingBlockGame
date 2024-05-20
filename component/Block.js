@@ -33,6 +33,8 @@ class Block {
   }
 
   isHit(ball, items, increaseScore) {
+    //test입니다
+
     if (!this.visible) return false;
 
     // 간단한 AABB 충돌 검사
