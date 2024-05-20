@@ -147,8 +147,8 @@ class Canvas {
     }
   }
   checkLifes() {
-    if (this.balls.length === 0) {
-      alert('공을 화면에 하나도 없습니다. 게임을 종료합니다');
+    if (this.lifes.length === 0) {
+      alert('생명이 없습니다. 게임을 종료합니다');
     }
   }
 
@@ -215,6 +215,7 @@ class Canvas {
 
       this.drawScore(); // 점수 그리기 추가
       this.checkBalls(); //공이 화면에 하나도 없는지 확인
+      this.checkLifes(); //생명이 없는지 확인
       requestAnimationFrame(update);
     };
     update();
