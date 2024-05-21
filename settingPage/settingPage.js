@@ -1,8 +1,8 @@
 // ------------------------------------ HTML ------------------------------------
 /* 해당 페이지의 HTML 코드를 작성하고 삽압하는 구간입니다. 주석이 잘 안보이니 자세히 확인부탁드립니다.*/
 
-document.querySelector("main").insertAdjacentHTML(
-  "afterbegin",
+document.querySelector('main').insertAdjacentHTML(
+  'afterbegin',
   `
   <div id="settingPage">
       <div id="text3">Choose your Character!</div>
@@ -27,39 +27,51 @@ document.querySelector("main").insertAdjacentHTML(
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 function moveToGameWithRalph() {
-  if (selectTargetGame == "game1") {
+  if (selectTargetGame == 'game1') {
     goToGame1ByRalph();
+  }
+  if (selectTargetGame == 'game2') {
+    goToGame2ByRalph();
   }
 }
 
 function moveToGameWithVanellope() {
-  if (selectTargetGame == "game1") {
+  if (selectTargetGame == 'game1') {
     goToGame1ByVanellope();
   }
 }
 
 function goToGame1ByRalph() {
-  gameState = "Gaming1"; //게임중으로 상태 변경
-  document.querySelector("#game1").style.display = "block";
-  document.querySelector("#settingPage").style.display = "none";
-  gameState = "Gaming1";
-  selectCharacter = "Ralph";
+  gameState = 'Gaming1'; //게임중으로 상태 변경
+  document.querySelector('#game1').style.display = 'block';
+  document.querySelector('#settingPage').style.display = 'none';
+  gameState = 'Gaming1';
+  selectCharacter = 'Ralph';
   setGame1();
 }
 // 곤용 잠금해제 되었을 때만 사용가능
 function goToGame1ByVanellope() {
-  gameState = "Gaming1"; //게임중으로 상태 변경
-  if (isCharacter === "true") {
-    document.querySelector("#game1").style.display = "block";
-    document.querySelector("#settingPage").style.display = "none";
-    gameState = "Gaming1";
-    selectCharacter = "Vanellope";
+  gameState = 'Gaming1'; //게임중으로 상태 변경
+  if (isCharacter === 'true') {
+    document.querySelector('#game1').style.display = 'block';
+    document.querySelector('#settingPage').style.display = 'none';
+    gameState = 'Gaming1';
+    selectCharacter = 'Vanellope';
     setGame1CanvasSize();
   } else {
-    const lockMessage = document.querySelector("#lockMessage");
-    lockMessage.style.display = "block";
+    const lockMessage = document.querySelector('#lockMessage');
+    lockMessage.style.display = 'block';
     setTimeout(() => {
-      lockMessage.style.display = "none";
+      lockMessage.style.display = 'none';
     }, 2000); // Character is locked! 메시지 출력
   }
+}
+
+function goToGame2ByRalph() {
+  gameState = 'Gaming2'; //게임중으로 상태 변경
+  console.log('hi');
+  document.querySelector('#game2').style.display = 'block';
+  document.querySelector('#settingPage').style.display = 'none';
+  selectCharacter = 'Ralph';
+  setGame2();
 }

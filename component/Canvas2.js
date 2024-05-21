@@ -1,8 +1,8 @@
-class Canvas {
+class Canvas2 {
   constructor(backgroundimageUrl) {
     this.backgroundimageUrl = backgroundimageUrl;
     this.canvas = document.createElement('canvas');
-    this.canvas.id = 'game1_canvas';
+    this.canvas.id = 'game2_canvas';
     this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
@@ -42,7 +42,7 @@ class Canvas {
     );
   }
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector('#game1'));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game2'));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -111,42 +111,6 @@ class Canvas {
 
     this.paddle.bindMouseMove();
 
-    // 블록의 시작 y 위치
-    let startY = 116;
-    const blockWidth = 38;
-    const blockHeight = 28;
-    const blockSpacingX = 45; // 블록 간 x 간격
-    const blockSpacingY = 30; // 블록 간 y 간격
-
-    // 블록 배치
-    for (let row = 0; row < 4; row++) {
-      for (let innerRow = 0; innerRow < 2; innerRow++) {
-        let startX = 297; // 블록의 시작 x 위치
-        let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
-
-        for (let i = 0; i < numBlocks; i++) {
-          this.blocks.push(
-            new Block(
-              startX,
-              startY,
-              blockWidth,
-              blockHeight,
-              this.increaseBrokenBlocks.bind(this)
-            )
-          );
-          // x좌표 조정
-          if (i === 0) startX += blockWidth + 40;
-          else startX += blockWidth + blockSpacingX;
-          if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
-        }
-        // 다음 행으로 이동
-        startY += blockHeight + 5; // innerRow 5px 간격
-      }
-      startY += blockHeight + blockSpacingY; // Row 30px 간격
-      if (row === 1) startY -= 5;
-      if (row === 2) startY -= 16;
-    }
-
     // 생명 배치
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
@@ -167,11 +131,6 @@ class Canvas {
     if (this.brokenBlocks === this.blocks.length) {
       this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
-  }
-  // 게임 종료 함수
-  endGame() {
-    alert("Congratulations! You've destroyed all the blocks!");
-    this.destroy();
   }
 
   //화면에 요소들을 일정주기마다 다시 그립니다.
