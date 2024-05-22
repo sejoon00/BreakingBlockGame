@@ -19,6 +19,8 @@ document.querySelector("main").insertAdjacentHTML(
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 
+// 주석
+
 //은서
 change_position($(".popup")); // top 및 left 속성 변경
 $("#overPage").fadeOut("slow").slideDown("slow");
