@@ -139,7 +139,7 @@ class Canvas3 {
 
     for (let row = 0; row < 4; row++) {
       let startX = 297; // 블록의 시작 x 위치
-      let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
+      let numBlocks = 5; // 각 행의 블록 수
 
       for (let i = 0; i < numBlocks; i++) {
         this.blocks.push(
@@ -152,14 +152,10 @@ class Canvas3 {
           )
         );
         // x좌표 조정
-        if(i===0)
-          startX += blockWidth + 40;
-        else
-        startX += blockWidth + blockSpacingX;
-        if(row > 1 && i === 1)
-          startX += blockWidth + blockSpacingX;
+        startX += blockWidth + 40;
       }
-  }
+      startY += blockHeight + 15;
+    }
 
     // 생명 배치
     for (let i = 0; i < 3; i++) {
