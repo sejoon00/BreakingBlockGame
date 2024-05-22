@@ -93,7 +93,8 @@ class Paddle {
       const maxBounceAngle = Math.PI / 3; // 최대 반사 각을 지정합니다. (60도)
       const bounceAngle = normalizedCollisionPointX * maxBounceAngle;
       ball.dx = Math.sin(bounceAngle); // x 방향으로의 속도를 각도에 따라 조정합니다.
-      ball.dy = -Math.cos(bounceAngle); // y 방향으로의 속도를 각도에 따라 조정합니다.
+      // ball.dy = -Math.cos(bounceAngle); // y 방향으로의 속도를 각도에 따라 조정합니다.
+      ball.dy = -ball.dy;
       return true; // 충돌이 발생했음을 반환합니다.
     }
     return false; // 충돌이 발생하지 않았음을 반환합니다.
@@ -104,10 +105,12 @@ class Paddle {
     if (item.isPaddleGetItem(this)) {
       if (item.type === "speed") {
         // 속도 증가 아이템 효과
-        if (ball.dx < 20 && ball.dy < 20) {
-          ball.dx *= 1.5;
-          ball.dy *= 1.5;
-        }
+        balls.forEach((b) => {
+          if (b.dx < 20 && b.dy < 20) {
+            b.dx *= 1.5;
+            b.dy *= 1.5;
+          }
+        });
       } else if (item.type === "ball") {
         // 공 개수 증가 아이템 효과
         let ballY;

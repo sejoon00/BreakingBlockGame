@@ -1,10 +1,10 @@
-class Canvas {
+class Game3_canvas {
   constructor(backgroundimageUrl) {
     console.log("hi");
 
     this.backgroundimageUrl = backgroundimageUrl;
     this.canvas = document.createElement("canvas");
-    this.canvas.id = "game_canvas";
+    this.canvas.id = "game3_canvas";
     this.context = this.canvas.getContext("2d");
     this.backgroundimage = new Image();
     this.ballInitialX;
@@ -16,6 +16,15 @@ class Canvas {
     this.lifes = []; // 생명 초기화
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
+    this.tower = null;
+    this.path = [
+      { x: 50, y: 100 },
+      { x: 300, y: 100 },
+      { x: 300, y: 300 },
+      { x: 550, y: 300 },
+      { x: 550, y: 500 },
+      { x: 750, y: 500 },
+    ]; // 적 이동 경로
 
     window.addEventListener("resize", this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
@@ -40,9 +49,20 @@ class Canvas {
       this.canvas.height
     );
   }
-  
+
+  drawPath() {
+    this.context.beginPath();
+    this.context.moveTo(this.path[0].x, this.path[0].y);
+    for (let i = 1; i < this.path.length; i++) {
+      this.context.lineTo(this.path[i].x, this.path[i].y);
+    }
+    this.context.strokeStyle = "green";
+    this.context.lineWidth = 5;
+    this.context.stroke();
+  }
+
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
+    let gameWidth = window.getComputedStyle(document.querySelector("#game3"));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -126,7 +146,7 @@ class Canvas {
 
         for (let i = 0; i < numBlocks; i++) {
           this.blocks.push(
-            new Block(
+            new Block3(
               startX,
               startY,
               blockWidth,

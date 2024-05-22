@@ -1,11 +1,9 @@
-class Canvas {
+class Canvas3 {
   constructor(backgroundimageUrl) {
-    console.log("hi");
-
     this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game_canvas";
-    this.context = this.canvas.getContext("2d");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'game3_canvas';
+    this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
     this.ballInitialY;
@@ -16,8 +14,17 @@ class Canvas {
     this.lifes = []; // 생명 초기화
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
+    this.tower = null;
+    this.path = [
+      { x: 50, y: 100 },
+      { x: 300, y: 100 },
+      { x: 300, y: 300 },
+      { x: 550, y: 300 },
+      { x: 550, y: 500 },
+      { x: 750, y: 500 }
+    ]; // 적 이동 경로
 
-    window.addEventListener("resize", this.resizeCanvas.bind(this));
+    window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
@@ -40,9 +47,21 @@ class Canvas {
       this.canvas.height
     );
   }
+
+  drawPath() {
+      this.context.beginPath();
+      this.context.moveTo(this.path[0].x, this.path[0].y);
+      for (let i = 1; i < this.path.length; i++) {
+          this.context.lineTo(this.path[i].x, this.path[i].y);
+      }
+      this.context.strokeStyle = 'green';
+      this.context.lineWidth = 5;
+      this.context.stroke();
+  }
+
   
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game3'));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -51,14 +70,14 @@ class Canvas {
   }
 
   appendTo(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.appendChild(this.canvas);
   }
 
   removeFrom(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.removeChild(this.canvas);
@@ -67,10 +86,10 @@ class Canvas {
   // 점수 증가 함수
   increaseScore() {
     this.score += 100; // 점수를 10 증가시킵니다.
-    console.log("score");
+    console.log('score');
   }
   decreaseLife() {
-    console.log("생명-1");
+    console.log('생명-1');
 
     if (this.lifes.length > 0) {
       this.lifes.pop(); // 생명 배열에서 하나를 제거합니다.
@@ -79,11 +98,11 @@ class Canvas {
 
   // 점수를 화면에 표시하는 함수
   drawScore() {
-    this.context.font = "24px Arial";
-    this.context.fillStyle = "yellow";
+    this.context.font = '24px Arial';
+    this.context.fillStyle = 'yellow';
     // this.context.strokeStyle = "black";
     this.context.lineWidth = 2;
-    this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
+    this.context.fillText('Score: ' + this.score, this.canvas.width - 150, 35);
     // this.context.strokeText(
     //   "Score: " + this.score,
     //   this.canvas.width - 150,
@@ -93,7 +112,7 @@ class Canvas {
 
   destroy() {
     // 리소스 정리 코드
-    window.removeEventListener("resize", this.resizeCanvas.bind(this));
+    window.removeEventListener('resize', this.resizeCanvas.bind(this));
     this.balls = [];
     this.blocks = [];
     this.items = [];
@@ -104,7 +123,7 @@ class Canvas {
   //게임 내 요소들을 초기화합니다.
   initGameElements() {
     this.balls.push(
-      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
+      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
     console.log(this.balls);
     this.paddle = new Paddle(this.canvas, 100, 10, 10);
@@ -118,39 +137,30 @@ class Canvas {
     const blockSpacingX = 45; // 블록 간 x 간격
     const blockSpacingY = 30; // 블록 간 y 간격
 
-    // 블록 배치
     for (let row = 0; row < 4; row++) {
-      for (let innerRow = 0; innerRow < 2; innerRow++) {
-        let startX = 297; // 블록의 시작 x 위치
-        let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
+      let startX = 297; // 블록의 시작 x 위치
+      let numBlocks = 5; // 각 행의 블록 수
 
-        for (let i = 0; i < numBlocks; i++) {
-          this.blocks.push(
-            new Block(
-              startX,
-              startY,
-              blockWidth,
-              blockHeight,
-              this.increaseBrokenBlocks.bind(this)
-            )
-          );
-          // x좌표 조정
-          if (i === 0) startX += blockWidth + 40;
-          else startX += blockWidth + blockSpacingX;
-          if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
-        }
-        // 다음 행으로 이동
-        startY += blockHeight + 5; // innerRow 5px 간격
+      for (let i = 0; i < numBlocks; i++) {
+        this.blocks.push(
+          new Block(
+            startX,
+            startY,
+            blockWidth,
+            blockHeight,
+            this.increaseBrokenBlocks.bind(this)
+          )
+        );
+        // x좌표 조정
+        startX += blockWidth + 40;
       }
-      startY += blockHeight + blockSpacingY; // Row 30px 간격
-      if (row === 1) startY -= 5;
-      if (row === 2) startY -= 16;
+      startY += blockHeight + 15;
     }
 
     // 생명 배치
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
-        new Life(this.canvas, "../source/full_heart.png", 30, 10 + i * 40, 10)
+        new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
   }
@@ -168,20 +178,15 @@ class Canvas {
       this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
   }
-  // 게임 종료 함수
-  endGame() {
-    alert("Congratulations! You've destroyed all the blocks!");
-    this.destroy();
-  }
 
   //화면에 요소들을 일정주기마다 다시 그립니다.
   startGameLoop() {
     const update = () => {
-      if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawBackground(); // 배경 다시 그리기
-      this.blocks.forEach((block) => {
-        block.draw(this.context); // 블록 그리기
+      this.drawPath();// 길 그리기
+      this.blocks.forEach((block3) => {
+        block3.draw(this.context); // 블록 그리기
       });
 
       //민석 - 공이 땅에 떨어진거 필터링해서 다시 공 배열 업데이트해줌
@@ -239,12 +244,5 @@ class Canvas {
       requestAnimationFrame(update);
     };
     update();
-  }
-
-  togglePause() {
-    this.isPaused = !this.isPaused;
-    if (!this.isPaused) {
-      this.startGameLoop(); // 일시 중지 해제 시 게임 루프 재개
-    }
   }
 }

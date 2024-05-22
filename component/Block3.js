@@ -1,4 +1,4 @@
-class Block {
+class Block3 {
   constructor(x, y, width, height, increaseBrokenBlocks) {
     this.x = x;
     this.y = y;
@@ -32,9 +32,7 @@ class Block {
     }
   }
 
-  isHit(ball, items, increaseScore) {
-    //test입니다
-
+  isHit(ball, items, increaseScore) {  
     if (!this.visible) return false;
 
     // 간단한 AABB 충돌 검사
@@ -102,16 +100,36 @@ class Block {
     return false;
   }
 
-  // 아무거나
+  isHit(tower) {
+      let distance = Math.hypot(tower.x - this.x, tower.y - this.y);
+      return distance < tower.range;
+  }
+
+  move() {
+    if (this.pathIndex < this.path.length - 1) {
+        let target = this.path[this.pathIndex + 1];
+        let dx = target.x - this.x;
+        let dy = target.y - this.y;
+        let dist = Math.hypot(dx, dy);
+
+        if (dist < this.speed) {
+            this.x = target.x;
+            this.y = target.y;
+            this.pathIndex++;
+        } else {
+            this.x += (dx / dist) * this.speed;
+            this.y += (dy / dist) * this.speed;
+        }
+    }
+  }
 
   draw(ctx) {
+    console.log(`Drawing block at (${this.x}, ${this.y})`); // 콘솔 로그 추가
     if (this.visible) {
       let image = new Image();
-      image.src = './source/window.png';
+      image.src = './source/Cy-Bug.png';
 
       ctx.drawImage(image, this.x, this.y, this.width, this.height);
-      // ctx.fillStyle = "#FF5733"; // 블록 색상 설정
-      // ctx.fillRect(this.x, this.y, this.width, this.height);
     }
   }
 }
