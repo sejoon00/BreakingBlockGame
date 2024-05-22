@@ -1,10 +1,10 @@
-class Canvas {
+class Game1_canvas {
   constructor(backgroundimageUrl) {
     console.log("hi");
 
     this.backgroundimageUrl = backgroundimageUrl;
     this.canvas = document.createElement("canvas");
-    this.canvas.id = "game1_canvas";
+    this.canvas.id = "game_canvas";
     this.context = this.canvas.getContext("2d");
     this.backgroundimage = new Image();
     this.ballInitialX;
@@ -25,11 +25,11 @@ class Canvas {
       this.drawBackground();
       this.initGameElements();
       this.startGameLoop();
-
-      console.log(this.ballInitialX);
     };
     this.backgroundimage.src = backgroundimageUrl;
   }
+
+  // 주석
 
   drawBackground() {
     this.context.drawImage(
@@ -40,9 +40,8 @@ class Canvas {
       this.canvas.height
     );
   }
-  
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
+    let gameWidth = window.getComputedStyle(document.querySelector("#game"));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -217,8 +216,7 @@ class Canvas {
           this.decreaseLife.bind(this)
         );
       });
-
-      this.paddle.draw(); // 막대기 그리기 추가
+      if (this.paddle != null) this.paddle.draw(); // 막대기 그리기 추가
 
       this.lifes.forEach((life) => {
         life.draw(); // 생명 그리기 추가

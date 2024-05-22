@@ -5,9 +5,8 @@
 document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
-    <div id="game1">
-      <div id="game1_container">
-        <img id="game1_backgroundImg" src="./game1Background.png" alt="Background Image">
+    <div id="game">
+      <div id="game_container">
       </div>
     </div>
   `
@@ -22,7 +21,7 @@ let canvas;
 
 function setGame1() {
   // 특정 요소를 선택합니다.
-  let game1 = document.querySelector("#game1");
+  let game1 = document.querySelector("#game");
 
   // 요소 내의 모든 자식 요소를 제거합니다.
   while (game1.firstChild) {
@@ -30,7 +29,7 @@ function setGame1() {
   }
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
-  canvas = new Canvas("./game1/game1Background.png");
+  canvas = new Game1_canvas("../source/game1Background.png");
   canvas.appendTo(game1);
 }
 
