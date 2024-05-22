@@ -50,16 +50,16 @@ function toggleEscPage() {
 //   }
 // }
 
-// //민석
-// function PopDownEscPage() {
-//   //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
-//   if (document.querySelector("#escPage").style.display == "block") {
-//     //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
+//민석
+function PopDownEscPage() {
+  //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
+  if (document.querySelector("#escPage").style.display == "block") {
+    //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
 
-//     document.querySelector("#escPage").style.display = "none";
-//     canvas.togglePause(); // 게임 재개
-//   }
-// }
+    document.querySelector("#escPage").style.display = "none";
+    canvas.togglePause(); // 게임 재개
+  }
+}
 
 //민석
 function setGameHide() {
