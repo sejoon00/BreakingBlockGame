@@ -18,7 +18,7 @@ document.querySelector("main").insertAdjacentHTML(
 //민석
 document.addEventListener("keydown", (event) => {
   if (event.code === "Escape") {
-    PopUpEscPage();
+    toggleEscPage();
     event.preventDefault(); // Escape의 기본 동작을 방지
 
     //실행중인 Canvas를 정지시킵니다
@@ -28,25 +28,38 @@ document.addEventListener("keydown", (event) => {
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
-//민석
-function PopUpEscPage() {
-  //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
-  if (gameState == "Gaming1") {
-    document.querySelector("#escPage").style.display = "block";
-    canvas.togglePause(); // 게임 일시 중지
+//세준
+function toggleEscPage() {
+  if (gameState.startsWith("Gaming")) {
+    const escPage = document.querySelector("#escPage");
+    if (escPage.style.display == "block") {
+      escPage.style.display = "none";
+      canvas.togglePause(); // 게임 재개
+    } else {
+      escPage.style.display = "block";
+      canvas.togglePause(); // 게임 일시 중지
+    }
   }
 }
+// //민석
+// function PopUpEscPage() {
+//   //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
+//   if (gameState == "Gaming1") {
+//     document.querySelector("#escPage").style.display = "block";
+//     canvas.togglePause(); // 게임 일시 중지
+//   }
+// }
 
-//민석
-function PopDownEscPage() {
-  //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
-  if (document.querySelector("#escPage").style.display == "block") {
-    //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
+// //민석
+// function PopDownEscPage() {
+//   //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
+//   if (document.querySelector("#escPage").style.display == "block") {
+//     //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
 
-    document.querySelector("#escPage").style.display = "none";
-    canvas.togglePause(); // 게임 재개
-  }
-}
+//     document.querySelector("#escPage").style.display = "none";
+//     canvas.togglePause(); // 게임 재개
+//   }
+// }
 
 //민석
 function setGameHide() {
