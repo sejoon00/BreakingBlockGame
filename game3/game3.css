@@ -1,7 +1,29 @@
 h1 {
-  background-color: white;
+  background-color: #264B43;
 }
 
 #game3 {
   display: none;
+}
+
+#game3_backgroundImg {
+  width: 100%;
+  display: block;
+}
+
+#game3_canvas {
+  border: 2px solid #264B43;
+
+  background-image: url('./game3/game3Background.png');
+  background-repeat: no-repeat;
+}
+
+#game3_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black; /* Optional: To have a background color for the container */
 }
