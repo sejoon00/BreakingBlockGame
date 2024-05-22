@@ -31,6 +31,8 @@ class Canvas {
     this.backgroundimage.src = backgroundimageUrl;
   }
 
+  // 주석
+
   drawBackground() {
     this.context.drawImage(
       this.backgroundimage,
@@ -40,9 +42,8 @@ class Canvas {
       this.canvas.height
     );
   }
-  
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
+    let gameWidth = window.getComputedStyle(document.querySelector("#game"));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -110,42 +111,6 @@ class Canvas {
     this.paddle = new Paddle(this.canvas, 100, 10, 10);
 
     this.paddle.bindMouseMove();
-
-    // 블록의 시작 y 위치
-    let startY = 116;
-    const blockWidth = 38;
-    const blockHeight = 28;
-    const blockSpacingX = 45; // 블록 간 x 간격
-    const blockSpacingY = 30; // 블록 간 y 간격
-
-    // 블록 배치
-    for (let row = 0; row < 4; row++) {
-      for (let innerRow = 0; innerRow < 2; innerRow++) {
-        let startX = 297; // 블록의 시작 x 위치
-        let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
-
-        for (let i = 0; i < numBlocks; i++) {
-          this.blocks.push(
-            new Block(
-              startX,
-              startY,
-              blockWidth,
-              blockHeight,
-              this.increaseBrokenBlocks.bind(this)
-            )
-          );
-          // x좌표 조정
-          if (i === 0) startX += blockWidth + 40;
-          else startX += blockWidth + blockSpacingX;
-          if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
-        }
-        // 다음 행으로 이동
-        startY += blockHeight + 5; // innerRow 5px 간격
-      }
-      startY += blockHeight + blockSpacingY; // Row 30px 간격
-      if (row === 1) startY -= 5;
-      if (row === 2) startY -= 16;
-    }
 
     // 생명 배치
     for (let i = 0; i < 3; i++) {

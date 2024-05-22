@@ -1,14 +1,5 @@
 // ------------------------------------ HTML ------------------------------------
 /* 해당 페이지의 HTML 코드를 작성하고 삽압하는 구간입니다. 주석이 잘 안보이니 자세히 확인부탁드립니다.*/
-document.querySelector("main").insertAdjacentHTML(
-  "afterbegin",
-  `
-    <div id="game3">
-      <div id="game3_container">
-      </div>
-    </div>
-      `
-);
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
@@ -17,8 +8,17 @@ let canvas3;
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function setGame3() {
+  document.querySelector("main").insertAdjacentHTML(
+    "afterbegin",
+    `
+      <div id="game">
+        <div id="game_container">
+        </div>
+      </div>
+        `
+  );
   // 특정 요소를 선택합니다.
-  let game = document.querySelector("#game3");
+  let game = document.querySelector("#game");
 
   // 요소 내의 모든 자식 요소를 제거합니다.
   while (game.firstChild) {
@@ -31,6 +31,6 @@ function setGame3() {
 }
 
 function endGame3() {
-  let game = document.querySelector("#game3");
+  let game = document.querySelector("#game");
   canvas.removeFrom(game);
 }
