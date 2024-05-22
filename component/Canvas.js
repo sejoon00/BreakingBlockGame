@@ -4,7 +4,7 @@ class Canvas {
 
     this.backgroundimageUrl = backgroundimageUrl;
     this.canvas = document.createElement("canvas");
-    this.canvas.id = "game1_canvas";
+    this.canvas.id = "game_canvas";
     this.context = this.canvas.getContext("2d");
     this.backgroundimage = new Image();
     this.ballInitialX;
