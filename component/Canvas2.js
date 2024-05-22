@@ -14,6 +14,7 @@ class Canvas2 {
     this.lifes = []; // 생명 초기화
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
+    this.bananas = []; //곤용 - 바나나 초기화
 
     window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
@@ -117,6 +118,16 @@ class Canvas2 {
         new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
+
+    // 곤용 바나나 배치
+    const bananaImageSrc = '../source/banana.png'; 
+    const bananaSize = 50; // 바나나 크기 설정
+    for (let i = 0; i < 5; i++) {
+      const x = Math.random() * (this.canvas.width - bananaSize);
+      const y = Math.random() * (this.canvas.height - bananaSize);
+      this.bananas.push(new Banana(this.canvas, bananaImageSrc, bananaSize, x, y));
+    }
+  
   }
 
   //공 개수 증가 아이템을 먹을시 추가 공을 화면에 그리는 함수
@@ -193,9 +204,15 @@ class Canvas2 {
         );
       });
 
+      // 곤용 바나나 그리기
+      this.bananas.forEach((banana) => {
+        banana.draw();
+      });
+
       this.drawScore(); // 점수 그리기 추가
       requestAnimationFrame(update);
     };
     update();
   }
 }
+
