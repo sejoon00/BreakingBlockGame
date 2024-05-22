@@ -1,8 +1,8 @@
-class Canvas {
+class Canvas3 {
     constructor(backgroundimageUrl) {
       this.backgroundimageUrl = backgroundimageUrl;
       this.canvas = document.createElement('canvas');
-      this.canvas.id = 'game1_canvas';
+      this.canvas.id = 'game3_canvas';
       this.context = this.canvas.getContext('2d');
       this.backgroundimage = new Image();
       this.ballInitialX;
@@ -42,7 +42,7 @@ class Canvas {
       );
     }
     resizeCanvas() {
-      let gameWidth = window.getComputedStyle(document.querySelector('#game1'));
+      let gameWidth = window.getComputedStyle(document.querySelector('#game3'));
   
       console.log(gameWidth.width);
       this.canvas.width = parseFloat(gameWidth.width);
