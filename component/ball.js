@@ -26,7 +26,7 @@ class Ball {
       this.dx = -this.dx;
     }
     // 캔버스 상단 경계 체크하여 방향 반전
-    if (this.y + this.dy < this.radius) {
+    if (this.y + this.dy < this.radius + 60) {
       this.dy = -this.dy;
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
