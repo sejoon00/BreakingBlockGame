@@ -29,8 +29,6 @@ class Canvas {
     this.backgroundimage.src = backgroundimageUrl;
   }
 
-  // 주석
-
   drawBackground() {
     this.context.drawImage(
       this.backgroundimage,
@@ -40,6 +38,7 @@ class Canvas {
       this.canvas.height
     );
   }
+  
   resizeCanvas() {
     let gameWidth = window.getComputedStyle(document.querySelector("#game1"));
 

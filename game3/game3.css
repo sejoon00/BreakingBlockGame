@@ -14,7 +14,7 @@ h1 {
 #game3_canvas {
   border: 2px solid #264B43;
 
-  background-image: url('./source/game3Background.png');
+  background-image: url('./game3/game3Background.png');
   background-repeat: no-repeat;
 }
 

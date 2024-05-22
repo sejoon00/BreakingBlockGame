@@ -1,3 +1,5 @@
+// ------------------------------------ HTML ------------------------------------
+/* 해당 페이지의 HTML 코드를 작성하고 삽압하는 구간입니다. 주석이 잘 안보이니 자세히 확인부탁드립니다.*/
 document.querySelector("main").insertAdjacentHTML(
   "afterbegin",
   `
@@ -24,7 +26,7 @@ function setGame3() {
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
   canvas3 = new Canvas3('./game3/game3Background.png');
-  canvas3.appendTo(game2);
+  canvas3.appendTo(game3);
 }
 
 function endGame3() {
