@@ -1,3 +1,4 @@
+/* 곤용 수정 */
 #escPage {
   display: none;
   position: fixed;
@@ -15,30 +16,41 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   border: 8px solid #b2b2b2;
-  font-family: "Press Start 2P", cursive;
-  background: url("./source/escbackground.png");
+  font-family: "Pixelify Sans", sans-serif;
+  background: url('../source/escbackground.png');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #escPage button {
+  width: 200px;
+  height: 60px;
   margin: 10px;
   padding: 15px 30px;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: bold;
   cursor: pointer;
-  background-color: #d35400;
-  border: none;
+  background-color: #A0522D;
+  border: 2px solid #8B4513;
   border-radius: 5px;
-  color: white;
+  color: #FFFFFF;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 #escPage button:hover {
-  background-color: #e67e22;
+  background-color: #CD853F;
   transform: translateY(-2px);
+  color: #FFD700;
+  font-size: 26px;
 }
 
 #escPage button:active {
-  background-color: #e67e22;
+  background-color: #CD853F;
   transform: translateY(0);
+  color: #FFD700;
+  font-size: 26px;
 }
-
