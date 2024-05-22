@@ -40,7 +40,7 @@ function moveToGameWithVanellope() {
 
 function goToGame1ByRalph() {
   gameState = "Gaming1"; //게임중으로 상태 변경
-  document.querySelector("#game1").style.display = "block";
+  document.querySelector("#game").style.display = "block";
   document.querySelector("#settingPage").style.display = "none";
   gameState = "Gaming1";
   selectCharacter = "Ralph";
@@ -50,7 +50,7 @@ function goToGame1ByRalph() {
 function goToGame1ByVanellope() {
   gameState = "Gaming1"; //게임중으로 상태 변경
   if (isCharacter === "true") {
-    document.querySelector("#game1").style.display = "block";
+    document.querySelector("#game").style.display = "block";
     document.querySelector("#settingPage").style.display = "none";
     gameState = "Gaming1";
     selectCharacter = "Vanellope";

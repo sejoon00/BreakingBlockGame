@@ -5,16 +5,18 @@ class Item {
     this.dy = 2; // 아이템이 떨어지는 속도
     this.type = type; // 속도 증가, 공 개수 증가 등
     this.visible = true;
+    this.image = new Image();
+    if (this.type === "speed") {
+      this.image.src = "../source/speed_up_item.png"; // 속도 증가 아이템 이미지 경로
+    } else {
+      this.image.src = "../source/increase_item.png"; // 다른 아이템 이미지 경로
+    }
   }
 
   draw(ctx) {
     if (!this.visible) return;
 
-    ctx.beginPath();
-    ctx.rect(this.x - 10, this.y - 10, 20, 20);
-    ctx.fillStyle = this.type === "speed" ? "blue" : "green";
-    ctx.fill();
-    ctx.closePath();
+    ctx.drawImage(this.image, this.x - 10, this.y - 10, 40, 40);
   }
 
   update(canvas) {

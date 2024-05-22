@@ -33,6 +33,7 @@ function PopUpEscPage() {
   //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
   if (gameState == "Gaming1") {
     document.querySelector("#escPage").style.display = "block";
+    canvas.togglePause(); // 게임 일시 중지
   }
 }
 
@@ -43,6 +44,7 @@ function PopDownEscPage() {
     //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
 
     document.querySelector("#escPage").style.display = "none";
+    canvas.togglePause(); // 게임 재개
   }
 }
 
@@ -50,19 +52,21 @@ function PopDownEscPage() {
 function setGameHide() {
   //나가기 버튼 클릭 시 게임 hide해주고, 난이도 선택 화면으로 돌아가기
   moveToStagePage();
-  // document.querySelector("#game1").style.display = "none";
-  document.querySelector("#game2").style.display = "none";
-  document.querySelector("#game3").style.display = "none";
+
   document.querySelector("#escPage").style.display = "none";
   // 특정 요소를 선택하고 제거합니다.
-  let game1 = document.querySelector("#game1");
-  if (game1) {
-    game1.remove();
-  }
+  let game1 = document.querySelector("#game");
+  let game_canvas = document.querySelector("#game_canvas");
+  console.log(game_canvas);
+
   // canvas 객체 정리
   if (canvas) {
     canvas.destroy();
     canvas = null;
+  }
+  if (game1) {
+    game1.style.display = "none";
+    game_canvas.display = "none";
   }
   gameState = "none";
 }
