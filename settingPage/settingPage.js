@@ -30,12 +30,26 @@ function moveToGameWithRalph() {
   if (selectTargetGame == "game1") {
     goToGame1ByRalph();
   }
+  else if (selectTargetGame == "game2") {
+    goToGame2ByRalph();
+  }
+  else if (selectTargetGame == "game3") {
+    goToGame3ByRalph();
+  }
+  else {}
 }
 
 function moveToGameWithVanellope() {
   if (selectTargetGame == "game1") {
     goToGame1ByVanellope();
   }
+  else if (selectTargetGame == "game2") {
+    goToGame2ByVanellope();
+  }
+  else if (selectTargetGame == "game3") {
+    goToGame3ByVanellope();
+  }
+  else {}
 }
 
 function goToGame1ByRalph() {
@@ -62,4 +76,13 @@ function goToGame1ByVanellope() {
       lockMessage.style.display = "none";
     }, 2000); // Character is locked! 메시지 출력
   }
+}
+
+function goToGame3ByRalph() {
+  gameState = "Gaming3"; //게임중으로 상태 변경
+  document.querySelector("#game3").style.display = "block";
+  document.querySelector("#settingPage").style.display = "none";
+  gameState = "Gaming3";
+  selectCharacter = "Ralph";
+  setGame3();
 }
