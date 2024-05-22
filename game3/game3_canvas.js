@@ -1,4 +1,4 @@
-class Canvas {
+class Game3_canvas {
     constructor(backgroundimageUrl) {
       console.log("hi");
   
@@ -131,7 +131,8 @@ class Canvas {
   
       this.paddle.bindMouseMove();
   
-      // 블록의 시작 y 위치
+      // 블록의 시작위치
+      let startX = 297;
       let startY = 116;
       const blockWidth = 38;
       const blockHeight = 28;
@@ -141,7 +142,6 @@ class Canvas {
       // 블록 배치
       for (let row = 0; row < 4; row++) {
         for (let innerRow = 0; innerRow < 2; innerRow++) {
-          let startX = 297; // 블록의 시작 x 위치
           let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
   
           for (let i = 0; i < numBlocks; i++) {

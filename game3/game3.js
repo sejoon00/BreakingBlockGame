@@ -25,7 +25,7 @@ function setGame3() {
   }
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
-  canvas3 = new Canvas3('./game3/game3Background.png');
+  canvas3 = new Game3_canvas('./game3/game3Background.png');
   canvas3.appendTo(game3);
 }
 
