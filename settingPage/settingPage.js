@@ -50,21 +50,21 @@ function moveToGameWithVanellope() {
 
 function goToGame1ByRalph() {
   gameState = "Gaming1"; //게임중으로 상태 변경
-  document.querySelector("#game").style.display = "block";
   document.querySelector("#settingPage").style.display = "none";
   gameState = "Gaming1";
   selectCharacter = "Ralph";
   setGame1();
+  document.querySelector("#game").style.display = "block";
 }
 // 곤용 잠금해제 되었을 때만 사용가능
 function goToGame1ByVanellope() {
   gameState = "Gaming1"; //게임중으로 상태 변경
   if (isCharacter === "true") {
-    document.querySelector("#game").style.display = "block";
     document.querySelector("#settingPage").style.display = "none";
     gameState = "Gaming1";
     selectCharacter = "Vanellope";
     setGame1CanvasSize();
+    document.querySelector("#game").style.display = "block";
   } else {
     const lockMessage = document.querySelector("#lockMessage");
     lockMessage.style.display = "block";
@@ -76,9 +76,10 @@ function goToGame1ByVanellope() {
 
 function goToGame3ByRalph() {
   gameState = "Gaming3"; //게임중으로 상태 변경
-  document.querySelector("#game3").style.display = "block";
+
   document.querySelector("#settingPage").style.display = "none";
   gameState = "Gaming3";
   selectCharacter = "Ralph";
   setGame3();
+  document.querySelector("#game").style.display = "block";
 }

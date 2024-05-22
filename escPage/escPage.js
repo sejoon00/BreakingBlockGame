@@ -68,7 +68,7 @@ function setGameHide() {
 
   document.querySelector("#escPage").style.display = "none";
   // 특정 요소를 선택하고 제거합니다.
-  let game1 = document.querySelector("#game");
+  let game = document.querySelector("#game");
   let game_canvas = document.querySelector("#game_canvas");
   console.log(game_canvas);
 
@@ -77,9 +77,10 @@ function setGameHide() {
     canvas.destroy();
     canvas = null;
   }
-  if (game1) {
-    game1.style.display = "none";
-    game_canvas.display = "none";
+  if (game) {
+    game.style.display = "none";
+    game.remove();
+    // game_canvas.display = "none";
   }
   gameState = "none";
 }
