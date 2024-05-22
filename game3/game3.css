@@ -1,5 +1,5 @@
 h1 {
-  background-color: #264B43;
+  background-color: #264b43;
 }
 
 #game3 {
@@ -12,9 +12,8 @@ h1 {
 }
 
 #game3_canvas {
-  border: 2px solid #264B43;
+  border: 2px solid #264b43;
 
-  background-image: url('./game3/game3Background.png');
   background-repeat: no-repeat;
 }
 

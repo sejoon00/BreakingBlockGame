@@ -29,27 +29,23 @@ document.querySelector("main").insertAdjacentHTML(
 function moveToGameWithRalph() {
   if (selectTargetGame == "game1") {
     goToGame1ByRalph();
-  }
-  else if (selectTargetGame == "game2") {
+  } else if (selectTargetGame == "game2") {
     goToGame2ByRalph();
-  }
-  else if (selectTargetGame == "game3") {
+  } else if (selectTargetGame == "game3") {
     goToGame3ByRalph();
+  } else {
   }
-  else {}
 }
 
 function moveToGameWithVanellope() {
   if (selectTargetGame == "game1") {
     goToGame1ByVanellope();
-  }
-  else if (selectTargetGame == "game2") {
+  } else if (selectTargetGame == "game2") {
     goToGame2ByVanellope();
-  }
-  else if (selectTargetGame == "game3") {
+  } else if (selectTargetGame == "game3") {
     goToGame3ByVanellope();
+  } else {
   }
-  else {}
 }
 
 function goToGame1ByRalph() {
