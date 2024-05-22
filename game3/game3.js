@@ -20,11 +20,11 @@ function setGame3() {
   // 요소 내의 모든 자식 요소를 제거합니다.
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
-  canvas2 = new Canvas3('./game3/game3Background.png');
-  canvas2.appendTo(game2);
+  canvas3 = new Canvas3('./game3/game3Background.png');
+  canvas3.appendTo(game2);
 }
 
 function endGame2() {
-  let game1 = document.querySelector('#game3');
-  canvas2.removeFrom(game1);
+  let game2 = document.querySelector('#game3');
+  canvas3.removeFrom(game2);
 }
