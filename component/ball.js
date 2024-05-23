@@ -17,7 +17,7 @@ class Ball {
     ctx.closePath();
   }
 
-  update(canvas, blocks, paddle, items, increaseScore, decreaseLife) {
+  update(canvas, blocks, paddle, items, increaseScore, decreaseLife, boss) {
     // 캔버스 좌우 경계 체크하여 방향 반전
     if (
       this.x + this.dx > canvas.width - this.radius ||
@@ -55,5 +55,38 @@ class Ball {
     // 공 위치 업데이트
     this.x += this.dx;
     this.y += this.dy;
+    // 보스와의 충돌 처리
+    if (boss && !boss.isRemoved) {
+      const isSideHit =
+        this.x - this.radius < boss.x ||
+        this.x + this.radius > boss.x + boss.width;
+      if (
+        this.x + this.radius > boss.x &&
+        this.x - this.radius < boss.x + boss.width &&
+        this.y + this.radius > boss.y &&
+        this.y - this.radius < boss.y + boss.height
+      ) {
+        if (isSideHit) {
+          this.dx = -this.dx; // 측면에 맞으면 x 방향 반전
+          // 공이 보스의 왼쪽이나 오른쪽 경계를 넘어가지 않도록 위치 조정
+          if (this.x < boss.x) {
+            this.x = boss.x - this.radius;
+          } else if (this.x > boss.x + boss.width) {
+            this.x = boss.x + boss.width + this.radius;
+          }
+        } else {
+          this.dy = -this.dy; // 상단이나 하단에 맞으면 y 방향 반전
+          // 공이 보스의 상단이나 하단 경계를 넘어가지 않도록 위치 조정
+          if (this.y < boss.y) {
+            this.y = boss.y - this.radius;
+          } else if (this.y > boss.y + boss.height) {
+            this.y = boss.y + boss.height + this.radius;
+          }
+        }
+        boss.takeDamage(); // HP를 1만 깎도록 설정
+      }
+    }
+
+    this.draw(canvas.getContext("2d"));
   }
 }
