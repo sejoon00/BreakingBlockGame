@@ -32,7 +32,7 @@ class Block3 {
     }
   }
 
-  isHit(ball, items, increaseScore) {  
+  isHit(ball, items, increaseScore) {
     if (!this.visible) return false;
 
     // 간단한 AABB 충돌 검사
@@ -101,10 +101,11 @@ class Block3 {
   }
 
   isHit(tower) {
-      let distance = Math.hypot(tower.x - this.x, tower.y - this.y);
-      return distance < tower.range;
+    let distance = Math.hypot(tower.x - this.x, tower.y - this.y);
+    return distance < tower.range;
   }
 
+<<<<<<< HEAD
   // move() {
   //   if (this.pathIndex < this.path.length - 1) {
   //       let target = this.path[this.pathIndex + 1];
@@ -124,9 +125,31 @@ class Block3 {
   // }
 
   draw(ctx) {
+=======
+  move() {
+    if (this.pathIndex < this.path.length - 1) {
+      let target = this.path[this.pathIndex + 1];
+      let dx = target.x - this.x;
+      let dy = target.y - this.y;
+      let dist = Math.hypot(dx, dy);
+
+      if (dist < this.speed) {
+        this.x = target.x;
+        this.y = target.y;
+        this.pathIndex++;
+      } else {
+        this.x += (dx / dist) * this.speed;
+        this.y += (dy / dist) * this.speed;
+      }
+    }
+  }
+
+  draw(ctx) {
+    // console.log(`Drawing block at (${this.x}, ${this.y})`); // 콘솔 로그 추가
+>>>>>>> origin
     if (this.visible) {
       let image = new Image();
-      image.src = './source/Cy-Bug.png';
+      image.src = "./source/Cy-Bug.png";
 
       ctx.drawImage(image, this.x, this.y, this.width, this.height);
     }
