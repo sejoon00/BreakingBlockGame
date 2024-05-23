@@ -1,26 +1,7 @@
 class Game3_canvas extends Canvas {
   constructor(backgroundimageUrl) {
-<<<<<<< HEAD
-    console.log("hi");
-    this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game3_canvas";
-    this.context = this.canvas.getContext("2d");
-    this.backgroundimage = new Image();
-    this.ballInitialX;
-    this.ballInitialY;
-    this.balls = []; // 공 리스트 초기화
-    this.blocks = []; // 블록 리스트 초기화
-    this.items = []; // 아이템 리스트 초기화
-    this.paddle; // 막대기 초기화
-    this.lifes = []; // 생명 초기화
-    this.score = 0; // 점수 초기화
-    this.brokenBlocks = 0; // 부서진 블록 수 초기화
-    this.tower = null;
-=======
     super(backgroundimageUrl);
     this.canvas.id = "game3_canvas"; // canvas id 변경
->>>>>>> origin/game3/master
     this.path = [
       { x: 50, y: 100 },
       { x: 300, y: 100 },
