@@ -17,7 +17,6 @@ class Paddle {
     //곤용
 
     if (selectCharacter === "Ralph") {
-      console.log("ralph");
       this.image.src = "../source/ralph_paddle.png";
     } else {
       this.image.src = "../source/vanellope_paddle.png";
@@ -60,6 +59,16 @@ class Paddle {
     ) {
       this.x += this.speed;
     }
+  }
+
+  isCollidingWithBullet(bullet) {
+    const distX = Math.abs(bullet.x - this.x - this.width / 2);
+    const distY = Math.abs(bullet.y - this.y - this.height / 2);
+
+    if (distX <= this.width / 2 && distY <= this.height / 2) {
+      return true;
+    }
+    return false;
   }
 
   //Block에서 가져와서 재사용
