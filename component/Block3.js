@@ -105,26 +105,25 @@ class Block3 {
       return distance < tower.range;
   }
 
-  move() {
-    if (this.pathIndex < this.path.length - 1) {
-        let target = this.path[this.pathIndex + 1];
-        let dx = target.x - this.x;
-        let dy = target.y - this.y;
-        let dist = Math.hypot(dx, dy);
+  // move() {
+  //   if (this.pathIndex < this.path.length - 1) {
+  //       let target = this.path[this.pathIndex + 1];
+  //       let dx = target.x - this.x;
+  //       let dy = target.y - this.y;
+  //       let dist = Math.hypot(dx, dy);
 
-        if (dist < this.speed) {
-            this.x = target.x;
-            this.y = target.y;
-            this.pathIndex++;
-        } else {
-            this.x += (dx / dist) * this.speed;
-            this.y += (dy / dist) * this.speed;
-        }
-    }
-  }
+  //       if (dist < this.speed) {
+  //           this.x = target.x;
+  //           this.y = target.y;
+  //           this.pathIndex++;
+  //       } else {
+  //           this.x += (dx / dist) * this.speed;
+  //           this.y += (dy / dist) * this.speed;
+  //       }
+  //   }
+  // }
 
   draw(ctx) {
-    console.log(`Drawing block at (${this.x}, ${this.y})`); // 콘솔 로그 추가
     if (this.visible) {
       let image = new Image();
       image.src = './source/Cy-Bug.png';
