@@ -161,8 +161,10 @@ class Canvas2 extends Canvas {
       });
 
       // 바나나 그리기 및 충돌 처리
-      this.bananas.forEach((banana) => {
+      this.bananas = this.bananas.filter((banana) => {
         banana.draw();
+        let collisionDetected = false;
+
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
             console.log('충돌 발생'); // 충돌시 출력
@@ -173,13 +175,18 @@ class Canvas2 extends Canvas {
         // 블록과 바나나 충돌 처리
         if (banana.isCollidingWithBlock(this.vanellope)) {
           this.freezeBlock(this.vanellope);
+          collisionDetected = true;
         }
 
         this.villains.forEach((villain) => {
           if (banana.isCollidingWithBlock(villain)) {
             this.freezeBlock(villain);
+            collisionDetected = true;
           }
         });
+
+        // 블록과의 충돌이 발생한 경우 배열에서 제거
+        return !collisionDetected;
       });
 
       this.drawScore(); // 점수 그리기 추가
