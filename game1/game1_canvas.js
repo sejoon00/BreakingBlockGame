@@ -97,6 +97,7 @@ class Game1_canvas extends Canvas {
         );
       });
 
+      this.checkBallandLife();
       this.drawScore();
       requestAnimationFrame(update);
     };

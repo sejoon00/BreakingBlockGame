@@ -7,6 +7,7 @@ class Ball {
     this.radius = radius;
     this.color = color;
     this.isRemoved = false; // 공 제거 여부를 표시하는 속성 추가
+    this.hitCooldowns = new Map(); // 충돌 쿨다운 맵 추가
   }
 
   draw(ctx) {
@@ -35,19 +36,26 @@ class Ball {
       selectTargetGame != "game3"
     ) {
       // 공을 제거할 플래그 설정
-      this.isRemoved = true;
-      console.log("땅에 닿았음");
-      decreaseLife();
+      if (!this.isRemoved) {
+        // 생명 감소 로직이 한 번만 실행되도록 조건 추가
+        this.isRemoved = true;
+        console.log("땅에 닿았음");
+        decreaseLife();
+      }
       return;
     }
 
     // 이동 전 충돌 검사
     blocks.forEach((block) => {
-      block.visible && block.isHit(this, items, increaseScore);
+      if (block.visible && !this.hitCooldowns.has(block)) {
+        if (block.isHit(this, items, increaseScore)) {
+          this.setHitCooldown(block); // 충돌 쿨다운 설정
+        }
+      }
     });
 
-    if (paddle.isHitPaddle(this)) {
-      // 패들과의 충돌 처리
+    if (!this.hitCooldowns.has(paddle) && paddle.isHitPaddle(this)) {
+      this.setHitCooldown(paddle); // 충돌 쿨다운 설정
 
       let paddleAudio = new Audio(
         "https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3"
@@ -58,9 +66,11 @@ class Ball {
     // 공 위치 업데이트
     this.x += this.dx;
     this.y += this.dy;
+
     let hisSize = this.radius + 2;
+
     // 보스와의 충돌 처리
-    if (boss && !boss.isRemoved) {
+    if (boss && !boss.isRemoved && !this.hitCooldowns.has(boss)) {
       const isSideHit =
         this.x - hisSize < boss.x || this.x + hisSize > boss.x + boss.width;
       if (
@@ -87,10 +97,18 @@ class Ball {
           }
         }
         boss.takeDamage(); // HP를 1만 깎도록 설정
+        this.setHitCooldown(boss); // 충돌 쿨다운 설정
       }
     }
 
     this.draw(canvas.getContext("2d"));
+  }
+
+  setHitCooldown(target) {
+    this.hitCooldowns.set(target, true);
+    setTimeout(() => {
+      this.hitCooldowns.delete(target);
+    }, 100); // 100ms 쿨다운
   }
 
   // 곤용 바나나 닿을 시 공 방향 랜덤 변경

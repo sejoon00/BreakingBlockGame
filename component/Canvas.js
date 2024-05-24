@@ -131,7 +131,6 @@ class Canvas {
       this.blocks.forEach((block) => {
         block.move();
         block.draw(this.context);
-        console.log(this.canvas.height);
         if (block.isOutOfBounds(this.canvas.height - 100)) {
           block.visible = false;
           this.decreaseLife(); // 블록이 바닥에 닿으면 생명 감소
