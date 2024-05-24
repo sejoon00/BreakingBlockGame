@@ -48,7 +48,7 @@ class Canvas2 extends Canvas {
     const bananaImageSrc = '../source/banana.png';
     const bananaSize = 50;
     const yellowAreaTop = 100;
-    const yellowAreaBottom = this.canvas.height - 100;
+    const yellowAreaBottom = this.canvas.height - 200;
     for (let i = 0; i < 5; i++) {
       const x = Math.random() * (this.canvas.width - bananaSize);
       const y =
