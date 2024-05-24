@@ -166,7 +166,7 @@ class Canvas2 extends Canvas {
 
         this.villains.forEach((villain) => {
           if (villain.isHit(ball, this.items, this.increaseScore.bind(this))) {
-            this.decreaseLife(); // 생명 하나 줄이기
+            // this.decreaseLife(); // 생명 하나 줄이기
           }
         });
 
@@ -237,13 +237,16 @@ class Canvas2 extends Canvas {
         });
 
         // 블록과 바나나 충돌 처리
-        if (banana.isCollidingWithBlock(this.vanellope)) {
+        if (
+          this.vanellope.visible == true &&
+          banana.isCollidingWithBlock(this.vanellope)
+        ) {
           this.freezeBlock(this.vanellope);
           collisionDetected = true;
         }
 
         this.villains.forEach((villain) => {
-          if (banana.isCollidingWithBlock(villain)) {
+          if (villain.visible == true && banana.isCollidingWithBlock(villain)) {
             this.freezeBlock(villain);
             collisionDetected = true;
           }
