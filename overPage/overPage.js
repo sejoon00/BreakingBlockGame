@@ -2,8 +2,8 @@
 /* 해당 페이지의 HTML 코드를 작성하고 삽압하는 구간입니다. 주석이 잘 안보이니 자세히 확인부탁드립니다.*/
 
 //은서
-document.querySelector("main").insertAdjacentHTML(
-  "afterbegin",
+document.querySelector('main').insertAdjacentHTML(
+  'afterbegin',
   `
       <div id="overPage" class="popup">
         <div id="result"></div>
@@ -22,27 +22,26 @@ document.querySelector("main").insertAdjacentHTML(
 // 주석
 
 //은서
-change_position($(".popup")); // top 및 left 속성 변경
-$("#overPage").fadeOut("slow").slideDown("slow");
+change_position($('.popup')); // top 및 left 속성 변경
 
-document.querySelector("").addEventListener("", () => {
+document.querySelector('').addEventListener('', () => {
   // 게임 클리어 이벤트로 변경
-  let clearAudio = new Audio(".mp3"); // 게임 클리어 소리
+  let clearAudio = new Audio('.mp3'); // 게임 클리어 소리
   clearAudio.play();
 
-  document.querySelector("#result").append("GAME CLEAR");
+  document.querySelector('#result').append('GAME CLEAR');
 });
 
-document.querySelector("").addEventListener("", () => {
+document.querySelector('').addEventListener('', () => {
   // 게임 오버 이벤트로 변경
-  let overPageAudio = new Audio(".mp3"); // 게임 오버 소리
+  let overPageAudio = new Audio('.mp3'); // 게임 오버 소리
   overPageAudio.play();
 
-  document.querySelector("#result").append("GAME OVER");
+  document.querySelector('#result').append('GAME OVER');
 });
 
-let str = "당신의 score는 " + score + "점입니다.";
-document.querySelector("#score").append(str);
+let str = '당신의 score는 ' + score + '점입니다.';
+document.querySelector('#score').append(str);
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
