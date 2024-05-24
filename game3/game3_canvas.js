@@ -31,10 +31,14 @@ class Game3_canvas extends Canvas {
   initGameElements() {
     super.initGameElements();
     // 추가로 필요한 블록이나 요소를 여기에 추가
-    this.blocks.push(
-      new Block3(50, 50, 40, 40, this.increaseBrokenBlocks.bind(this), "red")
-    );
-    console.log("New block added in Game3_canvas");
+
+    let block3num = 20;
+    for (let i = 0; i < block3num; i++) {
+      this.blocks.push(
+        new Block3(50, 50, 40, 40, 1, this.increaseBrokenBlocks.bind(this), "red")
+      );
+      console.log("New block added in Game3_canvas");
+    }
 
     // 보스 몬스터 생성 (15초 후 등장)
     setTimeout(() => {
@@ -90,6 +94,7 @@ class Game3_canvas extends Canvas {
 
       this.drawPath(); // 경로 그리기 추가
       this.blocks.forEach((block) => {
+        block.move(); // 블록 이동시키기
         block.draw(this.context); // 블록 그리기
       });
 
