@@ -1,7 +1,7 @@
 class Game1_canvas extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = 'game1_canvas'; // canvas id 변경
+    this.canvas.id = "game1_canvas"; // canvas id 변경
   }
 
   // 기존 initGameElements 메서드를 재정의하여 추가 블록을 생성
@@ -29,7 +29,7 @@ class Game1_canvas extends Canvas {
               blockWidth,
               blockHeight,
               this.increaseBrokenBlocks.bind(this),
-              '../source/window.png'
+              "../source/window.png "
             )
           );
           // x좌표 조정
