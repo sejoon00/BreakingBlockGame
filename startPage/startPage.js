@@ -32,10 +32,8 @@ document.addEventListener(
 );
 
 //은서
-let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
-startPageAudio.play();
-startPageAudio.loop = true;
 changeColor();
+startPageAudio.play();
 
 //
 // ---------------------------------- javascript function ----------------------------------

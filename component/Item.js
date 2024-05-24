@@ -38,6 +38,7 @@ class Item {
       this.y < paddle.y + paddle.height
     ) {
       this.visible = false;
+      itemAudio.play();
       return true;
     }
     return false;

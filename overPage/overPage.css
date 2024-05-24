@@ -1,9 +1,21 @@
 #overPage {
   display: none;
+  width: 500px;
+	height: 400px;
 }
 
 #result {
   font-size: 3em;
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
+}
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: white;
+	padding: 30px 20px;
+	z-index: 1;
+	border: 1px solid black;
 }

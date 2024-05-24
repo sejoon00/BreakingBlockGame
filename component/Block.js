@@ -79,9 +79,6 @@ class Block {
       if (this.increaseBrokenBlocks) {
         this.increaseBrokenBlocks();
       }
-      let blockAudio = new Audio(
-        'https://taira-komori.jpn.org/sound_os2/game01/select01.mp3'
-      ); // 임시
       blockAudio.play();
 
       console.log(increaseScore);

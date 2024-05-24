@@ -24,10 +24,7 @@ document.querySelector("main").insertAdjacentHTML(
 //은서
 document.querySelector("#game1Img").addEventListener("click", () => {
   goToSettingPageForGame1();
-  let startPageAudio = new Audio(
-    "https://taira-komori.jpn.org/sound_os2/game01/coin01.mp3"
-  ); // 동전 소리
-  startPageAudio.play();
+  stagePageAudio.play();
 });
 
 // ---------------------------------- javascript function ----------------------------------
