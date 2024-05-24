@@ -108,7 +108,7 @@ class Canvas2 {
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
     console.log(this.balls);
-    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    this.paddle = new Paddle(this.canvas, 100, 60, 10);
 
     this.paddle.bindMouseMove();
 
@@ -119,15 +119,16 @@ class Canvas2 {
       );
     }
 
-    // 곤용 바나나 배치
+    // 곤용 바나나 배치 노란 부분에만 나타나도록 수정
     const bananaImageSrc = '../source/banana.png'; 
-    const bananaSize = 50; // 바나나 크기 설정
+    const bananaSize = 50;
+    const yellowAreaTop = 100; 
+    const yellowAreaBottom = this.canvas.height - 100;
     for (let i = 0; i < 5; i++) {
       const x = Math.random() * (this.canvas.width - bananaSize);
-      const y = Math.random() * (this.canvas.height - bananaSize);
+      const y = yellowAreaTop + Math.random() * (yellowAreaBottom - yellowAreaTop - bananaSize);
       this.bananas.push(new Banana(this.canvas, bananaImageSrc, bananaSize, x, y));
     }
-  
   }
 
   //공 개수 증가 아이템을 먹을시 추가 공을 화면에 그리는 함수
@@ -207,6 +208,12 @@ class Canvas2 {
       // 곤용 바나나 그리기
       this.bananas.forEach((banana) => {
         banana.draw();
+        this.balls.forEach((ball) => {
+          if (banana.isColliding(ball)) {
+            console.log('충돌 발생');  // 충돌시 출력
+            ball.changeDirectionRandomly();
+          }
+        });
       });
 
       this.drawScore(); // 점수 그리기 추가
