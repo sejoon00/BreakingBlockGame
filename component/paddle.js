@@ -127,10 +127,11 @@ class Paddle {
     return false; // 충돌이 발생하지 않았음을 반환합니다.
   }
 
-  // 아이템 수집 함수
+  // 아이템 수집 함수 
   collectItem(item, ball, balls) {
     if (item.isPaddleGetItem(this)) {
-      if (item.type === 'speed') {
+      console.log("아이템 수집: " + item.type);
+      if (item.type === "speed") {
         // 속도 증가 아이템 효과
         balls.forEach((b) => {
           if (b.dx < 20 && b.dy < 20) {
@@ -138,7 +139,7 @@ class Paddle {
             b.dy *= 1.5;
           }
         });
-      } else if (item.type === 'ball') {
+      } else if (item.type === "increaseball") {
         // 공 개수 증가 아이템 효과
         let ballY;
         if (ball.dy > 0) ballY = -ball.dy;

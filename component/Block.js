@@ -128,8 +128,18 @@ class Block {
       }
 
       // 25% 확률로 아이템 생성
-      if (Math.random() < 0.25) {
-        const itemType = Math.random() < 0.5 ? "speed" : "ball";
+      // 곤용 이름 바꿈 'ball' -> 'increaseball', if문 으로 게임별
+      if (selectTargetGame === 'game1') {
+        if (Math.random() < 0.25) {
+          const itemType = Math.random() < 0.5 ? 'speed' : 'increaseball';
+          items.push(
+            new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
+          );
+        }
+      } else if (selectTargetGame === 'game2') {
+        const itemTypes = ['increaseheart', 'decreaseheart', 'increasevanellopespeed', 'decreasevanellopespeed', 'increasemonsterspeed', 'decreasemonsterspeed'];
+        const randomIndex = Math.floor(Math.random() * itemTypes.length);
+        const itemType = itemTypes[randomIndex];
         items.push(
           new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
         );
