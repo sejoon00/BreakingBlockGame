@@ -157,9 +157,7 @@ class Canvas2 extends Canvas {
       }
 
       this.balls.forEach((ball) => {
-        if (
-          this.vanellope.isHit(ball, this.items, this.increaseScore.bind(this))
-        ) {
+        if (this.vanellope.isHit(ball, this.items)) {
           this.vanellope.visible = true;
           this.decreaseLife(); // 생명 하나 줄이기
         }
