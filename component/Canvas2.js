@@ -8,16 +8,16 @@ class Canvas2 {
     this.ballInitialX;
     this.ballInitialY;
     this.balls = []; // 공 리스트 초기화
-    this.blocks = []; // 블록 리스트 초기화
     this.items = []; // 아이템 리스트 초기화
     this.paddle; // 막대기 초기화
     this.lifes = []; // 생명 초기화
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
     this.vanellope;
-    this.blockSpeed = 0.7; // 블록의 이동 속도
+    this.villains = []; //빌런 리스트 초기화
+    this.blockSpeed = 0.5; // 블록의 이동 속도
     this.moveState = 0; // 이동 상태 (0: 아래로, 1: 왼쪽으로, 2: 위로, 3: 왼쪽으로)
-    this.maxDistance = 200; // 한 번에 이동할 최대 거리
+    this.maxDistance = 400; // 한 번에 이동할 최대 거리
     this.currentDistance = 0; // 현재 이동 거리
 
     window.addEventListener('resize', this.resizeCanvas.bind(this));
@@ -91,7 +91,7 @@ class Canvas2 {
   destroy() {
     window.removeEventListener('resize', this.resizeCanvas.bind(this));
     this.balls = [];
-    this.blocks = [];
+    this.villains = [];
     this.items = [];
     this.paddle = null;
     this.lifes = [];
@@ -107,14 +107,27 @@ class Canvas2 {
     let startY = 116;
     let startX = 900; // 블록의 시작 x 위치
     this.vanellope = new Block(
-      startX,
-      startY,
-      60,
-      40,
+      startX + 40,
+      startY + 150,
+      100,
+      80,
       this.increaseBrokenBlocks.bind(this),
       '../game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
+
+    for (let i = 0; i < 6; i++) {
+      let villainBlock = new Block(
+        startX,
+        startY + i * 70,
+        80,
+        60,
+        this.increaseBrokenBlocks.bind(this),
+        '../game2/villain' + i + '.png',
+        false // 일반 블록임을 나타내는 플래그
+      );
+      this.villains.push(villainBlock);
+    }
 
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
@@ -130,8 +143,8 @@ class Canvas2 {
 
   increaseBrokenBlocks() {
     this.brokenBlocks++;
-    if (this.brokenBlocks === this.blocks.length) {
-      this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
+    if (this.brokenBlocks === this.villains.length) {
+      // this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
   }
 
@@ -159,6 +172,27 @@ class Canvas2 {
       }
 
       this.vanellope.draw(this.context);
+      // 빌런 블록들 이동 및 그리기
+      this.villains.forEach((villain) => {
+        if (this.moveState === 0) {
+          villain.y += this.blockSpeed; // 아래로 이동
+        } else if (this.moveState === 1) {
+          villain.x -= this.blockSpeed; // 왼쪽으로 이동
+        } else if (this.moveState === 2) {
+          villain.y -= this.blockSpeed; // 위로 이동
+        } else if (this.moveState === 3) {
+          villain.x -= this.blockSpeed; // 왼쪽으로 이동
+        }
+
+        this.currentDistance += this.blockSpeed;
+
+        if (this.currentDistance >= this.maxDistance) {
+          this.moveState = (this.moveState + 1) % 4; // 이동 상태 변경
+          this.currentDistance = 0; // 이동 거리 초기화
+        }
+        // villain.x -= this.blockSpeed;
+        villain.draw(this.context);
+      });
 
       // 공과 vanellope 블록의 충돌 검사
       this.balls.forEach((ball) => {
@@ -177,7 +211,7 @@ class Canvas2 {
       this.balls = this.balls.filter((ball) => {
         ball.update(
           this.canvas,
-          this.blocks,
+          this.villains,
           this.paddle,
           this.items,
           this.increaseScore.bind(this),
@@ -190,7 +224,7 @@ class Canvas2 {
         ball.draw(this.context);
         ball.update(
           this.canvas,
-          this.blocks,
+          this.villains,
           this.paddle,
           this.items,
           this.increaseScore.bind(this),
