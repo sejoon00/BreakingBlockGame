@@ -10,6 +10,7 @@ class Canvas2 extends Canvas {
     this.maxDistance = 100; // 한 번에 이동할 최대 거리
     this.bananas = []; // 바나나 초기화
     this.frozenBlocks = new Set(); // 일시정지된 블록들
+    this.isWarningVisible = false; // 경고 메시지 표시 여부
   }
 
   initGameElements() {
@@ -56,6 +57,19 @@ class Canvas2 extends Canvas {
         new Banana(this.canvas, bananaImageSrc, bananaSize, x, y)
       );
     }
+
+    setTimeout(() => {
+      setTimeout(() => {
+        this.showWarning();
+
+        this.boss = new Boss(
+          this.canvas,
+          this.canvas.width / 2 - 150,
+          50,
+          this.endGame.bind(this)
+        ); // 보스 위치 조정
+      }, 2000);
+    }, 5000);
   }
 
   freezeBlock(block) {
@@ -85,12 +99,44 @@ class Canvas2 extends Canvas {
       }
     }
   }
+  // 경고 메시지를 표시하는 메서드
+  showWarning() {
+    this.isWarningVisible = true;
+    let blinkCount = 0;
+    const blinkInterval = setInterval(() => {
+      this.isWarningVisible = !this.isWarningVisible;
+      blinkCount++;
+      if (blinkCount === 4) {
+        clearInterval(blinkInterval);
+        this.isWarningVisible = false;
+      }
+    }, 1000); // 250ms 간격으로 깜빡임
+  }
 
   startGameLoop() {
     const update = () => {
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawBackground(); // 배경 다시 그리기
+
+      if (this.isWarningVisible) {
+        // 하얀색 반투명 배경으로 깜빡이기
+        this.context.save();
+        this.context.globalAlpha = 0.1;
+        this.context.fillStyle = 'red';
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.restore();
+        this.context.font = '48px Arial';
+        this.context.fillStyle = 'red';
+        this.context.textAlign = 'center';
+        this.context.fillText(
+          'Warning! 보스보다 먼저 도착하세요!',
+          this.canvas.width / 2,
+          this.canvas.height / 2
+        );
+      } else {
+        this.drawBackground(); // 배경 다시 그리기
+      }
 
       this.moveBlock(this.vanellope, this.vanellopeState);
       this.vanellope.draw(this.context);
