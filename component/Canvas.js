@@ -135,14 +135,16 @@ class Canvas {
   // 게임 종료 함수
   endGame() {
     this.destroy();
-    gameState ='GameClear';
+    gameState = "GameClear";
+    console.log(gameState);
     $('#overPage').fadeOut('slow').slideDown('slow');
   }
 
   // 공이 배열에 하나도 없을 때 확인하는 함수
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {
-      gameState ='GameOver';
+      gameState = "GameOver";
+      console.log(gameState);
       this.destroy();
       $('#overPage').fadeOut('slow').slideDown('slow');
     }

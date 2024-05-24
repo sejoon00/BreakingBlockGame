@@ -33,6 +33,8 @@ document.addEventListener(
 
 //은서
 changeColor();
+let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
+startPageAudio.loop = true;
 startPageAudio.play();
 
 //

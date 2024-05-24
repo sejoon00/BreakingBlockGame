@@ -36,8 +36,6 @@ class Block {
   }
 
   isHit(ball, items, increaseScore) {
-    //test입니다
-
     if (!this.visible) return false;
 
     // 간단한 AABB 충돌 검사
@@ -48,7 +46,11 @@ class Block {
       ball.y - ball.radius < this.y + this.height
     ) {
       this.visible = false; // 블럭을 보이지 않게 설정
-
+      let blockAudio = new Audio(
+        'https://taira-komori.jpn.org/sound_os2/game01/select01.mp3'
+        );
+      blockAudio.play();
+      
       // 충돌 방향 계산 및 반응
       const overlapX =
         ball.radius +
@@ -79,7 +81,6 @@ class Block {
       if (this.increaseBrokenBlocks) {
         this.increaseBrokenBlocks();
       }
-      blockAudio.play();
 
       console.log(increaseScore);
       // 점수 증가

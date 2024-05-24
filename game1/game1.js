@@ -32,10 +32,26 @@ function setGame1() {
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
   canvas = new Game1_canvas("../source/game1Background.png");
   canvas.appendTo(game);
+  let Game1Audio = new Audio("./source/Game1BGM.mp3");
+  Game1Audio.loop = true;
+  Game1Audio.volume = 0.3;
   Game1Audio.play();
 }
 
 function endGame1() {
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
+}
+
+let canPlay = true;
+let paddleAudio = new Audio("https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3");
+
+function playPaddleAudio() {
+  if (canPlay) {
+      paddleAudio.play();
+      canPlay = false;
+      setTimeout(() => {
+          canPlay = true;
+      }, 50);
+  }
 }

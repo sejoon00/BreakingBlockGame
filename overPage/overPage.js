@@ -21,17 +21,17 @@ document.querySelector('main').insertAdjacentHTML(
 //은서
  // top 및 left 속성 변경
 
-let overpage = document.querySelector('#overpage');
+let overPage = document.querySelector('#overPage');
+console.log(gameState);
 
-if (gameState === 'GameClear') {
-  change_position(overpage);
-  clearAudio.play();
+
+if (gameState ==='GameClear') {
+  change_position(overPage);
   document.querySelector('#result').append('GAME CLEAR');
 }
 
 if (gameState === 'GameOver') {
-  change_position(overpage);
-  overPageAudio.play();
+  change_position(overPage);
   document.querySelector('#result').append('GAME OVER');
 }
 
@@ -42,8 +42,8 @@ document.querySelector('#score').append(str);
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 //은서
-function change_position(obj) {
-  var l = ($(window).width() - obj.width) / 2;
-  var t = ($(window).height() - obj.height) / 2;
-  obj.css({ top: t, left: l });
-}
+var l = (window.innerWidth - overPage.offsetWidth) / 2;
+var t = (window.innerHeight - overPage.offsetHeight) / 2;
+overPage.style.top = t + 'px'; // CSS 속성 직접 설정
+overPage.style.left = l + 'px'; // CSS 속성 직접 설정
+console.log(overPage.offsetWidth);

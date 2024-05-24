@@ -2,6 +2,8 @@
   display: none;
   width: 500px;
 	height: 400px;
+  top: 0;
+	left: 0;
 }
 
 #result {
@@ -12,10 +14,9 @@
 
 .popup {
 	position: fixed;
-	top: 0;
-	left: 0;
 	background-color: white;
+  opacity: 0.9;
 	padding: 30px 20px;
 	z-index: 1;
-	border: 1px solid black;
+	border: 3px solid yellow;
 }
