@@ -17,33 +17,35 @@ document.querySelector('main').insertAdjacentHTML(
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
+let 캔버스 = document.querySelector('#game1_canvas');
+let 캔버스2 = document.querySelector('#game2_canvas');
+let 캔버스3 = document.querySelector('#game3_canvas');
 
 //은서
- // top 및 left 속성 변경
+window.addEventListener('DOMContentLoaded', () => {
+  // overPage 요소를 선택
+  let overPage = document.querySelector('#overPage');
 
-let overPage = document.querySelector('#overPage');
-console.log(gameState);
+  // 게임 상태에 따른 결과 표시
+  if (gameState === 'GameClear') {
+      document.querySelector('#result').append('GAME CLEAR');
+  } else if (gameState === 'GameOver') {
+      document.querySelector('#result').append('GAME OVER');
+  }
 
+  // 점수 표시
+  let str = '당신의 score는 ' + canvas.score + '점입니다.';
+  document.querySelector('#score').append(str);
 
-if (gameState ==='GameClear') {
+  // 위치 변경 함수 호출
   change_position(overPage);
-  document.querySelector('#result').append('GAME CLEAR');
-}
-
-if (gameState === 'GameOver') {
-  change_position(overPage);
-  document.querySelector('#result').append('GAME OVER');
-}
-
-let str = '당신의 score는 ' + score + '점입니다.';
-document.querySelector('#score').append(str);
+});
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 //은서
-var l = (window.innerWidth - overPage.offsetWidth) / 2;
-var t = (window.innerHeight - overPage.offsetHeight) / 2;
+var l = (window.innerWidth - 500) / 2;
+var t = (window.innerHeight - 400) / 2;
 overPage.style.top = t + 'px'; // CSS 속성 직접 설정
 overPage.style.left = l + 'px'; // CSS 속성 직접 설정
-console.log(overPage.offsetWidth);

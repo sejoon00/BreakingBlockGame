@@ -7,6 +7,7 @@ document.querySelector("main").insertAdjacentHTML(
     <section id="instructionPage">
       <div id="instruction">
         <img src="./source/xlogo.png" width="30"></img>
+        <div>HIdddddddddddddddddddddddddddddd</div>
       </div>
     </section>
   `

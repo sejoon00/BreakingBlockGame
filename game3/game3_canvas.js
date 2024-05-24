@@ -37,7 +37,7 @@ class Game3_canvas extends Canvas {
       this.blocks.push(
         new Block3(50, 50, 40, 40, 1, this.increaseBrokenBlocks.bind(this), "red")
       );
-      console.log("New block added in Game3_canvas");
+      //console.log("New block added in Game3_canvas");
     }
 
     // 보스 몬스터 생성 (15초 후 등장)
@@ -73,6 +73,17 @@ class Game3_canvas extends Canvas {
   endGame() {
     alert("Congratulations! You've destroyed the boss!");
     this.destroy();
+    gameState = "GameClear";
+    $('#overPage').fadeOut('slow').slideDown('slow');
+  }
+
+  // 사용자 hp 0인지 확인하는 함수 
+  checkBallandLife() {
+    if (this.lifes.length === 0) {
+      gameState = "GameOver";
+      this.destroy();
+      $('#overPage').fadeOut('slow').slideDown('slow');
+    }
   }
 
   // 게임 루프 내에서 drawPath를 호출하여 경로를 그림

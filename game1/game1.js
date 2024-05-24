@@ -6,7 +6,8 @@
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 let canvas;
-
+console.log(canvas); // game1_canvas 객체 확인
+console.log(canvas.score); // score 속성 확인
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
@@ -41,17 +42,4 @@ function setGame1() {
 function endGame1() {
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
-}
-
-let canPlay = true;
-let paddleAudio = new Audio("https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3");
-
-function playPaddleAudio() {
-  if (canPlay) {
-      paddleAudio.play();
-      canPlay = false;
-      setTimeout(() => {
-          canPlay = true;
-      }, 50);
-  }
 }

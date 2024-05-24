@@ -36,7 +36,7 @@ class Ball {
       if (!this.isRemoved) {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
-        console.log('땅에 닿았음');
+        //console.log('땅에 닿았음');
         decreaseLife();
       }
       return;

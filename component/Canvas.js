@@ -1,7 +1,5 @@
 class Canvas {
   constructor(backgroundimageUrl) {
-    console.log('hi');
-
     this.backgroundimageUrl = backgroundimageUrl;
     this.canvas = document.createElement('canvas');
     this.canvas.id = 'game_canvas';
@@ -25,8 +23,6 @@ class Canvas {
       this.drawBackground();
       this.initGameElements();
       this.startGameLoop();
-
-      console.log(this.ballInitialX);
     };
     this.backgroundimage.src = backgroundimageUrl;
   }
@@ -43,7 +39,7 @@ class Canvas {
   resizeCanvas() {
     let gameWidth = window.getComputedStyle(document.querySelector('#game'));
 
-    console.log(gameWidth.width);
+    //console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
     this.canvas.height = this.canvas.width * 0.75;
     this.drawBackground(); // 캔버스 크기가 변경될 때마다 배경 다시 그리기
@@ -105,7 +101,7 @@ class Canvas {
     this.balls.push(
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
-    console.log(this.balls);
+    //console.log(this.balls);
     //패들 랄프 크기 수정
     this.paddle = new Paddle(this.canvas, 100, 60, 10);
 
@@ -136,7 +132,6 @@ class Canvas {
   endGame() {
     this.destroy();
     gameState = "GameClear";
-    console.log(gameState);
     $('#overPage').fadeOut('slow').slideDown('slow');
   }
 
@@ -144,7 +139,6 @@ class Canvas {
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {
       gameState = "GameOver";
-      console.log(gameState);
       this.destroy();
       $('#overPage').fadeOut('slow').slideDown('slow');
     }
@@ -220,7 +214,7 @@ class Canvas {
   }
 
   togglePause() {
-    console.log('stop');
+    //console.log('stop');
     this.isPaused = !this.isPaused;
     if (!this.isPaused) {
       this.startGameLoop(); // 일시 중지 해제 시 게임 루프 재개

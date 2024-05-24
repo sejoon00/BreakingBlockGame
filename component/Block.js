@@ -82,10 +82,10 @@ class Block {
         this.increaseBrokenBlocks();
       }
 
-      console.log(increaseScore);
+      //console.log(increaseScore);
       // 점수 증가
       if (increaseScore) {
-        console.log('score2');
+        //console.log('score2');
 
         increaseScore();
       }

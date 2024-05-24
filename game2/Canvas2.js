@@ -229,7 +229,7 @@ class Canvas2 extends Canvas {
 
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            console.log('충돌 발생'); // 충돌시 출력
+            //console.log('충돌 발생'); // 충돌시 출력
             ball.changeDirectionRandomly();
           }
         });

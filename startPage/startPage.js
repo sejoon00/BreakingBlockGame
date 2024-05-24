@@ -23,7 +23,7 @@ document.addEventListener(
   "keydown",
   (event) => {
     if (event.code === "Space") {
-      moveToStagePage();
+      moveToInstructionPage();
       event.preventDefault(); // 스페이스바의 기본 동작을 방지합니다.
       startPageAudio.pause(); // 노래 중단
     }
@@ -42,10 +42,10 @@ startPageAudio.play();
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 //세준
-function moveToStagePage() {
+function moveToInstructionPage() {
   document.querySelector("#startPage").style.display = "none";
-  gameState = "stagePage";
-  document.querySelector("#selectGame").style.display = "block";
+  gameState = "instructionPage";
+  document.querySelector("#instructionPage").style.display = "block";
 }
 
 //은서
