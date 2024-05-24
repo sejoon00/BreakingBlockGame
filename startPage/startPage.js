@@ -44,7 +44,7 @@ startPageAudio.play();
 //세준
 function moveToInstructionPage() {
   document.querySelector("#startPage").style.display = "none";
-  gameState = "instructionPage";
+  //gameState = "instructionPage";
   document.querySelector("#instructionPage").style.display = "block";
 }
 
