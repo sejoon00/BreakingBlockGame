@@ -1,5 +1,7 @@
 gameState = 'none';
 
+gameMode = 'none';
+
 selectTargetGame = '';
 
 selectCharacter = '';

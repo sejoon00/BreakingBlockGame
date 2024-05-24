@@ -61,7 +61,7 @@ class Canvas {
 
   // 점수 증가 함수
   increaseScore() {
-    this.score += 100; // 점수를 10 증가시킵니다.
+    this.score += 100; // 점수를 100 증가시킵니다.
     console.log('score');
   }
   decreaseLife() {
@@ -130,17 +130,17 @@ class Canvas {
   }
   // 게임 종료 함수
   endGame() {
+    console.log("GameClear");
     this.destroy();
-    gameState = "GameClear";
-    $('#overPage').fadeOut('slow').slideDown('slow');
+    gameMode = "GameClear";
   }
 
   // 공이 배열에 하나도 없을 때 확인하는 함수
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {
-      gameState = "GameOver";
+      console.log("GameOver");
+      gameMode = "GameOver";
       this.destroy();
-      $('#overPage').fadeOut('slow').slideDown('slow');
     }
   }
 

@@ -34,15 +34,20 @@ document.addEventListener("keydown", (event) => {
 function toggleEscPage() {
   if (gameState.startsWith("Gaming")) {
     const escPage = document.querySelector("#escPage");
-    if (escPage.style.display == "block") {
+    
+    if (escPage.style.display == "block")
+    {
       escPage.style.display = "none";
       canvas.togglePause(); // 게임 재개
-    } else {
+    }
+    else
+    {
       escPage.style.display = "block";
       canvas.togglePause(); // 게임 일시 중지
     }
   }
 }
+
 // //민석
 // function PopUpEscPage() {
 //   //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
