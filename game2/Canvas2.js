@@ -1,15 +1,17 @@
-// Canvas2 클래스가 Canvas 클래스를 상속하도록 수정
 class Canvas2 extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = "game2_canvas";
+    this.canvas.id = 'game2_canvas';
     this.vanellope;
     this.villains = []; // 빌런 리스트 초기화
     this.blockSpeed = 0.5; // 블록의 이동 속도
-    this.moveState = 0; // 이동 상태 (0: 아래로, 1: 왼쪽으로, 2: 위로, 3: 왼쪽으로)
-    this.maxDistance = 400; // 한 번에 이동할 최대 거리
-    this.currentDistance = 0; // 현재 이동 거리
+    this.vanellopeState = { moveState: 0, currentDistance: 0 }; // 바닐로페 이동 상태 및 거리
+    this.villainStates = new Map(); // 빌런 이동 상태 및 거리
+    this.maxDistance = 100; // 한 번에 이동할 최대 거리
     this.bananas = []; // 바나나 초기화
+    this.frozenBlocks = new Set(); // 일시정지된 블록들
+    this.isWarningVisible = false; // 경고 메시지 표시 여부
+    this.boss; // 보스 블록
   }
 
   initGameElements() {
@@ -22,7 +24,7 @@ class Canvas2 extends Canvas {
       100,
       80,
       this.increaseBrokenBlocks.bind(this),
-      "../game2/vanellope.png"
+      '../game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
 
@@ -33,17 +35,20 @@ class Canvas2 extends Canvas {
         80,
         60,
         this.increaseBrokenBlocks.bind(this),
-        "../game2/villain" + i + ".png",
+        '../game2/villain' + i + '.png',
         false // 일반 블록임을 나타내는 플래그
       );
       this.villains.push(villainBlock);
+      this.villainStates.set(villainBlock, {
+        moveState: 0,
+        currentDistance: 0,
+      });
     }
 
-    // 곤용 바나나 배치 노란 부분에만 나타나도록 수정
-    const bananaImageSrc = "../source/banana.png";
+    const bananaImageSrc = '../source/banana.png';
     const bananaSize = 50;
     const yellowAreaTop = 100;
-    const yellowAreaBottom = this.canvas.height - 100;
+    const yellowAreaBottom = this.canvas.height - 200;
     for (let i = 0; i < 5; i++) {
       const x = Math.random() * (this.canvas.width - bananaSize);
       const y =
@@ -53,6 +58,63 @@ class Canvas2 extends Canvas {
         new Banana(this.canvas, bananaImageSrc, bananaSize, x, y)
       );
     }
+
+    // 보스 블록 초기화
+    setTimeout(() => {
+      setTimeout(() => {
+        this.showWarning();
+        this.boss = new Block(
+          this.canvas.width - 150,
+          this.canvas.height / 2 - 75,
+          150,
+          150,
+          this.increaseBrokenBlocks.bind(this),
+          '../game2/boss.png'
+        );
+      }, 2000);
+    }, 5000);
+  }
+
+  freezeBlock(block) {
+    this.frozenBlocks.add(block);
+    setTimeout(() => {
+      this.frozenBlocks.delete(block);
+    }, 1000); // 1초 동안 멈춤
+  }
+
+  moveBlock(block, state) {
+    if (!this.frozenBlocks.has(block)) {
+      if (state.moveState === 0) {
+        block.y += this.blockSpeed; // 아래로 이동
+      } else if (state.moveState === 1) {
+        block.x -= this.blockSpeed; // 왼쪽으로 이동
+      } else if (state.moveState === 2) {
+        block.y -= this.blockSpeed; // 위로 이동
+      } else if (state.moveState === 3) {
+        block.x -= this.blockSpeed; // 왼쪽으로 이동
+      }
+
+      state.currentDistance += this.blockSpeed;
+
+      if (state.currentDistance >= this.maxDistance) {
+        state.moveState = (state.moveState + 1) % 4; // 이동 상태 변경
+        state.currentDistance = 0; // 이동 거리 초기화
+      }
+    }
+  }
+
+  // 경고 메시지를 표시하는 메서드
+  showWarning() {
+    this.isWarningVisible = true;
+    let blinkCount = 0;
+    const blinkInterval = setInterval(() => {
+      this.isWarningVisible = !this.isWarningVisible;
+      blinkCount++;
+      if (blinkCount === 4) {
+        clearInterval(blinkInterval);
+        this.isWarningVisible = false;
+      }
+    }, 1000); // 1초 간격으로 깜빡임
   }
 
   startGameLoop() {
@@ -61,58 +123,62 @@ class Canvas2 extends Canvas {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawBackground(); // 배경 다시 그리기
 
-      // 블록 이동 로직 추가
-      if (this.moveState === 0) {
-        this.vanellope.y += this.blockSpeed; // 아래로 이동
-      } else if (this.moveState === 1) {
-        this.vanellope.x -= this.blockSpeed; // 왼쪽으로 이동
-      } else if (this.moveState === 2) {
-        this.vanellope.y -= this.blockSpeed; // 위로 이동
-      } else if (this.moveState === 3) {
-        this.vanellope.x -= this.blockSpeed; // 왼쪽으로 이동
+      if (this.isWarningVisible) {
+        // 하얀색 반투명 배경으로 깜빡이기
+        this.context.save();
+        this.context.globalAlpha = 0.1;
+        this.context.fillStyle = 'red';
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.restore();
+        this.context.font = '48px Arial';
+        this.context.fillStyle = 'red';
+        this.context.textAlign = 'center';
+        this.context.fillText(
+          'Warning! 보스보다 먼저 도착하세요!',
+          this.canvas.width / 2,
+          this.canvas.height / 2
+        );
+      } else {
+        this.drawBackground(); // 배경 다시 그리기
       }
 
-      this.currentDistance += this.blockSpeed;
-
-      if (this.currentDistance >= this.maxDistance) {
-        this.moveState = (this.moveState + 1) % 4; // 이동 상태 변경
-        this.currentDistance = 0; // 이동 거리 초기화
-      }
-
+      this.moveBlock(this.vanellope, this.vanellopeState);
       this.vanellope.draw(this.context);
-      // 빌런 블록들 이동 및 그리기
+
       this.villains.forEach((villain) => {
-        if (this.moveState === 0) {
-          villain.y += this.blockSpeed; // 아래로 이동
-        } else if (this.moveState === 1) {
-          villain.x -= this.blockSpeed; // 왼쪽으로 이동
-        } else if (this.moveState === 2) {
-          villain.y -= this.blockSpeed; // 위로 이동
-        } else if (this.moveState === 3) {
-          villain.x -= this.blockSpeed; // 왼쪽으로 이동
-        }
-
-        this.currentDistance += this.blockSpeed;
-
-        if (this.currentDistance >= this.maxDistance) {
-          this.moveState = (this.moveState + 1) % 4; // 이동 상태 변경
-          this.currentDistance = 0; // 이동 거리 초기화
-        }
+        this.moveBlock(villain, this.villainStates.get(villain));
         villain.draw(this.context);
       });
 
-      // 공과 vanellope 블록의 충돌 검사
+      // 보스 이동 로직
+      if (this.boss) {
+        this.boss.x -= this.blockSpeed; // 보스는 오른쪽에서 왼쪽으로 이동
+        this.boss.draw(this.context);
+      }
+
       this.balls.forEach((ball) => {
-        if (
-          this.vanellope.isHit(ball, this.items, this.increaseScore.bind(this))
-        ) {
+        if (this.vanellope.isHit(ball, this.items)) {
           this.vanellope.visible = true;
           this.decreaseLife(); // 생명 하나 줄이기
+        }
+
+        this.villains.forEach((villain) => {
+          if (villain.isHit(ball, this.items, this.increaseScore.bind(this))) {
+            // this.decreaseLife(); // 생명 하나 줄이기
+          }
+        });
+
+        // 보스와의 충돌 검사
+        if (
+          this.boss &&
+          this.boss.isHit(ball, this.items, this.increaseScore.bind(this))
+        ) {
+          this.boss = null; // 보스 제거
         }
       });
 
       if (this.vanellope.x + this.vanellope.width < 0) {
-        alert("게임 승리");
+        alert('게임 승리');
       }
 
       this.balls = this.balls.filter((ball) => {
@@ -156,15 +222,36 @@ class Canvas2 extends Canvas {
         );
       });
 
-      // 곤용 바나나 그리기
-      this.bananas.forEach((banana) => {
+      // 바나나 그리기 및 충돌 처리
+      this.bananas = this.bananas.filter((banana) => {
         banana.draw();
+        let collisionDetected = false;
+
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            console.log("충돌 발생"); // 충돌시 출력
+            console.log('충돌 발생'); // 충돌시 출력
             ball.changeDirectionRandomly();
           }
         });
+
+        // 블록과 바나나 충돌 처리
+        if (
+          this.vanellope.visible == true &&
+          banana.isCollidingWithBlock(this.vanellope)
+        ) {
+          this.freezeBlock(this.vanellope);
+          collisionDetected = true;
+        }
+
+        this.villains.forEach((villain) => {
+          if (villain.visible == true && banana.isCollidingWithBlock(villain)) {
+            this.freezeBlock(villain);
+            collisionDetected = true;
+          }
+        });
+
+        // 블록과의 충돌이 발생한 경우 배열에서 제거
+        return !collisionDetected;
       });
 
       this.drawScore(); // 점수 그리기 추가
