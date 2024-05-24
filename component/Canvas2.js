@@ -67,6 +67,9 @@ class Canvas2 {
   }
 
   increaseScore() {
+    if (this.vanellope.isVanellope) {
+      return;
+    }
     this.score += 100; // 점수를 100 증가시킵니다.
     console.log('score');
   }
