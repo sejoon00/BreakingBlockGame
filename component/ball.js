@@ -32,9 +32,12 @@ class Ball {
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
     if (this.y + this.dy > canvas.height - this.radius) {
       // 공을 제거할 플래그 설정
-      this.isRemoved = true;
-      console.log("땅에 닿았음");
-      decreaseLife();
+      if (!this.isRemoved) {
+        // 생명 감소 로직이 한 번만 실행되도록 조건 추가
+        this.isRemoved = true;
+        console.log('땅에 닿았음');
+        decreaseLife();
+      }
       return;
     }
 
@@ -47,7 +50,7 @@ class Ball {
       // 패들과의 충돌 처리
 
       let paddleAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3"
+        'https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3'
       );
       paddleAudio.play();
     }
