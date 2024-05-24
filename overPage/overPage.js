@@ -12,7 +12,6 @@ document.querySelector("main").insertAdjacentHTML(
         <button onclick=moveToStagePage()>YES</button>
         <button onclick=setGameHide()>NO</button>
       </div>
-      
     `
 );
 

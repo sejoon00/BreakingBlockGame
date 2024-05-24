@@ -1,8 +1,8 @@
 class Paddle {
   constructor(canvas, width, height, speed) {
     this.canvas = canvas;
-    this.width = width;
-    this.height = height;
+    this.width = 110;
+    this.height = 130;
     this.x = (this.canvas.width - this.width) / 2; // 막대기의 초기 X 위치
     this.y = this.canvas.height - this.height - 20; // 막대기의 Y 위치
     this.speed = speed;
@@ -24,7 +24,7 @@ class Paddle {
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = "#833"; //"#333"
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // 수정 완
     ctx.fill();
     ctx.closePath();
 
@@ -88,6 +88,7 @@ class Paddle {
   //   }
   //   return false; // 충돌이 발생하지 않았음을 반환합니다.
   // }
+
   isHitPaddle(ball) {
     // 패들의 AABB 충돌 검사
     if (

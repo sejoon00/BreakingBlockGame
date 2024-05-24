@@ -63,6 +63,7 @@ function goToGame1ByVanellope() {
     document.querySelector("#settingPage").style.display = "none";
     gameState = "Gaming1";
     selectCharacter = "Vanellope";
+
     setGame1CanvasSize();
     document.querySelector("#game").style.display = "block";
   } else {
@@ -81,5 +82,13 @@ function goToGame3ByRalph() {
   gameState = "Gaming3";
   selectCharacter = "Ralph";
   setGame3();
+  document.querySelector("#game").style.display = "block";
+}
+
+function goToGame2ByRalph() {
+  gameState = "Gaming2"; //게임중으로 상태 변경
+  document.querySelector("#settingPage").style.display = "none";
+  selectCharacter = "Ralph";
+  setGame2();
   document.querySelector("#game").style.display = "block";
 }

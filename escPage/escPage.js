@@ -16,9 +16,11 @@ document.querySelector("main").insertAdjacentHTML(
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 
 //민석
+
 document.addEventListener("keydown", (event) => {
   if (event.code === "Escape") {
     toggleEscPage();
+
     event.preventDefault(); // Escape의 기본 동작을 방지
 
     //실행중인 Canvas를 정지시킵니다
@@ -55,7 +57,6 @@ function PopDownEscPage() {
   //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
   if (document.querySelector("#escPage").style.display == "block") {
     //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
-
     document.querySelector("#escPage").style.display = "none";
     canvas.togglePause(); // 게임 재개
   }
@@ -77,6 +78,7 @@ function setGameHide() {
     canvas.destroy();
     canvas = null;
   }
+
   if (game) {
     game.style.display = "none";
     game.remove();

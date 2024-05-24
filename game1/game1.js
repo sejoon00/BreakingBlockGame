@@ -37,3 +37,16 @@ function endGame1() {
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
 }
+
+let canPlay = true;
+let paddleAudio = new Audio("https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3");
+
+function playPaddleAudio() {
+  if (canPlay) {
+      paddleAudio.play();
+      canPlay = false;
+      setTimeout(() => {
+          canPlay = true;
+      }, 3000); // 3초 후에 다시 재생 가능하도록 설정
+  }
+}

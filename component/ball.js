@@ -30,7 +30,7 @@ class Ball {
       this.dy = -this.dy;
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
-    if (this.y + this.dy > canvas.height - this.radius) {
+    if (this.y + this.dy > canvas.height - 140 - this.radius) {
       // 공을 제거할 플래그 설정
       this.isRemoved = true;
       console.log("땅에 닿았음");
@@ -45,11 +45,7 @@ class Ball {
 
     if (paddle.isHitPaddle(this)) {
       // 패들과의 충돌 처리
-
-      let paddleAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3"
-      );
-      paddleAudio.play();
+      playPaddleAudio();
     }
 
     // 공 위치 업데이트
@@ -89,4 +85,13 @@ class Ball {
 
     this.draw(canvas.getContext("2d"));
   }
+
+  // 곤용 바나나 닿을 시 공 방향 랜덤 변경 
+  changeDirectionRandomly() {
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+    this.dx = speed * Math.cos(angle);
+    this.dy = speed * Math.sin(angle);
+  }
+
 }

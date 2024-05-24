@@ -21,7 +21,7 @@ class Canvas {
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
-      this.ballInitialY = this.canvas.height - 100;
+      this.ballInitialY = this.canvas.height - 160;
       this.drawBackground();
       this.initGameElements();
       this.startGameLoop();
@@ -30,8 +30,6 @@ class Canvas {
     };
     this.backgroundimage.src = backgroundimageUrl;
   }
-
-  // 주석
 
   drawBackground() {
     this.context.drawImage(
@@ -80,16 +78,15 @@ class Canvas {
 
   // 점수를 화면에 표시하는 함수
   drawScore() {
-    this.context.font = "24px Arial";
-    this.context.fillStyle = "yellow";
+    this.context.font = "14px Arial"; // 글자 크기 조정
+    this.context.fillStyle = "red";
     // this.context.strokeStyle = "black";
     this.context.lineWidth = 2;
-    this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
-    // this.context.strokeText(
-    //   "Score: " + this.score,
-    //   this.canvas.width - 150,
-    //   50
-    // );
+  
+    // 첫 번째 줄 그리기
+    this.context.fillText("SCORE", this.canvas.width - 150, 30);
+    // 두 번째 줄 그리기 (this.score)
+    this.context.fillText(this.score, this.canvas.width - 150, 40);
   }
 
   destroy() {
@@ -108,7 +105,8 @@ class Canvas {
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
     );
     console.log(this.balls);
-    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    //패들 랄프 크기 수정
+    this.paddle = new Paddle(this.canvas, 100, 60, 10);
 
     this.paddle.bindMouseMove();
 
@@ -207,6 +205,7 @@ class Canvas {
   }
 
   togglePause() {
+    console.log("stop");
     this.isPaused = !this.isPaused;
     if (!this.isPaused) {
       this.startGameLoop(); // 일시 중지 해제 시 게임 루프 재개

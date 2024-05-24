@@ -10,7 +10,7 @@ document.querySelector("main").insertAdjacentHTML(
       <img src="./startPage/ralphLogo.png" width="300" height="250"></img>
     </div>
     <div id="spacebar">PRESS SPACEBAR</div>
-		<div class="text">WEB PROGRAMMING TEAM 8<br>MINSEOK SEJUN KUNYONG EUNSEO</div>
+		<div class="text">WEB PROGRAMMING TEAM 8<br>MINSEOK SEJUN GONYOUNG EUNSEO</div>
   </section>
 `
 );
@@ -36,7 +36,6 @@ let id;
 let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
 startPageAudio.play();
 startPageAudio.loop = true;
-startPageAudio.volume = 0.005; // 임시 설정
 changeColor();
 
 //
