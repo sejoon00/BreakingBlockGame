@@ -32,7 +32,6 @@ document.addEventListener(
 );
 
 //은서
-let id;
 let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
 startPageAudio.play();
 startPageAudio.loop = true;
@@ -51,7 +50,7 @@ function moveToStagePage() {
 
 //은서
 function changeColor() {
-  id = setInterval(flashText, 1000);
+  setInterval(flashText, 1000);
 }
 function flashText() {
   let elem = document.querySelector("#spacebar");
