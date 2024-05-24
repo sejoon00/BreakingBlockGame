@@ -8,6 +8,7 @@ class Paddle {
     this.speed = speed;
     //곤용
     this.image = new Image();
+    this.hitPointSize = 15;
   }
 
   // 막대기 그리기 함수
@@ -18,13 +19,15 @@ class Paddle {
 
     if (selectCharacter === "Ralph") {
       this.image.src = "../source/ralph_paddle.png";
+      if (selectTargetGame == "game3")
+        this.image.src = "../source/stage3_ralph.png";
     } else {
       this.image.src = "../source/vanellope_paddle.png";
     }
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // 수정 완
+    ctx.fillStyle = "rgba(0, 0, 0, 0)"; // 수정 완
     ctx.fill();
     ctx.closePath();
 
@@ -37,8 +40,17 @@ class Paddle {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       };
     }
-  }
 
+    if (selectTargetGame == "game3") {
+      ctx.fillStyle = "green";
+      ctx.fillRect(
+        this.x + this.width / 2 - this.hitPointSize / 2,
+        this.y + this.height / 2 - this.hitPointSize / 2,
+        this.hitPointSize,
+        this.hitPointSize
+      );
+    }
+  }
   // 이벤트 리스너 등록 (마우스 이동)
   bindMouseMove() {
     document.addEventListener("mousemove", (e) => {
@@ -62,10 +74,15 @@ class Paddle {
   }
 
   isCollidingWithBullet(bullet) {
-    const distX = Math.abs(bullet.x - this.x - this.width / 2);
-    const distY = Math.abs(bullet.y - this.y - this.height / 2);
+    const hitPointX = this.x + this.width / 2 - this.hitPointSize / 2;
+    const hitPointY = this.y + this.height / 2 - this.hitPointSize / 2;
 
-    if (distX <= this.width / 2 && distY <= this.height / 2) {
+    if (
+      bullet.x > hitPointX &&
+      bullet.x < hitPointX + this.hitPointSize &&
+      bullet.y > hitPointY &&
+      bullet.y < hitPointY + this.hitPointSize
+    ) {
       return true;
     }
     return false;
@@ -128,6 +145,7 @@ class Paddle {
           new Ball(ball.x, ball.y, -ball.dx, ballY, ball.radius, ball.color)
         );
       }
+      return true;
     }
   }
 }

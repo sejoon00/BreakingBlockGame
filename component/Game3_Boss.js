@@ -3,12 +3,12 @@ class Boss {
     this.canvas = canvas;
     this.context = this.canvas.getContext("2d");
     this.x = x;
-    this.y = -100; // 보스의 초기 y 좌표를 화면 밖으로 설정
+    this.y = -300; // 보스의 초기 y 좌표를 화면 밖으로 설정
     this.targetY = y; // 목표 위치를 설정
     this.width = 300; // 보스의 너비를 300으로 설정
     this.height = this.width / 1.28;
-    this.hp = 10;
-    this.maxHp = 10; // 보스의 최대 HP
+    this.hp = 30;
+    this.maxHp = 30; // 보스의 최대 HP
     this.isRemoved = false;
     this.bullets = [];
     this.image = new Image();
@@ -16,7 +16,8 @@ class Boss {
     this.isHit = false; // 보스가 공에 맞았는지 여부를 나타내는 플래그
     this.hitTimer = null; // 보스가 공에 맞았을 때 타이머를 관리하기 위한 변수
     this.onDefeated = onDefeated; // 보스가 패배했을 때 호출될 콜백 함수
-
+    this.direction = 1; // 좌우 이동 방향 (1: 오른쪽, -1: 왼쪽)
+    this.speed = 0.3; // 이동 속도
     this.image.onload = () => {
       this.draw();
     };
@@ -69,6 +70,8 @@ class Boss {
     // 보스가 천천히 내려오도록 y 좌표를 증가시킴
     if (this.y < this.targetY) {
       this.y += 1; // 내려오는 속도 조절
+    } else {
+      this.move(); // 보스 이동 업데이트
     }
 
     this.bullets.forEach((bullet) => bullet.update());
@@ -77,7 +80,7 @@ class Boss {
 
   shoot() {
     const random = Math.random();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       const angle = (i * Math.PI * random) / 5; // 총알이 전방으로 발사되도록 각도를 조정
       const dx = Math.cos(angle);
       const dy = Math.sin(angle);
@@ -93,14 +96,27 @@ class Boss {
     }
   }
 
+  move() {
+    if (this.x <= 40) {
+      this.direction = 1; // 오른쪽으로 이동
+    } else if (this.x + this.width >= this.canvas.width - 40) {
+      this.direction = -1; // 왼쪽으로 이동
+    }
+    this.x += this.direction * this.speed;
+  }
+
   takeDamage() {
+    if (this.isInvincible) return; // 무적 상태일 때는 피해를 받지 않음
+
     this.hp -= 1;
     this.isHit = true;
+    this.isInvincible = true; // 무적 상태로 설정
 
     // 보스가 맞았을 때 0.5초 후에 다시 원래 상태로 돌아가게 함
     clearTimeout(this.hitTimer);
     this.hitTimer = setTimeout(() => {
       this.isHit = false;
+      this.isInvincible = false; // 무적 상태 해제
     }, 500);
   }
 }
