@@ -11,6 +11,7 @@ class Canvas2 extends Canvas {
     this.bananas = []; // 바나나 초기화
     this.frozenBlocks = new Set(); // 일시정지된 블록들
     this.isWarningVisible = false; // 경고 메시지 표시 여부
+    this.boss; // 보스 블록
   }
 
   initGameElements() {
@@ -58,16 +59,18 @@ class Canvas2 extends Canvas {
       );
     }
 
+    // 보스 블록 초기화
     setTimeout(() => {
       setTimeout(() => {
         this.showWarning();
-
-        this.boss = new Boss(
-          this.canvas,
-          this.canvas.width / 2 - 150,
-          50,
-          this.endGame.bind(this)
-        ); // 보스 위치 조정
+        this.boss = new Block(
+          this.canvas.width - 150,
+          this.canvas.height / 2 - 75,
+          150,
+          150,
+          this.increaseBrokenBlocks.bind(this),
+          '../game2/boss.png'
+        );
       }, 2000);
     }, 5000);
   }
@@ -99,6 +102,7 @@ class Canvas2 extends Canvas {
       }
     }
   }
+
   // 경고 메시지를 표시하는 메서드
   showWarning() {
     this.isWarningVisible = true;
@@ -110,7 +114,7 @@ class Canvas2 extends Canvas {
         clearInterval(blinkInterval);
         this.isWarningVisible = false;
       }
-    }, 1000); // 250ms 간격으로 깜빡임
+    }, 1000); // 1초 간격으로 깜빡임
   }
 
   startGameLoop() {
@@ -146,6 +150,12 @@ class Canvas2 extends Canvas {
         villain.draw(this.context);
       });
 
+      // 보스 이동 로직
+      if (this.boss) {
+        this.boss.x -= this.blockSpeed; // 보스는 오른쪽에서 왼쪽으로 이동
+        this.boss.draw(this.context);
+      }
+
       this.balls.forEach((ball) => {
         if (
           this.vanellope.isHit(ball, this.items, this.increaseScore.bind(this))
@@ -159,6 +169,14 @@ class Canvas2 extends Canvas {
             this.decreaseLife(); // 생명 하나 줄이기
           }
         });
+
+        // 보스와의 충돌 검사
+        if (
+          this.boss &&
+          this.boss.isHit(ball, this.items, this.increaseScore.bind(this))
+        ) {
+          this.boss = null; // 보스 제거
+        }
       });
 
       if (this.vanellope.x + this.vanellope.width < 0) {
