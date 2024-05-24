@@ -106,7 +106,8 @@ class Canvas {
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
     );
     console.log(this.balls);
-    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    //패들 랄프 크기 수정
+    this.paddle = new Paddle(this.canvas, 100, 60, 10);
 
     this.paddle.bindMouseMove();
 

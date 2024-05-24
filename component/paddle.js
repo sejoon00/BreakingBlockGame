@@ -25,7 +25,7 @@ class Paddle {
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = "#833"; //"#333"
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // 수정 완
     ctx.fill();
     ctx.closePath();
 

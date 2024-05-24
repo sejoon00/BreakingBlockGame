@@ -19,6 +19,7 @@ class Canvas2 {
     this.moveState = 0; // 이동 상태 (0: 아래로, 1: 왼쪽으로, 2: 위로, 3: 왼쪽으로)
     this.maxDistance = 400; // 한 번에 이동할 최대 거리
     this.currentDistance = 0; // 현재 이동 거리
+    this.bananas = []; //곤용 - 바나나 초기화
 
     window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
@@ -101,7 +102,9 @@ class Canvas2 {
     this.balls.push(
       new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
-    this.paddle = new Paddle(this.canvas, 100, 10, 10);
+    console.log(this.balls);
+    this.paddle = new Paddle(this.canvas, 100, 60, 10);
+
     this.paddle.bindMouseMove();
 
     let startY = 116;
@@ -133,6 +136,17 @@ class Canvas2 {
       this.lifes.push(
         new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
+    }
+
+    // 곤용 바나나 배치 노란 부분에만 나타나도록 수정
+    const bananaImageSrc = '../source/banana.png'; 
+    const bananaSize = 50;
+    const yellowAreaTop = 100; 
+    const yellowAreaBottom = this.canvas.height - 100;
+    for (let i = 0; i < 5; i++) {
+      const x = Math.random() * (this.canvas.width - bananaSize);
+      const y = yellowAreaTop + Math.random() * (yellowAreaBottom - yellowAreaTop - bananaSize);
+      this.bananas.push(new Banana(this.canvas, bananaImageSrc, bananaSize, x, y));
     }
   }
 
@@ -249,9 +263,21 @@ class Canvas2 {
         );
       });
 
+      // 곤용 바나나 그리기
+      this.bananas.forEach((banana) => {
+        banana.draw();
+        this.balls.forEach((ball) => {
+          if (banana.isColliding(ball)) {
+            console.log('충돌 발생');  // 충돌시 출력
+            ball.changeDirectionRandomly();
+          }
+        });
+      });
+
       this.drawScore(); // 점수 그리기 추가
       requestAnimationFrame(update);
     };
     update();
   }
 }
+
