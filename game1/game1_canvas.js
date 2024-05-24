@@ -28,7 +28,8 @@ class Game1_canvas extends Canvas {
               startY,
               blockWidth,
               blockHeight,
-              this.increaseBrokenBlocks.bind(this)
+              this.increaseBrokenBlocks.bind(this),
+              "../source/window.png"
             )
           );
           // x좌표 조정

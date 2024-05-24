@@ -1,11 +1,14 @@
 class Block {
-  constructor(x, y, width, height, increaseBrokenBlocks) {
+  constructor(x, y, width, height, increaseBrokenBlocks, imageSrc) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.visible = true;
+    this.image = new Image();
+    this.image.src = imageSrc;
     this.increaseBrokenBlocks = increaseBrokenBlocks; // 부서진 블록 수 증가 콜백
+    this.isVanellope = false; // 바닐로페 여부
   }
 
   hitLeft(ball) {
@@ -77,21 +80,24 @@ class Block {
         this.increaseBrokenBlocks();
       }
       let blockAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/select01.mp3"
+        'https://taira-komori.jpn.org/sound_os2/game01/select01.mp3'
       ); // 임시
       blockAudio.play();
 
       console.log(increaseScore);
       // 점수 증가
       if (increaseScore) {
-        console.log("score2");
+        console.log('score2');
 
         increaseScore();
+      }
+      if (this.isVanellope) {
+        return true;
       }
 
       // 25% 확률로 아이템 생성
       if (Math.random() < 0.25) {
-        const itemType = Math.random() < 0.5 ? "speed" : "ball";
+        const itemType = Math.random() < 0.5 ? 'speed' : 'ball';
         items.push(
           new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
         );
@@ -107,9 +113,9 @@ class Block {
   draw(ctx) {
     if (this.visible) {
       let image = new Image();
-      image.src = './source/window.png';
+      // image.src = './source/window.png';
 
-      ctx.drawImage(image, this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       // ctx.fillStyle = "#FF5733"; // 블록 색상 설정
       // ctx.fillRect(this.x, this.y, this.width, this.height);
     }
