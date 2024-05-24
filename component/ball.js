@@ -89,4 +89,13 @@ class Ball {
 
     this.draw(canvas.getContext("2d"));
   }
+
+  // 곤용 바나나 닿을 시 공 방향 랜덤 변경 
+  changeDirectionRandomly() {
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+    this.dx = speed * Math.cos(angle);
+    this.dy = speed * Math.sin(angle);
+  }
+
 }
