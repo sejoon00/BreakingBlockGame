@@ -1,11 +1,11 @@
 class Canvas {
   constructor(backgroundimageUrl) {
-    console.log("hi");
+    console.log('hi');
 
     this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game_canvas";
-    this.context = this.canvas.getContext("2d");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'game_canvas';
+    this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
     this.ballInitialY;
@@ -43,7 +43,7 @@ class Canvas {
     );
   }
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game"));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game'));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -136,19 +136,15 @@ class Canvas {
   }
   // 게임 종료 함수
   endGame() {
-    alert("Congratulations! You've destroyed all the blocks!");
     this.destroy();
+    $('#overPage').fadeOut('slow').slideDown('slow');
   }
 
   // 공이 배열에 하나도 없을 때 확인하는 함수
-  checkBalls() {
-    if (this.balls.length === 0) {
-      alert('공을 화면에 하나도 없습니다. 게임을 종료합니다');
-    }
-  }
-  checkLifes() {
-    if (this.lifes.length === 0) {
-      alert('생명이 없습니다. 게임을 종료합니다');
+  checkBallandLife() {
+    if (this.balls.length === 0 || this.lifes.length === 0) {
+      this.destroy();
+      $('#overPage').fadeOut('slow').slideDown('slow');
     }
   }
 
@@ -222,7 +218,7 @@ class Canvas {
   }
 
   togglePause() {
-    console.log("stop");
+    console.log('stop');
     this.isPaused = !this.isPaused;
     if (!this.isPaused) {
       this.startGameLoop(); // 일시 중지 해제 시 게임 루프 재개
