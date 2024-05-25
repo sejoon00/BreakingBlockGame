@@ -33,7 +33,7 @@ document.querySelector("#game1Img").addEventListener("click", () => {
 //민석
 function goToSettingPageForGame1() {
   document.querySelector("#settingPage").style.display = "block";
-  document.querySelector("#selectGame").style.display = "none";
+  document.querySelector("#instructionPage").style.display = "none";
   selectTargetGame = "game1";
 }
 function goToSettingPageForGame2() {

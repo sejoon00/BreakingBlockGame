@@ -42,10 +42,10 @@ startPageAudio.play();
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 //세준
-function moveToInstructionPage() {
+function moveToStagePage() {
   document.querySelector("#startPage").style.display = "none";
-  //gameState = "instructionPage";
-  document.querySelector("#instructionPage").style.display = "block";
+  gameState = "stagePage";
+  document.querySelector("#stagePage").style.display = "block";
 }
 
 //은서

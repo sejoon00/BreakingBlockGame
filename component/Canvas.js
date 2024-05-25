@@ -124,7 +124,7 @@ class Canvas {
   // 부서진 블록 수 증가 함수
   increaseBrokenBlocks() {
     this.brokenBlocks++;
-    if (this.brokenBlocks === this.blocks.length) {
+    if (this.brokenBlocks === this.blocks.length || this.score > 600) {
       this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
   }

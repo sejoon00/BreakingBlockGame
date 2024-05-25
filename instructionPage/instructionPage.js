@@ -6,14 +6,15 @@ document.querySelector("main").insertAdjacentHTML(
     `
     <section id="instructionPage">
       <div id="instruction">
+        <img src="./source/xlogo.png" width="30" class="close-btn" onclick="closePopup()"></img>
         <div id="instr-title">INSTRUCTION</div>
+        
         <div id="instr">
           <p>이 게임은 재미있는 퍼즐 게임입니다. 목표는 모든 블록을 제거하는 것입니다.</p>
           <p>각 레벨에는 다양한 도전 과제가 있으며, 빠른 속도와 정확한 판단이 필요합니다.</p>
           <p>마우스를 사용하여 블록을 이동시키고, 세 개 이상의 동일한 색상 블록을 일렬로 배치하여 제거하세요.</p>
           <p>제한 시간이 있으므로 빠르게 움직여 보세요. 모든 레벨을 클리어하면 게임이 완료됩니다.</p>
         </div>
-        <img src="./source/xlogo.png" width="30" class="close-btn" onclick="closePopup()"></img>
       </div>
     </section>
   `
@@ -27,5 +28,11 @@ document.querySelector("main").insertAdjacentHTML(
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function closePopup() {
   document.querySelector('#instruction').style.display = 'none';
-  goToSettingPageForGame1();
+  goToSettingPageForGame11();
+}
+
+function goToSettingPageForGame11() {
+  document.querySelector("#settingPage").style.display = "block";
+  document.querySelector("#instructionPage").style.display = "none";
+  selectTargetGame = "game1";
 }
