@@ -23,7 +23,7 @@ document.addEventListener(
   "keydown",
   (event) => {
     if (event.code === "Space") {
-      moveToInstructionPage();
+      moveToStagePage();
       event.preventDefault(); // 스페이스바의 기본 동작을 방지합니다.
       startPageAudio.pause(); // 노래 중단
     }
@@ -32,6 +32,7 @@ document.addEventListener(
 );
 
 //은서
+let changecolor;
 changeColor();
 let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
 startPageAudio.loop = true;
@@ -45,12 +46,13 @@ startPageAudio.play();
 function moveToStagePage() {
   document.querySelector("#startPage").style.display = "none";
   gameState = "stagePage";
-  document.querySelector("#stagePage").style.display = "block";
+  document.querySelector("#selectGame").style.display = "block";
+  clearInterval(changecolor);
 }
 
 //은서
 function changeColor() {
-  setInterval(flashText, 1000);
+  changecolor = setInterval(flashText, 1000);
 }
 function flashText() {
   let elem = document.querySelector("#spacebar");

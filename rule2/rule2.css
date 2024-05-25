@@ -1,10 +1,10 @@
-#instructionPage {
+#rule2 {
     display: none;
     margin: 0 auto;
     color: yellow;
 }
 
-#instruction {
+#instruction2 {
     margin-top: 50px;
     width: 1000px;
     height: 600px;
@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-#instr-title {
+#instr-title2 {
     text-align: center;
     color: blue;
     font-weight: bold;
@@ -21,15 +21,6 @@
     font-family: "Pixelify Sans", sans-serif;
 }
 
-.close-btn {
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    top: 20px;
-    position: relative;
-}
-
-#instr {
+#instr2 {
     margin-left: 30px;
 }

@@ -1,0 +1,35 @@
+#rule1 {
+    display: none;
+    margin: 0 auto;
+    color: yellow;
+}
+
+#instruction1 {
+    margin-top: 50px;
+    width: 1000px;
+    height: 600px;
+    border: 1px double yellow;
+    align-items: center;
+}
+
+#instr-title1 {
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+    font-size: 50px;
+    margin: 30px 0;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+.close-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    top: 20px;
+    position: relative;
+}
+
+#instr1 {
+    margin-left: 30px;
+}

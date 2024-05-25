@@ -1,0 +1,26 @@
+#rule3 {
+    display: none;
+    margin: 0 auto;
+    color: yellow;
+}
+
+#instruction3 {
+    margin-top: 50px;
+    width: 1000px;
+    height: 600px;
+    border: 1px double yellow;
+    align-items: center;
+}
+
+#instr-title3 {
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+    font-size: 50px;
+    margin: 30px 0;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+#instr3 {
+    margin-left: 30px;
+}
