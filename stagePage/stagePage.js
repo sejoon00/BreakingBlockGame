@@ -57,6 +57,7 @@ function goToRule3() {
 //은서
 function imgOnMouseIn(elem) {
   elem.style.transform = "scale(1.05)";
+  cursor: pointer;
 }
 function imgOnMouseOut(elem) {
   elem.style.transform = "scale(1)";
