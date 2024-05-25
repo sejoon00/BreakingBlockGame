@@ -1,9 +1,30 @@
 #overPage {
   display: none;
+  width: 500px;
+	height: 400px;
+  top: 0;
+	left: 0;
 }
 
 #result {
   font-size: 3em;
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
+}
+
+.popup {
+	position: fixed;
+	background-color: white;
+  opacity: 0.9;
+	padding: 30px 20px;
+	z-index: 1;
+	border: 3px solid yellow;
+}
+
+#gameclear {
+  display: none;
+}
+
+#gameover {
+  display: none;
 }

@@ -1,13 +1,14 @@
 class Paddle {
   constructor(canvas, width, height, speed) {
     this.canvas = canvas;
-    this.width = width;
-    this.height = height;
+    this.width = 110;
+    this.height = 130;
     this.x = (this.canvas.width - this.width) / 2; // 막대기의 초기 X 위치
     this.y = this.canvas.height - this.height - 20; // 막대기의 Y 위치
     this.speed = speed;
     //곤용
     this.image = new Image();
+    this.hitPointSize = 15;
   }
 
   // 막대기 그리기 함수
@@ -17,15 +18,16 @@ class Paddle {
     //곤용
 
     if (selectCharacter === "Ralph") {
-      console.log("ralph");
       this.image.src = "../source/ralph_paddle.png";
+      if (selectTargetGame == "game3")
+        this.image.src = "../source/stage3_ralph.png";
     } else {
       this.image.src = "../source/vanellope_paddle.png";
     }
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = "#833"; //"#333"
+    ctx.fillStyle = "rgba(0, 0, 0, 0)"; // 수정 완
     ctx.fill();
     ctx.closePath();
 
@@ -38,8 +40,17 @@ class Paddle {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       };
     }
-  }
 
+    if (selectTargetGame == "game3") {
+      ctx.fillStyle = "green";
+      ctx.fillRect(
+        this.x + this.width / 2 - this.hitPointSize / 2,
+        this.y + this.height / 2 - this.hitPointSize / 2,
+        this.hitPointSize,
+        this.hitPointSize
+      );
+    }
+  }
   // 이벤트 리스너 등록 (마우스 이동)
   bindMouseMove() {
     document.addEventListener("mousemove", (e) => {
@@ -62,6 +73,21 @@ class Paddle {
     }
   }
 
+  isCollidingWithBullet(bullet) {
+    const hitPointX = this.x + this.width / 2 - this.hitPointSize / 2;
+    const hitPointY = this.y + this.height / 2 - this.hitPointSize / 2;
+
+    if (
+      bullet.x > hitPointX &&
+      bullet.x < hitPointX + this.hitPointSize &&
+      bullet.y > hitPointY &&
+      bullet.y < hitPointY + this.hitPointSize
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   //Block에서 가져와서 재사용
   // isHitPaddle(ball) {
   //   // 패들의 AABB 충돌 검사
@@ -79,6 +105,7 @@ class Paddle {
   //   }
   //   return false; // 충돌이 발생하지 않았음을 반환합니다.
   // }
+
   isHitPaddle(ball) {
     // 패들의 AABB 충돌 검사
     if (
@@ -93,7 +120,8 @@ class Paddle {
       const maxBounceAngle = Math.PI / 3; // 최대 반사 각을 지정합니다. (60도)
       const bounceAngle = normalizedCollisionPointX * maxBounceAngle;
       ball.dx = Math.sin(bounceAngle); // x 방향으로의 속도를 각도에 따라 조정합니다.
-      ball.dy = -Math.cos(bounceAngle); // y 방향으로의 속도를 각도에 따라 조정합니다.
+      // ball.dy = -Math.cos(bounceAngle); // y 방향으로의 속도를 각도에 따라 조정합니다.
+      ball.dy = -ball.dy;
       return true; // 충돌이 발생했음을 반환합니다.
     }
     return false; // 충돌이 발생하지 않았음을 반환합니다.
@@ -104,10 +132,12 @@ class Paddle {
     if (item.isPaddleGetItem(this)) {
       if (item.type === "speed") {
         // 속도 증가 아이템 효과
-        if (ball.dx < 20 && ball.dy < 20) {
-          ball.dx *= 1.5;
-          ball.dy *= 1.5;
-        }
+        balls.forEach((b) => {
+          if (b.dx < 20 && b.dy < 20) {
+            b.dx *= 1.5;
+            b.dy *= 1.5;
+          }
+        });
       } else if (item.type === "ball") {
         // 공 개수 증가 아이템 효과
         let ballY;
@@ -116,6 +146,7 @@ class Paddle {
           new Ball(ball.x, ball.y, -ball.dx, ballY, ball.radius, ball.color)
         );
       }
+      return true;
     }
   }
 }

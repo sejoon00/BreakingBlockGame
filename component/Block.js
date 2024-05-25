@@ -1,11 +1,46 @@
 class Block {
-  constructor(x, y, width, height, increaseBrokenBlocks) {
+  constructor(
+    x,
+    y,
+    width,
+    height,
+    increaseBrokenBlocks,
+    imageSrc,
+    path,
+    requiredHits = 1
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.visible = true;
+    this.image = new Image();
+    this.image.src = imageSrc;
     this.increaseBrokenBlocks = increaseBrokenBlocks; // 부서진 블록 수 증가 콜백
+    this.isVanellope = false; // 바닐로페 여부
+    this.path = path; // 블록 이동 경로
+    this.pathIndex = 0; // 현재 경로 인덱스
+    this.hitCount = 0; // 맞은 횟수
+    this.requiredHits = requiredHits; // 부서지기 위해 필요한 횟수
+  }
+
+  move() {
+    if (this.pathIndex < this.path.length) {
+      const target = this.path[this.pathIndex];
+      const dx = target.x - this.x;
+      const dy = target.y - this.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const speed = 0.5; // 블록 이동 속도
+
+      if (distance < speed) {
+        this.x = target.x;
+        this.y = target.y;
+        this.pathIndex++;
+      } else {
+        this.x += (dx / distance) * speed;
+        this.y += (dy / distance) * speed;
+      }
+    }
   }
 
   hitLeft(ball) {
@@ -42,8 +77,7 @@ class Block {
       ball.y + ball.radius > this.y &&
       ball.y - ball.radius < this.y + this.height
     ) {
-      this.visible = false; // 블럭을 보이지 않게 설정
-
+      this.hitCount++;
       // 충돌 방향 계산 및 반응
       const overlapX =
         ball.radius +
@@ -69,6 +103,12 @@ class Block {
           this.hitBottom(ball);
         }
       }
+      console.log(this.requiredHits);
+      if (this.hitCount < this.requiredHits) {
+        return false; // 필요한 히트 횟수만큼 맞지 않으면 return
+      }
+
+      this.visible = false; // 블럭을 보이지 않게 설정
 
       // 부서진 블록 수 증가
       if (this.increaseBrokenBlocks) {
@@ -79,12 +119,12 @@ class Block {
       ); // 임시
       blockAudio.play();
 
-      console.log(increaseScore);
       // 점수 증가
       if (increaseScore) {
-        console.log("score2");
-
         increaseScore();
+      }
+      if (this.isVanellope) {
+        return true;
       }
 
       // 25% 확률로 아이템 생성
@@ -95,6 +135,23 @@ class Block {
         );
       }
 
+      if (selectTargetGame == "game3") {
+        if (Math.random() < 0.25) {
+          const itemType = Math.random();
+          let type;
+          if (itemType < 0.33) {
+            type = "speed";
+          } else if (itemType < 0.66) {
+            type = "ball";
+          } else {
+            type = "light";
+          }
+          items.push(
+            new Item(this.x + this.width / 2, this.y + this.height / 2, type)
+          );
+        }
+      }
+
       return true;
     }
     return false;
@@ -102,8 +159,29 @@ class Block {
 
   draw(ctx) {
     if (this.visible) {
-      ctx.fillStyle = "#FF5733"; // 블록 색상 설정
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+      if (selectTargetGame == "game3") this.drawHitBar(ctx); // 히트 게이지 바 그리기
     }
+  }
+
+  drawHitBar(ctx) {
+    const barWidth = this.width;
+    const barHeight = 5;
+    const barX = this.x;
+    const barY = this.y - barHeight - 2; // 블록 위에 게이지 바를 그림
+
+    // 배경 바
+    ctx.fillStyle = "red";
+    ctx.fillRect(barX, barY, barWidth, barHeight);
+
+    // 현재 hitCount에 비례하는 초록색 게이지 바
+    const greenBarWidth =
+      (barWidth * (this.requiredHits - this.hitCount)) / this.requiredHits;
+    ctx.fillStyle = "#80E12A";
+    ctx.fillRect(barX, barY, greenBarWidth, barHeight);
+  }
+
+  isOutOfBounds(canvasHeight) {
+    return this.y + this.height > canvasHeight;
   }
 }

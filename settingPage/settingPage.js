@@ -29,32 +29,43 @@ document.querySelector("main").insertAdjacentHTML(
 function moveToGameWithRalph() {
   if (selectTargetGame == "game1") {
     goToGame1ByRalph();
+  } else if (selectTargetGame == "game2") {
+    goToGame2ByRalph();
+  } else if (selectTargetGame == "game3") {
+    goToGame3ByRalph();
+  } else {
   }
 }
 
 function moveToGameWithVanellope() {
   if (selectTargetGame == "game1") {
     goToGame1ByVanellope();
+  } else if (selectTargetGame == "game2") {
+    goToGame2ByVanellope();
+  } else if (selectTargetGame == "game3") {
+    goToGame3ByVanellope();
+  } else {
   }
 }
 
 function goToGame1ByRalph() {
   gameState = "Gaming1"; //게임중으로 상태 변경
-  document.querySelector("#game1").style.display = "block";
   document.querySelector("#settingPage").style.display = "none";
   gameState = "Gaming1";
   selectCharacter = "Ralph";
   setGame1();
+  document.querySelector("#game").style.display = "block";
 }
 // 곤용 잠금해제 되었을 때만 사용가능
 function goToGame1ByVanellope() {
   gameState = "Gaming1"; //게임중으로 상태 변경
   if (isCharacter === "true") {
-    document.querySelector("#game1").style.display = "block";
     document.querySelector("#settingPage").style.display = "none";
     gameState = "Gaming1";
     selectCharacter = "Vanellope";
+
     setGame1CanvasSize();
+    document.querySelector("#game").style.display = "block";
   } else {
     const lockMessage = document.querySelector("#lockMessage");
     lockMessage.style.display = "block";
@@ -62,4 +73,22 @@ function goToGame1ByVanellope() {
       lockMessage.style.display = "none";
     }, 2000); // Character is locked! 메시지 출력
   }
+}
+
+function goToGame2ByRalph() {
+  gameState = "Gaming2"; //게임중으로 상태 변경
+  document.querySelector("#settingPage").style.display = "none";
+  selectCharacter = "Ralph";
+  setGame2();
+  document.querySelector("#game").style.display = "block";
+}
+
+function goToGame3ByRalph() {
+  gameState = "Gaming3"; //게임중으로 상태 변경
+
+  document.querySelector("#settingPage").style.display = "none";
+  gameState = "Gaming3";
+  selectCharacter = "Ralph";
+  setGame3();
+  document.querySelector("#game").style.display = "block";
 }
