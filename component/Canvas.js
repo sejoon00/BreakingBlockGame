@@ -128,11 +128,13 @@ class Canvas {
       this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
   }
+
   // 게임 종료 함수
   endGame() {
     console.log("GameClear");
     this.destroy();
     gameMode = "GameClear";
+    toggleOverPage();
   }
 
   // 공이 배열에 하나도 없을 때 확인하는 함수
@@ -141,6 +143,7 @@ class Canvas {
       console.log("GameOver");
       gameMode = "GameOver";
       this.destroy();
+      toggleOverPage();
     }
   }
 

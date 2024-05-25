@@ -20,3 +20,11 @@
 	z-index: 1;
 	border: 3px solid yellow;
 }
+
+#gameclear {
+  display: none;
+}
+
+#gameover {
+  display: none;
+}
