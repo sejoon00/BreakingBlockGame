@@ -39,6 +39,9 @@ function toggleOverPage() {
       gameclear.style.display = "block";
       document.querySelector('#result').append('GAME CLEAR');
 
+      setTimeout(() => {
+        gotoLevelUpForGame1();
+      }, 3000);
     }
     else if (gameMode === "GameOver")
     {
@@ -58,4 +61,9 @@ function change_position() {
   overPage.style.left = l + 'px'; // CSS 속성 직접 설정
 }
 
-levelUp2.style.display = 'block';
+function gotoLevelUpForGame1() {
+  overPage.style.display = 'none';
+  endGame1();
+  Game1Audio.pause();
+  document.querySelector('#levelUp1').style.display = 'block';
+}
