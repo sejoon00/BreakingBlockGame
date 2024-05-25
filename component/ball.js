@@ -31,12 +31,23 @@ class Ball {
       this.dy = -this.dy;
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
+<<<<<<< HEAD
     if (this.y + this.dy > canvas.height - 140 - this.radius) {
+=======
+    if (
+      this.y + this.dy > canvas.height - this.radius &&
+      selectTargetGame != "game3"
+    ) {
+>>>>>>> origin
       // 공을 제거할 플래그 설정
       if (!this.isRemoved) {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
+<<<<<<< HEAD
         //console.log('땅에 닿았음');
+=======
+        console.log("땅에 닿았음");
+>>>>>>> origin
         decreaseLife();
       }
       return;
@@ -55,7 +66,7 @@ class Ball {
       this.setHitCooldown(paddle); // 충돌 쿨다운 설정
 
       let paddleAudio = new Audio(
-        'https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3'
+        "https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3"
       );
       paddleAudio.play();
     }
@@ -64,32 +75,33 @@ class Ball {
     this.x += this.dx;
     this.y += this.dy;
 
+    let hisSize = this.radius + 2;
+
     // 보스와의 충돌 처리
     if (boss && !boss.isRemoved && !this.hitCooldowns.has(boss)) {
       const isSideHit =
-        this.x - this.radius < boss.x ||
-        this.x + this.radius > boss.x + boss.width;
+        this.x - hisSize < boss.x || this.x + hisSize > boss.x + boss.width;
       if (
-        this.x + this.radius > boss.x &&
-        this.x - this.radius < boss.x + boss.width &&
-        this.y + this.radius > boss.y &&
-        this.y - this.radius < boss.y + boss.height
+        this.x + hisSize > boss.x &&
+        this.x - hisSize < boss.x + boss.width &&
+        this.y + hisSize > boss.y &&
+        this.y - hisSize < boss.y + boss.height
       ) {
         if (isSideHit) {
           this.dx = -this.dx; // 측면에 맞으면 x 방향 반전
           // 공이 보스의 왼쪽이나 오른쪽 경계를 넘어가지 않도록 위치 조정
           if (this.x < boss.x) {
-            this.x = boss.x - this.radius;
+            this.x = boss.x - hisSize;
           } else if (this.x > boss.x + boss.width) {
-            this.x = boss.x + boss.width + this.radius;
+            this.x = boss.x + boss.width + hisSize;
           }
         } else {
           this.dy = -this.dy; // 상단이나 하단에 맞으면 y 방향 반전
           // 공이 보스의 상단이나 하단 경계를 넘어가지 않도록 위치 조정
           if (this.y < boss.y) {
-            this.y = boss.y - this.radius;
+            this.y = boss.y - hisSize;
           } else if (this.y > boss.y + boss.height) {
-            this.y = boss.y + boss.height + this.radius;
+            this.y = boss.y + boss.height + hisSize;
           }
         }
         boss.takeDamage(); // HP를 1만 깎도록 설정
@@ -97,7 +109,7 @@ class Ball {
       }
     }
 
-    this.draw(canvas.getContext('2d'));
+    this.draw(canvas.getContext("2d"));
   }
 
   setHitCooldown(target) {

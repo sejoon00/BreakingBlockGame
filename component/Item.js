@@ -8,8 +8,10 @@ class Item {
     this.image = new Image();
     if (this.type === "speed") {
       this.image.src = "../source/speed_up_item.png"; // 속도 증가 아이템 이미지 경로
-    } else {
+    } else if (this.type === "ball") {
       this.image.src = "../source/increase_item.png"; // 다른 아이템 이미지 경로
+    } else {
+      this.image.src = "../source/light_item.png"; // 다른 아이템 이미지 경로
     }
   }
 
