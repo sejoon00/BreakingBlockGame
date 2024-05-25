@@ -27,7 +27,7 @@ function toggleOverPage() {
     let str = '당신의 score는 ' + canvas.score + '점입니다.';
 
     change_position(overPage);
-    document.querySelector('#score').innerText = str;
+    document.querySelector('#score').innerHTML = str;
     overPage.fadeOut('slow').slideDown('slow');
 
     if (gameMode === "GameClear")
