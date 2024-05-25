@@ -75,6 +75,14 @@ function goToGame1ByVanellope() {
   }
 }
 
+function goToGame2ByRalph() {
+  gameState = "Gaming2"; //게임중으로 상태 변경
+  document.querySelector("#settingPage").style.display = "none";
+  selectCharacter = "Ralph";
+  setGame2();
+  document.querySelector("#game").style.display = "block";
+}
+
 function goToGame3ByRalph() {
   gameState = "Gaming3"; //게임중으로 상태 변경
 
@@ -82,13 +90,5 @@ function goToGame3ByRalph() {
   gameState = "Gaming3";
   selectCharacter = "Ralph";
   setGame3();
-  document.querySelector("#game").style.display = "block";
-}
-
-function goToGame2ByRalph() {
-  gameState = "Gaming2"; //게임중으로 상태 변경
-  document.querySelector("#settingPage").style.display = "none";
-  selectCharacter = "Ralph";
-  setGame2();
   document.querySelector("#game").style.display = "block";
 }

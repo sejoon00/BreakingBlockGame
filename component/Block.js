@@ -78,7 +78,6 @@ class Block {
       ball.y - ball.radius < this.y + this.height
     ) {
       this.hitCount++;
-
       // 충돌 방향 계산 및 반응
       const overlapX =
         ball.radius +

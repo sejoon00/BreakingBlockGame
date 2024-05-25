@@ -32,7 +32,7 @@ class Ball {
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
     if (
-      this.y + this.dy > canvas.height - this.radius &&
+      this.y + this.dy > canvas.height - 140 - this.radius &&
       selectTargetGame != "game3"
     ) {
       // 공을 제거할 플래그 설정

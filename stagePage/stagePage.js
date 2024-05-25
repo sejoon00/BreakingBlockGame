@@ -11,8 +11,8 @@ document.querySelector("main").insertAdjacentHTML(
       </div>
       <div id="selectgame_image">
         <img src="./stagePage/WreckItRalph.png" width="700" id="game1Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
-        <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onclick=goToSettingPageForGame2() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
-        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onclick=goToSettingPageForGame3() onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+        <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+        <img src="./stagePage/Hero'sDuty.png" width="700" id="game3Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
       </div>
     </div>
     `
@@ -23,29 +23,33 @@ document.querySelector("main").insertAdjacentHTML(
 
 //은서
 document.querySelector("#game1Img").addEventListener("click", () => {
-  goToSettingPageForGame1();
-  let startPageAudio = new Audio(
-    "https://taira-komori.jpn.org/sound_os2/game01/coin01.mp3"
-  ); // 동전 소리
-  startPageAudio.play();
+  goToRule1();
+});
+
+document.querySelector("#game2Img").addEventListener("click", () => {
+  goToRule2();
+});
+
+document.querySelector("#game3Img").addEventListener("click", () => {
+  goToRule3();
 });
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 
 //민석
-function goToSettingPageForGame1() {
-  document.querySelector("#settingPage").style.display = "block";
+function goToRule1() {
+  document.querySelector("#rule1").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game1";
 }
-function goToSettingPageForGame2() {
-  document.querySelector("#settingPage").style.display = "block";
+function goToRule2() {
+  document.querySelector("#rule2").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game2";
 }
-function goToSettingPageForGame3() {
-  document.querySelector("#settingPage").style.display = "block";
+function goToRule3() {
+  document.querySelector("#rule3").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   selectTargetGame = "game3";
 }
@@ -53,6 +57,7 @@ function goToSettingPageForGame3() {
 //은서
 function imgOnMouseIn(elem) {
   elem.style.transform = "scale(1.05)";
+  elem.style.cursor = "pointer";
 }
 function imgOnMouseOut(elem) {
   elem.style.transform = "scale(1)";

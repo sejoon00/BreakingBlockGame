@@ -1,10 +1,14 @@
 class Block3 {
-  constructor(x, y, width, height, increaseBrokenBlocks) {
+  constructor(x, y, width, height, health, increaseBrokenBlocks) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.health = health; // 적의 내구도
+    this.speed = 1;
     this.visible = true;
+    this.path = [];
+    this.pathIndex = 0;
     this.increaseBrokenBlocks = increaseBrokenBlocks; // 부서진 블록 수 증가 콜백
   }
 
@@ -74,15 +78,12 @@ class Block3 {
       if (this.increaseBrokenBlocks) {
         this.increaseBrokenBlocks();
       }
-      let blockAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/select01.mp3"
-      ); // 임시
       blockAudio.play();
 
-      console.log(increaseScore);
+      //console.log(increaseScore);
       // 점수 증가
       if (increaseScore) {
-        console.log("score2");
+        //console.log("score2");
 
         increaseScore();
       }
@@ -100,31 +101,41 @@ class Block3 {
     return false;
   }
 
-  isHit(tower) {
+  // 빛의 기둥 근처 반경에 있을 시 전멸
+  isHitByTower(tower) {
     let distance = Math.hypot(tower.x - this.x, tower.y - this.y);
     return distance < tower.range;
   }
 
+  // 길대로 이동
   move() {
-    if (this.pathIndex < this.path.length - 1) {
-      let target = this.path[this.pathIndex + 1];
-      let dx = target.x - this.x;
-      let dy = target.y - this.y;
-      let dist = Math.hypot(dx, dy);
-
-      if (dist < this.speed) {
-        this.x = target.x;
-        this.y = target.y;
-        this.pathIndex++;
-      } else {
-        this.x += (dx / dist) * this.speed;
-        this.y += (dy / dist) * this.speed;
+    if (this. alive) {
+      if (this.pathIndex < this.path.length - 1) {
+        let target = this.path[this.pathIndex + 1];
+        let dx = target.x - this.x;
+        let dy = target.y - this.y;
+        let dist = Math.hypot(dx, dy);
+  
+        if (dist < this.speed) {
+          this.x = target.x;
+          this.y = target.y;
+          this.pathIndex++;
+        } else {
+          this.x += (dx / dist) * this.speed;
+          this.y += (dy / dist) * this.speed;
+        }
       }
     }
   }
 
+  takeDamage(amount) {
+    this.health -= amount;
+    if (this.health <= 0) {
+        this.alive = false;
+    }
+  }
+
   draw(ctx) {
-    // console.log(`Drawing block at (${this.x}, ${this.y})`); // 콘솔 로그 추가
     if (this.visible) {
       let image = new Image();
       image.src = "./source/Cy-Bug.png";

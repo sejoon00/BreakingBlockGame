@@ -19,7 +19,7 @@ class Canvas {
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
-      this.ballInitialY = this.canvas.height - 100;
+      this.ballInitialY = this.canvas.height - 160;
       this.drawBackground();
       this.initGameElements();
       this.startGameLoop();
@@ -112,20 +112,25 @@ class Canvas {
 
   increaseBrokenBlocks() {
     this.brokenBlocks++;
-    if (this.brokenBlocks === this.blocks.length) {
+    if (this.brokenBlocks === this.blocks.length || this.score > 600) {
       this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     }
   }
 
   endGame() {
-    alert("Congratulations! You've destroyed all the blocks!");
+    console.log("GameClear");
+    gameMode = "GameClear";
     this.destroy();
+    toggleOverPage();
   }
+
   // 공이 배열에 하나도 없을 때 확인하는 함수
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {
+      console.log("GameOver");
+      gameMode = "GameOver";
       this.destroy();
-      $('#overPage').fadeOut('slow').slideDown('slow');
+      toggleOverPage();
     }
   }
 

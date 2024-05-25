@@ -40,6 +40,10 @@ class Item {
       this.y < paddle.y + paddle.height
     ) {
       this.visible = false;
+      let itemAudio = new Audio(
+        'https://taira-komori.jpn.org/sound_os2/game01/powerup01.mp3'
+        );
+      itemAudio.play();
       return true;
     }
     return false;

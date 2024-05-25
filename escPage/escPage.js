@@ -32,17 +32,22 @@ document.addEventListener("keydown", (event) => {
 
 //세준
 function toggleEscPage() {
-  if (gameState.startsWith("Gaming")) {
+  if (gameState.startsWith("Gaming")) { // 게임 중일때
     const escPage = document.querySelector("#escPage");
-    if (escPage.style.display == "block") {
+    
+    if (escPage.style.display == "block")
+    {
       escPage.style.display = "none";
       canvas.togglePause(); // 게임 재개
-    } else {
+    }
+    else
+    {
       escPage.style.display = "block";
       canvas.togglePause(); // 게임 일시 중지
     }
   }
 }
+
 // //민석
 // function PopUpEscPage() {
 //   //현재 gameState 상태가 'Gaming1'인 경우에만 ESC 이벤트 발동
@@ -65,6 +70,10 @@ function PopDownEscPage() {
 //민석
 function setGameHide() {
   //나가기 버튼 클릭 시 게임 hide해주고, 난이도 선택 화면으로 돌아가기
+  Game1Audio.pause();
+  Game1Audio.currentTime = 0;
+  Game2Audio.pause();
+  Game2Audio.currentTime = 0;
   moveToStagePage();
 
   document.querySelector("#escPage").style.display = "none";

@@ -109,8 +109,18 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    alert("Congratulations! You've destroyed the boss!");
     this.destroy();
+    gameMode = "GameClear";
+    $('#overPage').fadeOut('slow').slideDown('slow');
+  }
+
+  // 사용자 hp 0인지 확인하는 함수 
+  checkBallandLife() {
+    if (this.lifes.length === 0) {
+      gameMode = "GameOver";
+      this.destroy();
+      $('#overPage').fadeOut('slow').slideDown('slow');
+    }
   }
 
   startGameLoop() {
