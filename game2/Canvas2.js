@@ -117,6 +117,30 @@ class Canvas2 extends Canvas {
     }, 1000); // 1초 간격으로 깜빡임
   }
 
+  // 바넬로피가 먼저 도착
+  endGame() {
+    let villainsReached = false;
+    for (let villain of this.villains) {
+        if (villain.x + villain.width < 0) {
+            villainsReached = true;
+            break;
+        }
+    }
+
+    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
+      console.log("GameClear");
+      gameMode = "GameClear";
+      this.destroy();
+      toggleOverPage();
+    }
+    else if (villainsReached || this.balls.length === 0 || this.lifes.length === 0) {
+      console.log("GameOver");
+      gameMode = "GameOver";
+      this.destroy();
+      toggleOverPage();
+    }
+  }
+
   startGameLoop() {
     const update = () => {
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
@@ -176,10 +200,6 @@ class Canvas2 extends Canvas {
           this.boss = null; // 보스 제거
         }
       });
-
-      if (this.vanellope.x + this.vanellope.width < 0) {
-        alert('게임 승리');
-      }
 
       this.balls = this.balls.filter((ball) => {
         ball.update(
@@ -256,6 +276,7 @@ class Canvas2 extends Canvas {
 
       this.drawScore(); // 점수 그리기 추가
       requestAnimationFrame(update);
+      this.endGame();
     };
     update();
   }

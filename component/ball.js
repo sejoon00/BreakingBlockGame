@@ -31,23 +31,15 @@ class Ball {
       this.dy = -this.dy;
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
-<<<<<<< HEAD
-    if (this.y + this.dy > canvas.height - 140 - this.radius) {
-=======
     if (
-      this.y + this.dy > canvas.height - this.radius &&
+      this.y + this.dy > canvas.height - 140 - this.radius &&
       selectTargetGame != "game3"
     ) {
->>>>>>> origin
       // 공을 제거할 플래그 설정
       if (!this.isRemoved) {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
-<<<<<<< HEAD
-        //console.log('땅에 닿았음');
-=======
         console.log("땅에 닿았음");
->>>>>>> origin
         decreaseLife();
       }
       return;

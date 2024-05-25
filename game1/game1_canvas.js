@@ -1,12 +1,7 @@
 class Game1_canvas extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-<<<<<<< HEAD
-    this.canvas.id = 'game1_canvas'; // canvas id 변경
-    this.score = 0;
-=======
     this.canvas.id = "game1_canvas"; // canvas id 변경
->>>>>>> origin
   }
 
   // 기존 initGameElements 메서드를 재정의하여 추가 블록을 생성

@@ -118,10 +118,12 @@ class Canvas {
   }
 
   endGame() {
-    alert("Congratulations! You've destroyed all the blocks!");
+    console.log("GameClear");
     gameMode = "GameClear";
     this.destroy();
+    toggleOverPage();
   }
+
   // 공이 배열에 하나도 없을 때 확인하는 함수
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {

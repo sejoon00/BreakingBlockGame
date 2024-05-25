@@ -14,7 +14,6 @@ document.querySelector("main").insertAdjacentHTML(
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 let levelUp1 = document.querySelector('#levelUp1');
-  
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/

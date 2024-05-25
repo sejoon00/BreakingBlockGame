@@ -50,17 +50,6 @@ class Game3_canvas extends Canvas {
 
   initGameElements() {
     super.initGameElements();
-<<<<<<< HEAD
-    // 추가로 필요한 블록이나 요소를 여기에 추가
-
-    let block3num = 20;
-    for (let i = 0; i < block3num; i++) {
-      this.blocks.push(
-        new Block3(50, 50, 40, 40, 1, this.increaseBrokenBlocks.bind(this), "red")
-      );
-      //console.log("New block added in Game3_canvas");
-    }
-=======
     // 무한히 블록을 생성하여 경로를 따라 이동하게 설정
     setInterval(() => {
       const startX = this.path[0].x;
@@ -90,7 +79,6 @@ class Game3_canvas extends Canvas {
     }, 20000);
 
     console.log("Blocks will be added continuously in Game3_canvas");
->>>>>>> origin
 
     // 보스 몬스터 생성 (15초 후 등장)
     setTimeout(() => {
@@ -121,16 +109,15 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    alert("Congratulations! You've destroyed the boss!");
     this.destroy();
-    gameState = "GameClear";
+    gameMode = "GameClear";
     $('#overPage').fadeOut('slow').slideDown('slow');
   }
 
   // 사용자 hp 0인지 확인하는 함수 
   checkBallandLife() {
     if (this.lifes.length === 0) {
-      gameState = "GameOver";
+      gameMode = "GameOver";
       this.destroy();
       $('#overPage').fadeOut('slow').slideDown('slow');
     }
@@ -154,11 +141,7 @@ class Game3_canvas extends Canvas {
 
       this.drawPath(); // 경로 그리기 추가
       this.blocks.forEach((block) => {
-<<<<<<< HEAD
-        block.move(); // 블록 이동시키기
-=======
         block.move(); // 블록 이동
->>>>>>> origin
         block.draw(this.context); // 블록 그리기
         if (block.isOutOfBounds(this.canvas.height)) {
           block.visible = false;
