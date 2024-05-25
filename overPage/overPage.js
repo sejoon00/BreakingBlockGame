@@ -38,6 +38,7 @@ function toggleOverPage() {
       const gameclear = document.querySelector("#gameclear");
       gameclear.style.display = "block";
       document.querySelector('#result').append('GAME CLEAR');
+
     }
     else if (gameMode === "GameOver")
     {
@@ -56,3 +57,5 @@ function change_position() {
   overPage.style.top = t + 'px'; // CSS 속성 직접 설정
   overPage.style.left = l + 'px'; // CSS 속성 직접 설정
 }
+
+levelUp2.style.display = 'block';
