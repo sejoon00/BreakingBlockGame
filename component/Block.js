@@ -164,8 +164,18 @@ class Block {
 
       return true;
     }
-    return false;
+  } else if (selectTargetGame === 'game2') {
+    if (Math.random() < 1.00) { // 아이템 생성 확률을 30%로 설정
+      const itemTypes = ['increaseheart', 'decreaseheart', 'increasevanellopespeed', 'decreasevanellopespeed', 'increasemonsterspeed', 'decreasemonsterspeed'];
+      const randomIndex = Math.floor(Math.random() * itemTypes.length);
+      const itemType = itemTypes[randomIndex];
+      items.push(
+        new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
+      );
+      return true;
+    }
   }
+  return false;
 
   draw(ctx) {
     if (this.visible) {
