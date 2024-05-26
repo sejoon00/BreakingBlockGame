@@ -149,7 +149,7 @@ class Canvas2 extends Canvas {
       game3Img.src = '../stagePage/HeroDuty.png';
     }
   }
-
+  /*
   startGameLoop() {
     const update = () => {
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
@@ -287,6 +287,125 @@ class Canvas2 extends Canvas {
     };
     update();
   }
+  */
+  startGameLoop() {
+    const update = () => {
+      if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.drawBackground(); // 배경 다시 그리기
+  
+      // vanellope 이동 로직
+      if (this.moveState === 0) {
+        this.vanellope.y += this.vanellope.blockSpeed; // 아래로 이동
+      } else if (this.moveState === 1) {
+        this.vanellope.x -= this.vanellope.blockSpeed; // 왼쪽으로 이동
+      } else if (this.moveState === 2) {
+        this.vanellope.y -= this.vanellope.blockSpeed; // 위로 이동
+      } else if (this.moveState === 3) {
+        this.vanellope.x -= this.vanellope.blockSpeed; // 다시 왼쪽으로 이동
+      }
+  
+      this.vanellope.currentDistance += this.vanellope.blockSpeed;
+  
+      if (this.vanellope.currentDistance >= this.maxDistance) {
+        this.moveState = (this.moveState + 1) % 4; // 이동 상태 변경
+        this.vanellope.currentDistance = 0; // 이동 거리 초기화
+      }
+  
+      this.vanellope.draw(this.context);
+  
+      // 빌런 블록들 이동 및 그리기
+      this.villains.forEach((villain) => {
+        if (this.moveState === 0) {
+          villain.y += villain.blockSpeed; // 아래로 이동
+        } else if (this.moveState === 1) {
+          villain.x -= villain.blockSpeed; // 왼쪽으로 이동
+        } else if (this.moveState === 2) {
+          villain.y -= villain.blockSpeed; // 위로 이동
+        } else if (this.moveState === 3) {
+          villain.x -= villain.blockSpeed; // 다시 왼쪽으로 이동
+        }
+  
+        villain.currentDistance += villain.blockSpeed;
+  
+        if (villain.currentDistance >= this.maxDistance) {
+          villain.currentDistance = 0; // 이동 거리 초기화
+        }
+        villain.draw(this.context);
+      });
+  
+      // 공과 vanellope 블록의 충돌 검사
+      this.balls.forEach((ball) => {
+        if (
+          this.vanellope.isHit(ball, this.items, this.increaseScore.bind(this))
+        ) {
+          this.vanellope.visible = true;
+          this.decreaseLife(); // 생명 하나 줄이기
+        }
+      });
+  
+      if (this.vanellope.x + this.vanellope.width < 0) {
+        alert('게임 승리');
+      }
+  
+      this.balls = this.balls.filter((ball) => {
+        ball.update(
+          this.canvas,
+          this.villains,
+          this.paddle,
+          this.items,
+          this.increaseScore.bind(this),
+          this.decreaseLife.bind(this)
+        );
+        return !ball.isRemoved;
+      });
+  
+      this.balls.forEach((ball) => {
+        ball.draw(this.context);
+        ball.update(
+          this.canvas,
+          this.villains,
+          this.paddle,
+          this.items,
+          this.increaseScore.bind(this),
+          this.decreaseLife.bind(this)
+        );
+      });
+  
+      this.paddle.draw(); // 막대기 그리기 추가
+  
+      this.lifes.forEach((life) => {
+        life.draw(); // 생명 그리기 추가
+      });
+  
+      this.items.forEach((item) => {
+        item.draw(this.context);
+        item.update(this.canvas);
+      });
+  
+      this.items.forEach((item) => {
+        this.balls.forEach((ball) => this.collectItem2(item, ball));
+      });
+  
+      // 바나나 그리기
+      this.bananas.forEach((banana) => {
+        banana.draw();
+        this.balls.forEach((ball) => {
+          if (banana.isColliding(ball)) {
+            console.log('충돌 발생'); // 충돌시 출력
+            ball.changeDirectionRandomly();
+          }
+        });
+      });
+  
+      this.drawScore(); // 점수 그리기 추가
+      requestAnimationFrame(update);
+    };
+    update();
+  }
+  
+  
+  
 
   //곤용 -item2로 바꿨더니 작동함
   collectItem2(item, ball) {
