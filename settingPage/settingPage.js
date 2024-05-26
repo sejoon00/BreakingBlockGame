@@ -10,7 +10,7 @@ document.querySelector('main').insertAdjacentHTML(
           <div class="left" onclick="moveToGameWithRalph()" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
             <img id="settingRalph" src="./source/selectRalph.png">
           </div>
-          <div class = "right" onclick="moveToGameWithVanellope" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
+          <div class = "right" onclick="moveToGameWithVanellope()" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
             <img id="settingVanellope" src = "./source/lockedVanellope.png">
           </div>
         </div>
@@ -32,6 +32,7 @@ function moveToGameWithRalph() {
   } else if (selectTargetGame == 'game2') {
     goToGame2ByRalph();
   } else if (selectTargetGame == 'game3') {
+    console.log('selectTargetGame');
     goToGame3ByRalph();
   } else {
   }
@@ -89,6 +90,14 @@ function goToGame3ByRalph() {
   document.querySelector('#settingPage').style.display = 'none';
   gameState = 'Gaming3';
   selectCharacter = 'Ralph';
+  setGame3();
+  document.querySelector('#game').style.display = 'block';
+}
+function goToGame3ByVanellope() {
+  console.log('goToGame3ByVanellope');
+  document.querySelector('#settingPage').style.display = 'none';
+  gameState = 'Gaming3';
+  selectCharacter = 'Vanellope';
   setGame3();
   document.querySelector('#game').style.display = 'block';
 }
