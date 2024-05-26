@@ -121,21 +121,31 @@ class Canvas2 extends Canvas {
   endGame() {
     let villainsReached = false;
     for (let villain of this.villains) {
-        if (villain.x + villain.width < 0) {
-            villainsReached = true;
-            break;
-        }
+      if (villain.x + villain.width < 0) {
+        villainsReached = true;
+        break;
+      }
     }
 
-    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
-      console.log("GameClear");
-      gameMode = "GameClear";
+    if (this.vanellope.x + this.vanellope.width < 0 || this.score >= 100) {
+      console.log('GameClear');
+      gameMode = 'GameClear';
       this.destroy();
       toggleOverPage();
-    }
-    else if (villainsReached || this.balls.length === 0 || this.lifes.length === 0) {
-      console.log("GameOver");
-      gameMode = "GameOver";
+      isGame2Cleared = true;
+      let game3Img = document.querySelector('#game3Img');
+      if (isGame2Cleared) {
+        game3Img.src = '../stagePage/HeroDuty2.png';
+      } else {
+        game3Img.src = '../stagePage/HeroDuty.png';
+      }
+    } else if (
+      villainsReached ||
+      this.balls.length === 0 ||
+      this.lifes.length === 0
+    ) {
+      console.log('GameOver');
+      gameMode = 'GameOver';
       this.destroy();
       toggleOverPage();
     }
