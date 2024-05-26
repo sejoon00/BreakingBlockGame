@@ -27,11 +27,15 @@ document.querySelector('#game1Img').addEventListener('click', () => {
 });
 
 document.querySelector('#game2Img').addEventListener('click', () => {
-  goToRule2();
+  if (isGame1Cleared) {
+    goToRule2();
+  }
 });
 
 document.querySelector('#game3Img').addEventListener('click', () => {
-  goToRule3();
+  if (isGame1Cleared && isGame2Cleared) {
+    goToRule3();
+  }
 });
 
 // ---------------------------------- javascript function ----------------------------------
