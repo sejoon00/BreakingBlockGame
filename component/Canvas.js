@@ -1,11 +1,11 @@
 class Canvas {
   constructor(backgroundimageUrl) {
-    console.log("hi");
+    console.log('hi');
 
     this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game_canvas";
-    this.context = this.canvas.getContext("2d");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'game_canvas';
+    this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
     this.ballInitialY;
@@ -17,7 +17,7 @@ class Canvas {
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
 
-    window.addEventListener("resize", this.resizeCanvas.bind(this));
+    window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
@@ -43,7 +43,7 @@ class Canvas {
     );
   }
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game"));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game'));
 
     console.log(gameWidth.width);
     this.canvas.width = parseFloat(gameWidth.width);
@@ -52,14 +52,14 @@ class Canvas {
   }
 
   appendTo(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.appendChild(this.canvas);
   }
 
   removeFrom(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.removeChild(this.canvas);
@@ -68,33 +68,39 @@ class Canvas {
   // 점수 증가 함수
   increaseScore() {
     this.score += 100; // 점수를 10 증가시킵니다.
-    console.log("score");
+    console.log('score');
   }
   decreaseLife() {
-    console.log("생명-1");
+    console.log('생명-1');
 
     if (this.lifes.length > 0) {
       this.lifes.pop(); // 생명 배열에서 하나를 제거합니다.
     }
   }
-  // 곤용 increaseLife 
+  // 곤용 increaseLife
   increaseLife() {
-    console.log("생명+1");
-  
+    console.log('생명+1');
+
     const newX = 10 + this.lifes.length * 40;
-    
-    const newLife = new Life(this.canvas, "../source/full_heart.png", 30, newX, 10);
-  
+
+    const newLife = new Life(
+      this.canvas,
+      '../source/full_heart.png',
+      30,
+      newX,
+      10
+    );
+
     this.lifes.push(newLife);
   }
 
   // 점수를 화면에 표시하는 함수
   drawScore() {
-    this.context.font = "24px Arial";
-    this.context.fillStyle = "yellow";
+    this.context.font = '24px Arial';
+    this.context.fillStyle = 'yellow';
     // this.context.strokeStyle = "black";
     this.context.lineWidth = 2;
-    this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
+    this.context.fillText('Score: ' + this.score, this.canvas.width - 150, 35);
     // this.context.strokeText(
     //   "Score: " + this.score,
     //   this.canvas.width - 150,
@@ -104,7 +110,7 @@ class Canvas {
 
   destroy() {
     // 리소스 정리 코드
-    window.removeEventListener("resize", this.resizeCanvas.bind(this));
+    window.removeEventListener('resize', this.resizeCanvas.bind(this));
     this.balls = [];
     this.blocks = [];
     this.items = [];
@@ -115,7 +121,7 @@ class Canvas {
   //게임 내 요소들을 초기화합니다.
   initGameElements() {
     this.balls.push(
-      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
+      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, '#0095DD')
     );
     console.log(this.balls);
     //패들 랄프 크기 수정
@@ -126,7 +132,7 @@ class Canvas {
     // 생명 배치
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
-        new Life(this.canvas, "../source/full_heart.png", 30, 10 + i * 40, 10)
+        new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
   }
@@ -205,12 +211,6 @@ class Canvas {
         item.update(this.canvas);
       });
 
-      this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
-      });
-
       this.drawScore(); // 점수 그리기 추가
       requestAnimationFrame(update);
     };
@@ -218,7 +218,7 @@ class Canvas {
   }
 
   togglePause() {
-    console.log("stop");
+    console.log('stop');
     this.isPaused = !this.isPaused;
     if (!this.isPaused) {
       this.startGameLoop(); // 일시 중지 해제 시 게임 루프 재개

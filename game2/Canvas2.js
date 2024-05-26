@@ -2,7 +2,7 @@
 class Canvas2 extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = "game2_canvas";
+    this.canvas.id = 'game2_canvas';
     this.vanellope;
     this.villains = []; // 빌런 리스트 초기화
     this.blockSpeed = 0.5; // 블록의 이동 속도
@@ -23,7 +23,7 @@ class Canvas2 extends Canvas {
       100,
       80,
       this.increaseBrokenBlocks.bind(this),
-      "../game2/vanellope.png"
+      '../game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
 
@@ -34,14 +34,14 @@ class Canvas2 extends Canvas {
         80,
         60,
         this.increaseBrokenBlocks.bind(this),
-        "../game2/villain" + i + ".png",
+        '../game2/villain' + i + '.png',
         false // 일반 블록임을 나타내는 플래그
       );
       this.villains.push(villainBlock);
     }
 
     // 곤용 바나나 배치 노란 부분에만 나타나도록 수정
-    const bananaImageSrc = "../source/banana.png";
+    const bananaImageSrc = '../source/banana.png';
     const bananaSize = 50;
     const yellowAreaTop = 100;
     const yellowAreaBottom = this.canvas.height - 150;
@@ -113,7 +113,7 @@ class Canvas2 extends Canvas {
       });
 
       if (this.vanellope.x + this.vanellope.width < 0) {
-        alert("게임 승리");
+        alert('게임 승리');
       }
 
       this.balls = this.balls.filter((ball) => {
@@ -152,9 +152,7 @@ class Canvas2 extends Canvas {
       });
 
       this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
+        this.balls.forEach((ball) => this.collectItem2(item, ball, this.balls));
       });
 
       // 곤용 바나나 그리기
@@ -162,7 +160,7 @@ class Canvas2 extends Canvas {
         banana.draw();
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            console.log("충돌 발생"); // 충돌시 출력
+            console.log('충돌 발생'); // 충돌시 출력
             ball.changeDirectionRandomly();
           }
         });
@@ -175,24 +173,25 @@ class Canvas2 extends Canvas {
   }
 
   //곤용 -item2로 바꿨더니 작동함
-    collectItem2(item, ball) {
-      if (item.isPaddleGetItem(this.paddle)) {
-          console.log("아이템 수집: " + item.type); // 디버그용 로그
-          if (item.type == "increasevanellopespeed") {
-          this.increaseVanellopeSpeed();
-        } else if (item.type == "decreasevanellopespeed") {
-          this.decreaseVanellopeSpeed();
-        } else if (item.type == "increaseheart") {
-          this.increaseLife();
-        } else if (item.type == "decreaseheart") {
-          this.decreaseLife();
-        } else if (item.type == "increasemonsterspeed") {
-          this.increaseMonsterSpeed();
-        } else if (item.type == "decreasemonsterspeed") {
-          this.decreaseMonsterSpeed();        }
-       }
+  collectItem2(item, ball) {
+    if (item.isPaddleGetItem(this.paddle)) {
+      console.log('아이템 수집: ' + item.type); // 디버그용 로그
+
+      if (item.type == 'increasevanellopespeed') {
+        this.increaseVanellopeSpeed();
+      } else if (item.type == 'decreasevanellopespeed') {
+        this.decreaseVanellopeSpeed();
+      } else if (item.type == 'increaseheart') {
+        this.increaseLife();
+      } else if (item.type == 'decreaseheart') {
+        this.decreaseLife();
+      } else if (item.type == 'increasemonsterspeed') {
+        this.increaseMonsterSpeed();
+      } else if (item.type == 'decreasemonsterspeed') {
+        this.decreaseMonsterSpeed();
+      }
     }
-  
+  }
 
   //바넬로피 속도 관련 함수
   increaseVanellopeSpeed() {
@@ -202,7 +201,7 @@ class Canvas2 extends Canvas {
       this.vanellope.blockSpeed = this.originalBlockSpeed;
     }, 2000);
   }
-  
+
   decreaseVanellopeSpeed() {
     console.log('바낼 속도 감소');
     this.vanellope.blockSpeed = 0.4;
@@ -214,18 +213,21 @@ class Canvas2 extends Canvas {
   // 몬스터 속도 관련 함수
   increaseMonsterSpeed() {
     console.log('몬스터 속도 증가');
-    this.villains.forEach(villain => villain.blockSpeed = 0.7);
+    this.villains.forEach((villain) => (villain.blockSpeed = 0.7));
     setTimeout(() => {
-      this.villains.forEach(villain => villain.blockSpeed = this.originalBlockSpeed);
+      this.villains.forEach(
+        (villain) => (villain.blockSpeed = this.originalBlockSpeed)
+      );
     }, 2000);
   }
 
   decreaseMonsterSpeed() {
     console.log('몬스터 속도 감소');
-    this.villains.forEach(villain => villain.blockSpeed = 0.4);
+    this.villains.forEach((villain) => (villain.blockSpeed = 0.4));
     setTimeout(() => {
-      this.villains.forEach(villain => villain.blockSpeed = this.originalBlockSpeed);
+      this.villains.forEach(
+        (villain) => (villain.blockSpeed = this.originalBlockSpeed)
+      );
     }, 2000);
   }
 }
-
