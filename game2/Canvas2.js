@@ -26,6 +26,10 @@ class Canvas2 extends Canvas {
       '../game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
+    //곤용 originalSpeed적용 두 줄 추가
+    // 기존속도 ,변경 속도 콘솔창 undefined => 정상적으로 출력
+    this.vanellope.blockSpeed = this.blockSpeed; 
+    this.vanellope.originalBlockSpeed = this.blockSpeed;
 
     for (let i = 0; i < 6; i++) {
       let villainBlock = new Block(
@@ -37,6 +41,10 @@ class Canvas2 extends Canvas {
         '../game2/villain' + i + '.png',
         false // 일반 블록임을 나타내는 플래그
       );
+      //곤용 originalSpeed적용 두 줄 추가
+      // 기존속도 ,변경 속도 콘솔창 undefined => 정상적으로 출력
+      villainBlock.blockSpeed = this.blockSpeed; 
+      villainBlock.originalBlockSpeed = this.blockSpeed;
       this.villains.push(villainBlock);
     }
 
@@ -193,41 +201,57 @@ class Canvas2 extends Canvas {
     }
   }
 
-  //바넬로피 속도 관련 함수
+  // 바넬로피 속도 관련 함수
   increaseVanellopeSpeed() {
     console.log('바낼 속도 증가');
-    this.vanellope.blockSpeed = 0.7;
+    console.log('기존 속도:', this.vanellope.blockSpeed); // 기존 속도 디버깅 메시지
+    this.vanellope.blockSpeed = 10.7;
+    console.log('변경된 속도:', this.vanellope.blockSpeed); // 변경된 속도 디버깅 메시지
     setTimeout(() => {
-      this.vanellope.blockSpeed = this.originalBlockSpeed;
+      this.vanellope.blockSpeed = this.vanellope.originalBlockSpeed;
+      console.log('복원된 속도:', this.vanellope.blockSpeed); // 복원된 속도 디버깅 메시지
     }, 2000);
   }
 
   decreaseVanellopeSpeed() {
     console.log('바낼 속도 감소');
+    console.log('기존 속도:', this.vanellope.blockSpeed); // 기존 속도 디버깅 메시지
     this.vanellope.blockSpeed = 0.4;
+    console.log('변경된 속도:', this.vanellope.blockSpeed); // 변경된 속도 디버깅 메시지
     setTimeout(() => {
-      this.vanellope.blockSpeed = this.originalBlockSpeed;
+      this.vanellope.blockSpeed = this.vanellope.originalBlockSpeed;
+      console.log('복원된 속도:', this.vanellope.blockSpeed); // 복원된 속도 디버깅 메시지
     }, 2000);
   }
 
   // 몬스터 속도 관련 함수
   increaseMonsterSpeed() {
     console.log('몬스터 속도 증가');
-    this.villains.forEach((villain) => (villain.blockSpeed = 0.7));
+    this.villains.forEach((villain) => {
+      console.log('기존 속도:', villain.blockSpeed); // 기존 속도 디버깅 메시지
+      villain.blockSpeed = 0.7;
+      console.log('변경된 속도:', villain.blockSpeed); // 변경된 속도 디버깅 메시지
+    });
     setTimeout(() => {
-      this.villains.forEach(
-        (villain) => (villain.blockSpeed = this.originalBlockSpeed)
-      );
+      this.villains.forEach((villain) => {
+        villain.blockSpeed = villain.originalBlockSpeed;
+        console.log('복원된 속도:', villain.blockSpeed); // 복원된 속도 디버깅 메시지
+      });
     }, 2000);
   }
 
   decreaseMonsterSpeed() {
     console.log('몬스터 속도 감소');
-    this.villains.forEach((villain) => (villain.blockSpeed = 0.4));
+    this.villains.forEach((villain) => {
+      console.log('기존 속도:', villain.blockSpeed); // 기존 속도 디버깅 메시지
+      villain.blockSpeed = 0.4;
+      console.log('변경된 속도:', villain.blockSpeed); // 변경된 속도 디버깅 메시지
+    });
     setTimeout(() => {
-      this.villains.forEach(
-        (villain) => (villain.blockSpeed = this.originalBlockSpeed)
-      );
+      this.villains.forEach((villain) => {
+        villain.blockSpeed = villain.originalBlockSpeed;
+        console.log('복원된 속도:', villain.blockSpeed); // 복원된 속도 디버깅 메시지
+      });
     }, 2000);
   }
 }
