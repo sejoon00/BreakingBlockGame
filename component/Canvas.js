@@ -112,23 +112,36 @@ class Canvas {
 
   increaseBrokenBlocks() {
     this.brokenBlocks++;
+<<<<<<< HEAD
     // if (this.brokenBlocks === this.blocks.length || this.score > 600) {
     //   this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
     // }
+=======
+    if (this.brokenBlocks === this.blocks.length || this.score > 700) {
+      this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
+    }
+>>>>>>> origin/master
   }
 
   endGame() {
-    console.log("GameClear");
-    gameMode = "GameClear";
+    console.log('GameClear');
+    gameMode = 'GameClear';
     this.destroy();
     toggleOverPage();
+    isGame1Cleared = true;
+    let game2Img = document.querySelector('#game2Img');
+    if (isGame1Cleared) {
+      game2Img.src = './stagePage/SugarRush2.png';
+    } else {
+      game2Img.src = './stagePage/SugarRush.png';
+    }
   }
 
   // 공이 배열에 하나도 없을 때 확인하는 함수
   checkBallandLife() {
     if (this.balls.length === 0 || this.lifes.length === 0) {
-      console.log("GameOver");
-      gameMode = "GameOver";
+      console.log('GameOver');
+      gameMode = 'GameOver';
       this.destroy();
       toggleOverPage();
     }
