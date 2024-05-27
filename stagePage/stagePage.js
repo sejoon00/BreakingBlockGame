@@ -14,21 +14,36 @@ document.querySelector('main').insertAdjacentHTML(
         <img src="./stagePage/SugarRush.png" width="700" id="game2Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
         <img src="./stagePage/HeroDuty.png" width="700" id="game3Img" onmouseover="imgOnMouseIn (this)" onmouseout="imgOnMouseOut (this)">
       </div>
-      <div id="stageLockMessage">Stage is locked!</div>
+      <div id="stageLockMessage">This stage is locked!</div>
     </div>
     `
 );
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
+let game1Img = document.querySelector('#game1Img');
+let game2Img = document.querySelector('#game2Img');
+let game3Img = document.querySelector('#game3Img');
 let stageLockMessage = document.querySelector('#stageLockMessage');
 
+if (isGame1Cleared) {
+  game2Img.src = '../stagePage/SugarRush2.png';
+} else {
+  game2Img.src = '../stagePage/SugarRush.png';
+}
+
+if (isGame1Cleared && isGame2Cleared) {
+  game3Img.src = '../stagePage/HeroDuty2.png';
+} else {
+  game3Img.src = '../stagePage/HeroDuty.png';
+}
+
 //은서
-document.querySelector('#game1Img').addEventListener('click', () => {
+game1Img.addEventListener('click', () => {
   goToRule1();
 });
 
-document.querySelector('#game2Img').addEventListener('click', () => {
+game2Img.addEventListener('click', () => {
   if (isGame1Cleared) {
     goToRule2();
   }
@@ -40,7 +55,7 @@ document.querySelector('#game2Img').addEventListener('click', () => {
   }
 });
 
-document.querySelector('#game3Img').addEventListener('click', () => {
+game3Img.addEventListener('click', () => {
   if (isGame1Cleared && isGame2Cleared) {
     goToRule3();
   }
@@ -48,9 +63,10 @@ document.querySelector('#game3Img').addEventListener('click', () => {
     stageLockMessage.style.display = 'block';
     setTimeout(() => {
       stageLockMessage.style.display = 'none';
-    }, 500);    
+    }, 500);
   }
 });
+
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/

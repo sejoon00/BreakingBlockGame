@@ -22,10 +22,16 @@ document.querySelector('main').insertAdjacentHTML(
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
+let lockMessage = document.querySelector('#lockMessage');
+
+if (isGame2Cleared && isGame1Cleared) {
+  settingVanellope.src = './source/vanellope.png';
+} else {
+  settingVanellope.src = './source/lockedVanellope.png';
+}
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
-
 function moveToGameWithRalph() {
   if (selectTargetGame == 'game1') {
     goToGame1ByRalph();
@@ -61,21 +67,18 @@ function goToGame1ByRalph() {
 
 // 곤용 잠금해제 되었을 때만 사용가능
 function goToGame1ByVanellope() {
-  // gameState = 'Gaming1'; //게임중으로 상태 변경
-  // if (isGame2Cleared === 'true') {
-  //   document.querySelector('#settingPage').style.display = 'none';
-  //   gameState = 'Gaming1';
-  //   selectCharacter = 'Vanellope';
-
-  //   setGame1();
-  //   //document.querySelector('#game').style.display = 'block';
-  // } else {
-    const lockMessage = document.querySelector('#lockMessage');
+  gameState = 'Gaming1'; //게임중으로 상태 변경
+  if (isGame2Cleared) {
+    document.querySelector('#settingPage').style.display = 'none';
+    gameState = 'Gaming1';
+    selectCharacter = 'Vanellope';
+    setGame1();
+  } else {
     lockMessage.style.display = 'block';
     setTimeout(() => {
       lockMessage.style.display = 'none';
     }, 2000); // Character is locked! 메시지 출력
-  // }
+  }
 }
 
 function goToGame2ByRalph() {
@@ -87,7 +90,6 @@ function goToGame2ByRalph() {
 }
 
 function goToGame2ByVanellope() {
-  const lockMessage = document.querySelector('#lockMessage');
   lockMessage.style.display = 'block';
   setTimeout(() => {
     lockMessage.style.display = 'none';

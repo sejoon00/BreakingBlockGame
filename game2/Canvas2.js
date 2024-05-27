@@ -119,30 +119,17 @@ class Canvas2 extends Canvas {
 
   // 바넬로피가 먼저 도착
   endGame() {
+    let game3Img = document.querySelector('#game3Img');
     if (this.vanellope.x + this.vanellope.width < 0) {
       console.log('GameClear');
       gameMode = 'GameClear';
       this.destroy();
-      toggleOverPage();
-
       isGame2Cleared = true;
-      let game3Img = document.querySelector('#game3Img');
-      let settingVanellope = document.querySelector('#settingVanellope');
-
-      if (isGame2Cleared) {
-        game3Img.src = '../stagePage/HeroDuty2.png';
-      } else {
-        game3Img.src = '../stagePage/HeroDuty.png';
-      }
-
-      if (isGame2Cleared && isGame1Cleared) {
-        settingVanellope.src = './source/vanellope.png';
-      } else {
-        settingVanellope.src = './source/lockedVanellope.png.png';
-      }
+      toggleOverPage();
+      game3Img.src = '../stagePage/HeroDuty2.png';
     } else if (
       this.villains.some(villain => villain.x + villain.width < 0) ||
-      this.boss.x + this.boss.width < 0 ||
+      (this.boss && this.boss.x + this.boss.width < 0) ||
       this.balls.length === 0 ||
       this.lifes.length === 0
     ) {
@@ -150,6 +137,7 @@ class Canvas2 extends Canvas {
       gameMode = 'GameOver';
       this.destroy();
       toggleOverPage();
+      game3Img.src = '../stagePage/HeroDuty.png';
     }
   }
 

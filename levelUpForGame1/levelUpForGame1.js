@@ -24,7 +24,7 @@ document.addEventListener("keydown", (event) => {
       event.preventDefault(); // Escape의 기본 동작을 방지
       //실행중인 Canvas를 정지시킵니다
     }
-  });
+});
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/

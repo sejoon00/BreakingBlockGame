@@ -108,16 +108,18 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    if (this.boss === 0) {
+    if (this.boss) {
       console.log("GameClear");
       gameMode = "GameClear";
       this.destroy();
       toggleOverPage();
+      game3Img.src = '../stagePage/HeroDuty2.png';
     }
     else if (this.lifes.length === 0) {
       gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
+      game3Img.src = '../stagePage/HeroDuty.png';
     }
   }
 
