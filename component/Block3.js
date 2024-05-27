@@ -84,7 +84,7 @@ class Block3 {
       // 점수 증가
       if (increaseScore) {
         //console.log("score2");
-
++
         increaseScore();
       }
 

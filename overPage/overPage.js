@@ -93,7 +93,7 @@ function gotoLevelUpForGame2() {
 function gotoLevelUpForGame3() {
   overPage.style.display = 'none'; // 팝업창 종료
   endGame3(); // 게임 종료
-  Game3Audio.pause(); // 게임 bgm 종료
+  //Game3Audio.pause(); // 게임 bgm 종료
   document.querySelector('#levelUp3').style.display = 'block'; // levelup1 페이지로 이동
 }
 

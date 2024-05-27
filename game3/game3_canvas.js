@@ -84,7 +84,6 @@ class Game3_canvas extends Canvas {
     setTimeout(() => {
       setTimeout(() => {
         this.showWarning();
-
         this.boss = new Boss(
           this.canvas,
           this.canvas.width / 2 - 150,
@@ -109,17 +108,16 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    this.destroy();
-    gameMode = "GameClear";
-    $('#overPage').fadeOut('slow').slideDown('slow');
-  }
-
-  // 사용자 hp 0인지 확인하는 함수 
-  checkBallandLife() {
-    if (this.lifes.length === 0) {
+    if (this.boss === 0 || this.score > 2000) {
+      console.log("GameClear");
+      gameMode = "GameClear";
+      this.destroy();
+      toggleOverPage();
+    }
+    else if (this.lifes.length === 0) {
       gameMode = "GameOver";
       this.destroy();
-      $('#overPage').fadeOut('slow').slideDown('slow');
+      toggleOverPage();
     }
   }
 
@@ -238,6 +236,7 @@ class Game3_canvas extends Canvas {
 
       this.drawScore();
       requestAnimationFrame(update);
+      this.endGame();
     };
     update();
   }
