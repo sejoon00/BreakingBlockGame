@@ -32,14 +32,7 @@ document.addEventListener(
 );
 
 //은서
-<<<<<<< HEAD
-let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
-startPageAudio.play();
-startPageAudio.loop = true;
-startPageAudio.volume = 0.005; // 임시 설정
-=======
 let changecolor;
->>>>>>> origin/master
 changeColor();
 let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
 startPageAudio.loop = true;
