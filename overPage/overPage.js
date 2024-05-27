@@ -11,8 +11,8 @@ document.querySelector('main').insertAdjacentHTML(
         <div id="gameclear">다음 레벨로 이동...</div>
         <div id="gameover">
           <div>PLAY AGAIN</div>
-          <button onclick=moveToStagePage()>YES</button>
-          <button onclick=overPageSetGameHide()>NO</button>
+          <button onclick=gameOverPlayAgain()>YES</button>
+          <button onclick=gameOverSetGameHide()>NO</button>
         </div>
       </div>
     `
@@ -20,17 +20,24 @@ document.querySelector('main').insertAdjacentHTML(
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
+let overPage = document.querySelector("#overPage");
+let gameclear = document.querySelector("#gameclear");
+let gameover = document.querySelector("#gameover");
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function toggleOverPage() {
+  let str = '당신의 score는 ' + canvas.score + '점입니다.';
   if (gameMode.startsWith("Game")) {
-    if(document.querySelector('#result').innerHTML != '') {
+    if (document.querySelector('#result').innerHTML != '') {
       document.querySelector('#result').innerHTML = '';
     }
-    
-    const overPage = document.querySelector("#overPage");
-    let str = '당신의 score는 ' + canvas.score + '점입니다.';
+    if (gameclear.style.display = "block") {
+      gameclear.style.display = "none";
+    }
+    if (gameover.style.display = "block") {
+      gameover.style.display = "none";
+    }
 
     change_position(overPage);
     document.querySelector('#score').innerHTML = str;
@@ -39,7 +46,7 @@ function toggleOverPage() {
     if (gameMode === "GameClear")
     {
       gameMode = 'Gaming';
-      const gameclear = document.querySelector("#gameclear");
+      
       gameclear.style.display = "block";
       document.querySelector('#result').innerHTML = 'GAME CLEAR';
 
@@ -62,13 +69,12 @@ function toggleOverPage() {
     else if (gameMode === "GameOver")
     {
       gameMode = '';
-      const gameover = document.querySelector("#gameover");
+      
       gameover.style.display = "block";
       document.querySelector('#result').innerHTML = 'GAME OVER';
     }
   }
 }
-
 
 //은서
 function change_position() {
@@ -97,33 +103,36 @@ function gotoLevelUpForGame3() {
   document.querySelector('#levelUp3').style.display = 'block'; // levelup1 페이지로 이동
 }
 
-function overPageSetGameHide() {
-  Game1Audio.pause();
-  Game1Audio.currentTime = 0;
-  Game2Audio.pause();
-  Game2Audio.currentTime = 0;
-  Game3Audio.pause();
-  Game3Audio.currentTime = 0;
+function gameOverPlayAgain() {
+  overPage.style.display = "none";
+  // 게임 다시 시작
+  if (gameState == 'Gaming1') {
+    endGame1();
+    setGame1();
+  }
+  else if (gameState == 'Gaming2') {
+    endGame2();
+    setGame2();
+  }
+  else if (gameState == 'Gaming3') {
+    endGame3();
+    setGame3();
+  }
+}
+
+function gameOverSetGameHide() {
+  overPage.style.display = "none";
+  if (gameState == 'Gaming1') {
+    endGame1();
+  }
+  else if (gameState == 'Gaming2') {
+    endGame2();
+  }
+  else if (gameState == 'Gaming3') {
+    endGame3();
+  }
 
   //no 버튼 클릭 시 게임 hide해주고, 난이도 선택 화면으로 돌아가기
   moveToStagePage();
-
-  document.querySelector("#overPage").style.display = "none";
-  // 특정 요소를 선택하고 제거합니다.
-  let game = document.querySelector("#game");
-  let game_canvas = document.querySelector("#game_canvas");
-  console.log(game_canvas);
-
-  // canvas 객체 정리
-  if (canvas) {
-    canvas.destroy();
-    canvas = null;
-  }
-
-  if (game) {
-    game.style.display = "none";
-    game.remove();
-    // game_canvas.display = "none";
-  }
   gameState = "none";
 }

@@ -34,10 +34,12 @@ function setGame1() {
   canvas.appendTo(game);
   Game1Audio.loop = true;
   Game1Audio.volume = 0.3;
+  Game1Audio.currentTime = 0;
   Game1Audio.play();
 }
 
 function endGame1() {
+  Game1Audio.pause();
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
 }

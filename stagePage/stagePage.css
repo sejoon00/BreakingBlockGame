@@ -20,3 +20,18 @@
 #game2Img {
   margin-bottom: 20px;
 }
+
+#stageLockMessage {
+  color: #e90d0d;
+  font-family: "Pixelify Sans", sans-serif;
+  text-align: center;
+  font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: none;
+}

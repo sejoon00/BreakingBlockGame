@@ -69,11 +69,18 @@ class Canvas {
   }
 
   drawScore() {
-    this.context.font = '24px Arial';
-    this.context.fillStyle = 'yellow';
+    // 첫 번째 줄 스타일
+    this.context.font = 'bold 22px Pixelify Sans';
+    this.context.fillStyle = 'red';
     this.context.lineWidth = 2;
-    this.context.fillText('Score: ' + this.score, this.canvas.width - 150, 35);
-  }
+    this.context.fillText('SCORE', this.canvas.width - 100, 23);
+    
+    // 두 번째 줄 스타일
+    this.context.font = '18px Verdana';
+    this.context.fillStyle = 'white';
+    this.context.lineWidth = 1;
+    this.context.fillText(this.score, this.canvas.width - 95, 40);
+  }  
 
   destroy() {
     window.removeEventListener('resize', this.resizeCanvas.bind(this));
@@ -112,26 +119,7 @@ class Canvas {
 
   increaseBrokenBlocks() {
     this.brokenBlocks++;
-    if (this.brokenBlocks === this.blocks.length || this.score > 600) {
-      this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
-    }
-  }
-
-  endGame() {
-    console.log("GameClear");
-    gameMode = "GameClear";
-    this.destroy();
-    toggleOverPage();
-  }
-
-  // 공이 배열에 하나도 없을 때 확인하는 함수
-  checkBallandLife() {
-    if (this.balls.length === 0 || this.lifes.length === 0) {
-      console.log("GameOver");
-      gameMode = "GameOver";
-      this.destroy();
-      toggleOverPage();
-    }
+    
   }
 
   startGameLoop() {

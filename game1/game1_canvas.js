@@ -46,6 +46,25 @@ class Game1_canvas extends Canvas {
     }
   }
 
+  endGame() {
+    let game2Img = document.querySelector('#game2Img');
+    if (this.brokenBlocks === this.blocks.length || this.score > 600) {
+      console.log('GameClear');
+      gameMode = 'GameClear';
+      this.destroy();
+      toggleOverPage();
+      isGame1Cleared = true;
+      game2Img.src = './stagePage/SugarRush2.png';
+    }
+    else if (this.balls.length === 0 || this.lifes.length === 0) {
+      console.log('GameOver');
+      gameMode = 'GameOver';
+      this.destroy();
+      toggleOverPage();
+      game2Img.src = './stagePage/SugarRush.png';
+    }
+  }
+
   // 게임 루프 내에서 drawPath를 호출하여 경로를 그림
   startGameLoop() {
     const update = () => {
@@ -97,7 +116,7 @@ class Game1_canvas extends Canvas {
         );
       });
 
-      this.checkBallandLife();
+      this.endGame();
       this.drawScore();
       requestAnimationFrame(update);
     };
