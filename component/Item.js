@@ -6,13 +6,24 @@ class Item {
     this.type = type; // 속도 증가, 공 개수 증가 등
     this.visible = true;
     this.image = new Image();
+    //곤용 변경
     if (this.type === "speed") {
       this.image.src = "../source/speed_up_item.png"; // 속도 증가 아이템 이미지 경로
-    } else if (this.type === "ball") {
-      this.image.src = "../source/increase_item.png"; // 다른 아이템 이미지 경로
-    } else {
-      this.image.src = "../source/light_item.png"; // 다른 아이템 이미지 경로
-    }
+    } else if(this.type === "increaseball") {
+      this.image.src = "../source/increase_item.png"; // 볼 개수 증가 아이템 이미지 경로
+    } else if(this.type === "increaseheart") {
+      this.image.src = "../source/increase_life.png"; // 생명 증가 아이템 이미지 경로
+    } else if(this.type === "decreaseheart") {
+      this.image.src = "../source/decrease_life.png"; // 생명 감소 아이템 이미지 경로
+    } else if(this.type === "increasevanellopespeed") {
+      this.image.src = "../source/increase_speed.png"; // 바넬로피 속도 증가 아이템 이미지 경로
+    } else if(this.type === "decreasevanellopespeed") {
+      this.image.src = "../source/decrease_speed.png"; // 바넬로피 속도 감소 아이템 아이템 이미지 경로
+    } else if(this.type === "increasemonsterspeed") {
+      this.image.src = "../source/increase_speed.png"; // 몬스터 속도 증가 아이템 이미지 경로
+    } else if(this.type === "decreasemonsterspeed") {
+      this.image.src = "../source/decrease_speed.png"; // 몬스터 속도 감소 아이템 이미지 경로
+    } 
   }
 
   draw(ctx) {
