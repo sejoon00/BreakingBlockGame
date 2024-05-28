@@ -128,7 +128,7 @@ class Canvas2 extends Canvas {
       toggleOverPage();
       game3Img.src = '../stagePage/HeroDuty2.png';
     } else if (
-      this.villains.some(villain => villain.x + villain.width < 0) ||
+      this.villains.some((villain) => villain.x + villain.width < 0) ||
       (this.boss && this.boss.x + this.boss.width < 0) ||
       this.balls.length === 0 ||
       this.lifes.length === 0
