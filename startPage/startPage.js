@@ -10,7 +10,7 @@ document.querySelector("main").insertAdjacentHTML(
       <img src="./startPage/ralphLogo.png" width="300" height="250"></img>
     </div>
     <div id="spacebar">PRESS SPACEBAR</div>
-		<div class="text">WEB PROGRAMMING TEAM 8<br>MINSEOK SEJUN KUNYONG EUNSEO</div>
+		<div class="text">WEB PROGRAMMING TEAM 8<br>MINSEOK SEJUN GONYOUNG EUNSEO</div>
   </section>
 `
 );
@@ -32,12 +32,11 @@ document.addEventListener(
 );
 
 //은서
-let id;
-let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
-startPageAudio.play();
-startPageAudio.loop = true;
-startPageAudio.volume = 0.005; // 임시 설정
+let changecolor;
 changeColor();
+let startPageAudio = new Audio("./source/WreckItRalph_StartPage.mp3");
+startPageAudio.loop = true;
+startPageAudio.play();
 
 //
 // ---------------------------------- javascript function ----------------------------------
@@ -48,11 +47,12 @@ function moveToStagePage() {
   document.querySelector("#startPage").style.display = "none";
   gameState = "stagePage";
   document.querySelector("#selectGame").style.display = "block";
+  clearInterval(changecolor);
 }
 
 //은서
 function changeColor() {
-  id = setInterval(flashText, 1000);
+  changecolor = setInterval(flashText, 1000);
 }
 function flashText() {
   let elem = document.querySelector("#spacebar");

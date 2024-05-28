@@ -6,6 +6,7 @@
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
 let canvas;
+let Game1Audio = new Audio("./source/Game1BGM.mp3");
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
@@ -29,11 +30,16 @@ function setGame1() {
   }
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
-  canvas = new Game1_canvas("../source/game1Background.png");
+  canvas = new Game1_canvas("./source/game1Background.png");
   canvas.appendTo(game);
+  Game1Audio.loop = true;
+  Game1Audio.volume = 0.3;
+  Game1Audio.currentTime = 0;
+  Game1Audio.play();
 }
 
 function endGame1() {
+  Game1Audio.pause();
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
 }

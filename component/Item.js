@@ -9,6 +9,7 @@ class Item {
     //곤용 변경
     if (this.type === "speed") {
       this.image.src = "../source/speed_up_item.png"; // 속도 증가 아이템 이미지 경로
+<<<<<<< HEAD
     } else if(this.type === "increaseball") {
       this.image.src = "../source/increase_item.png"; // 볼 개수 증가 아이템 이미지 경로
     } else if(this.type === "increaseheart") {
@@ -24,6 +25,13 @@ class Item {
     } else if(this.type === "decreasemonsterspeed") {
       this.image.src = "../source/decrease_speed.png"; // 몬스터 속도 감소 아이템 이미지 경로
     } 
+=======
+    } else if (this.type === "ball") {
+      this.image.src = "../source/increase_item.png"; // 다른 아이템 이미지 경로
+    } else {
+      this.image.src = "../source/light_item.png"; // 다른 아이템 이미지 경로
+    }
+>>>>>>> origin/master
   }
 
   draw(ctx) {
@@ -51,6 +59,10 @@ class Item {
       this.y < paddle.y + paddle.height
     ) {
       this.visible = false;
+      let itemAudio = new Audio(
+        'https://taira-komori.jpn.org/sound_os2/game01/powerup01.mp3'
+        );
+      itemAudio.play();
       return true;
     }
     return false;

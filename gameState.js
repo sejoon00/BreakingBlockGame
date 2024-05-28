@@ -1,8 +1,12 @@
-gameState = "none";
+gameState = 'none';
+gameMode = 'none';
+selectTargetGame = '';
 
-selectTargetGame = "";
-
-selectCharacter = "";
+selectCharacter = '';
 
 //곤용 캐릭터 잠금여부 상태
-isCharacter = "";
+isCharacter = '';
+
+isGame1Cleared = false;
+isGame2Cleared = false;
+isGame3Cleared = false;

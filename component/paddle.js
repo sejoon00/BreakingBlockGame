@@ -1,25 +1,28 @@
 class Paddle {
   constructor(canvas, width, height, speed) {
     this.canvas = canvas;
-    this.width = width;
-    this.height = height;
+    this.width = 110;
+    this.height = 130;
     this.x = (this.canvas.width - this.width) / 2; // 막대기의 초기 X 위치
     this.y = this.canvas.height - this.height - 20; // 막대기의 Y 위치
     this.speed = speed;
     //곤용
     this.image = new Image();
+    this.hitPointSize = 15;
   }
 
   // 막대기 그리기 함수
   //draw() -> draw(selectCharacter)
   draw() {
-    const ctx = this.canvas.getContext("2d");
+    const ctx = this.canvas.getContext('2d');
     //곤용
 
-    if (selectCharacter === "Ralph") {
-      this.image.src = "../source/ralph_paddle.png";
+    if (selectCharacter === 'Ralph') {
+      this.image.src = '../source/ralph_paddle.png';
+      if (selectTargetGame == 'game3')
+        this.image.src = '../source/stage3_ralph.png';
     } else {
-      this.image.src = "../source/vanellope_paddle.png";
+      this.image.src = '../source/vanellope_paddle.png';
     }
 
     ctx.beginPath();
@@ -37,11 +40,20 @@ class Paddle {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       };
     }
-  }
 
+    if (selectTargetGame == 'game3') {
+      ctx.fillStyle = 'green';
+      ctx.fillRect(
+        this.x + this.width / 2 - this.hitPointSize / 2,
+        this.y + this.height / 2 - this.hitPointSize / 2,
+        this.hitPointSize,
+        this.hitPointSize
+      );
+    }
+  }
   // 이벤트 리스너 등록 (마우스 이동)
   bindMouseMove() {
-    document.addEventListener("mousemove", (e) => {
+    document.addEventListener('mousemove', (e) => {
       const relativeX = e.clientX - this.canvas.offsetLeft;
       if (relativeX > 0 && relativeX < this.canvas.width) {
         this.x = relativeX - this.width / 2;
@@ -51,10 +63,10 @@ class Paddle {
 
   // 막대기 이동 함수
   movePaddle(direction) {
-    if (direction === "left" && this.x > 0) {
+    if (direction === 'left' && this.x > 0) {
       this.x -= this.speed;
     } else if (
-      direction === "right" &&
+      direction === 'right' &&
       this.x < this.canvas.width - this.width
     ) {
       this.x += this.speed;
@@ -62,10 +74,15 @@ class Paddle {
   }
 
   isCollidingWithBullet(bullet) {
-    const distX = Math.abs(bullet.x - this.x - this.width / 2);
-    const distY = Math.abs(bullet.y - this.y - this.height / 2);
+    const hitPointX = this.x + this.width / 2 - this.hitPointSize / 2;
+    const hitPointY = this.y + this.height / 2 - this.hitPointSize / 2;
 
-    if (distX <= this.width / 2 && distY <= this.height / 2) {
+    if (
+      bullet.x > hitPointX &&
+      bullet.x < hitPointX + this.hitPointSize &&
+      bullet.y > hitPointY &&
+      bullet.y < hitPointY + this.hitPointSize
+    ) {
       return true;
     }
     return false;
@@ -88,6 +105,7 @@ class Paddle {
   //   }
   //   return false; // 충돌이 발생하지 않았음을 반환합니다.
   // }
+
   isHitPaddle(ball) {
     // 패들의 AABB 충돌 검사
     if (
@@ -112,8 +130,12 @@ class Paddle {
   // 아이템 수집 함수 
   collectItem(item, ball, balls) {
     if (item.isPaddleGetItem(this)) {
+<<<<<<< HEAD
       console.log("아이템 수집: " + item.type);
       if (item.type === "speed") {
+=======
+      if (item.type === 'speed') {
+>>>>>>> origin/master
         // 속도 증가 아이템 효과
         balls.forEach((b) => {
           if (b.dx < 20 && b.dy < 20) {
@@ -121,7 +143,11 @@ class Paddle {
             b.dy *= 1.5;
           }
         });
+<<<<<<< HEAD
       } else if (item.type === "increaseball") {
+=======
+      } else if (item.type === 'ball') {
+>>>>>>> origin/master
         // 공 개수 증가 아이템 효과
         let ballY;
         if (ball.dy > 0) ballY = -ball.dy;
@@ -129,6 +155,7 @@ class Paddle {
           new Ball(ball.x, ball.y, -ball.dx, ballY, ball.radius, ball.color)
         );
       }
+      return true;
     }
   }
 }
