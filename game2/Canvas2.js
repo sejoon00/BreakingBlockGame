@@ -12,7 +12,12 @@ class Canvas2 extends Canvas {
     this.frozenBlocks = new Set(); // 일시정지된 블록들
     this.isWarningVisible = false; // 경고 메시지 표시 여부
     this.boss; // 보스 블록
-    this.originalBlockSpeed = 0.5; //원래 속도 저장
+    this.originalBlockSpeed = 0.5; // 원래 속도 저장
+    this.villainStates = new Map(); // 빌런의 상태 저장
+    this.vanellopeState = {
+      moveState: 0,
+      currentDistance: 0,
+    }; // 바넬로피의 상태 저장
   }
 
   initGameElements() {
@@ -66,8 +71,8 @@ class Canvas2 extends Canvas {
 
     // 보스 블록 초기화
     setTimeout(() => {
+      this.showWarning();
       setTimeout(() => {
-        this.showWarning();
         this.boss = new Block(
           this.canvas.width - 150,
           this.canvas.height / 2 - 75,
@@ -76,8 +81,36 @@ class Canvas2 extends Canvas {
           this.increaseBrokenBlocks.bind(this),
           '../game2/boss.png'
         );
+        this.boss.blockSpeed = this.blockSpeed;
+        this.boss.originalBlockSpeed = this.blockSpeed;
       }, 2000);
     }, 5000);
+  }
+
+  setBlockSpeed(block, newSpeed, duration) {
+    console.log(`변경 전 속도: ${block.blockSpeed}`);
+    block.blockSpeed = newSpeed;
+    console.log(`변경된 속도: ${block.blockSpeed}`);
+    setTimeout(() => {
+      block.blockSpeed = block.originalBlockSpeed;
+      console.log(`복원된 속도: ${block.blockSpeed}`);
+    }, duration);
+  }
+
+  increaseVanellopeSpeed() {
+    this.setBlockSpeed(this.vanellope, 10.7, 2000);
+  }
+
+  decreaseVanellopeSpeed() {
+    this.setBlockSpeed(this.vanellope, 0.4, 2000);
+  }
+
+  increaseMonsterSpeed() {
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.7, 2000));
+  }
+
+  decreaseMonsterSpeed() {
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.4, 2000));
   }
 
   freezeBlock(block) {
@@ -89,21 +122,26 @@ class Canvas2 extends Canvas {
 
   moveBlock(block, state) {
     if (!this.frozenBlocks.has(block)) {
-      if (state.moveState === 0) {
-        block.y += this.blockSpeed; // 아래로 이동
-      } else if (state.moveState === 1) {
-        block.x -= this.blockSpeed; // 왼쪽으로 이동
-      } else if (state.moveState === 2) {
-        block.y -= this.blockSpeed; // 위로 이동
-      } else if (state.moveState === 3) {
-        block.x -= this.blockSpeed; // 왼쪽으로 이동
+      switch (state.moveState) {
+        case 0:
+          block.y += block.blockSpeed;
+          break;
+        case 1:
+          block.x -= block.blockSpeed;
+          break;
+        case 2:
+          block.y -= block.blockSpeed;
+          break;
+        case 3:
+          block.x -= block.blockSpeed;
+          break;
       }
 
-      state.currentDistance += this.blockSpeed;
+      state.currentDistance += block.blockSpeed;
 
       if (state.currentDistance >= this.maxDistance) {
-        state.moveState = (state.moveState + 1) % 4; // 이동 상태 변경
-        state.currentDistance = 0; // 이동 거리 초기화
+        state.moveState = (state.moveState + 1) % 4;
+        state.currentDistance = 0;
       }
     }
   }
@@ -125,7 +163,7 @@ class Canvas2 extends Canvas {
   // 바넬로피가 먼저 도착
   endGame() {
     let game3Img = document.querySelector('#game3Img');
-    if (this.vanellope.x + this.vanellope.width < 0) {
+    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
       console.log('GameClear');
       gameMode = 'GameClear';
       this.destroy();
@@ -133,7 +171,7 @@ class Canvas2 extends Canvas {
       toggleOverPage();
       game3Img.src = '../stagePage/HeroDuty2.png';
     } else if (
-      this.villains.some(villain => villain.x + villain.width < 0) ||
+      this.villains.some((villain) => villain.x + villain.width < 0) ||
       (this.boss && this.boss.x + this.boss.width < 0) ||
       this.balls.length === 0 ||
       this.lifes.length === 0
@@ -145,6 +183,7 @@ class Canvas2 extends Canvas {
       game3Img.src = '../stagePage/HeroDuty.png';
     }
   }
+
   startGameLoop() {
     const update = () => {
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
@@ -180,7 +219,7 @@ class Canvas2 extends Canvas {
 
       // 보스 이동 로직
       if (this.boss) {
-        this.boss.x -= this.blockSpeed; // 보스는 오른쪽에서 왼쪽으로 이동
+        this.boss.x -= this.boss.blockSpeed; // 보스는 오른쪽에서 왼쪽으로 이동
         this.boss.draw(this.context);
       }
 
@@ -245,18 +284,16 @@ class Canvas2 extends Canvas {
       });
 
       // 바나나 그리기
-      this.bananas.forEach((banana) => {
+      this.bananas = this.bananas.filter((banana) => {
         banana.draw();
         let collisionDetected = false;
 
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            //console.log('충돌 발생'); // 충돌시 출력
             ball.changeDirectionRandomly();
           }
         });
 
-        // 블록과 바나나 충돌 처리
         if (
           this.vanellope.visible == true &&
           banana.isCollidingWithBlock(this.vanellope)
@@ -272,7 +309,6 @@ class Canvas2 extends Canvas {
           }
         });
 
-        // 블록과의 충돌이 발생한 경우 배열에서 제거
         return !collisionDetected;
       });
 
@@ -283,76 +319,21 @@ class Canvas2 extends Canvas {
     update();
   }
 
-  // 바넬로피 속도 관련 함수
-  increaseVanellopeSpeed() {
-    console.log('바낼 속도 증가');
-    console.log('기존 속도:', this.vanellope.blockSpeed); // 기존 속도 디버깅 메시지
-    this.vanellope.blockSpeed = 10.7;
-    console.log('변경된 속도:', this.vanellope.blockSpeed); // 변경된 속도 디버깅 메시지
-    setTimeout(() => {
-      this.vanellope.blockSpeed = this.vanellope.originalBlockSpeed;
-      console.log('복원된 속도:', this.vanellope.blockSpeed); // 복원된 속도 디버깅 메시지
-    }, 2000);
-  }
-
-  decreaseVanellopeSpeed() {
-    console.log('바낼 속도 감소');
-    console.log('기존 속도:', this.vanellope.blockSpeed); // 기존 속도 디버깅 메시지
-    this.vanellope.blockSpeed = 0.4;
-    console.log('변경된 속도:', this.vanellope.blockSpeed); // 변경된 속도 디버깅 메시지
-    setTimeout(() => {
-      this.vanellope.blockSpeed = this.vanellope.originalBlockSpeed;
-      console.log('복원된 속도:', this.vanellope.blockSpeed); // 복원된 속도 디버깅 메시지
-    }, 2000);
-  }
-
-  // 몬스터 속도 관련 함수
-  increaseMonsterSpeed() {
-    console.log('몬스터 속도 증가');
-    this.villains.forEach((villain) => {
-      console.log('기존 속도:', villain.blockSpeed); // 기존 속도 디버깅 메시지
-      villain.blockSpeed = 0.7;
-      console.log('변경된 속도:', villain.blockSpeed); // 변경된 속도 디버깅 메시지
-    });
-    setTimeout(() => {
-      this.villains.forEach((villain) => {
-        villain.blockSpeed = villain.originalBlockSpeed;
-        console.log('복원된 속도:', villain.blockSpeed); // 복원된 속도 디버깅 메시지
-      });
-    }, 2000);
-  }
-
-  decreaseMonsterSpeed() {
-    console.log('몬스터 속도 감소');
-    this.villains.forEach((villain) => {
-      console.log('기존 속도:', villain.blockSpeed); // 기존 속도 디버깅 메시지
-      villain.blockSpeed = 0.4;
-      console.log('변경된 속도:', villain.blockSpeed); // 변경된 속도 디버깅 메시지
-    });
-    setTimeout(() => {
-      this.villains.forEach((villain) => {
-        villain.blockSpeed = villain.originalBlockSpeed;
-        console.log('복원된 속도:', villain.blockSpeed); // 복원된 속도 디버깅 메시지
-      });
-    }, 2000);
-  }
-
-  // 아이템 수집 함수 수정
   collectItem2(item, ball) {
     if (item.isPaddleGetItem(this.paddle)) {
       console.log('아이템 수집: ' + item.type); // 디버그용 로그
 
-      if (item.type == 'increasevanellopespeed') {
+      if (item.type === 'increasevanellopespeed') {
         this.increaseVanellopeSpeed();
-      } else if (item.type == 'decreasevanellopespeed') {
+      } else if (item.type === 'decreasevanellopespeed') {
         this.decreaseVanellopeSpeed();
-      } else if (item.type == 'increaseheart') {
+      } else if (item.type === 'increaseheart') {
         this.increaseLife();
-      } else if (item.type == 'decreaseheart') {
+      } else if (item.type === 'decreaseheart') {
         this.decreaseLife();
-      } else if (item.type == 'increasemonsterspeed') {
+      } else if (item.type === 'increasemonsterspeed') {
         this.increaseMonsterSpeed();
-      } else if (item.type == 'decreasemonsterspeed') {
+      } else if (item.type === 'decreasemonsterspeed') {
         this.decreaseMonsterSpeed();
       }
     }

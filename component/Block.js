@@ -115,7 +115,7 @@ class Block {
         this.increaseBrokenBlocks();
       }
       let blockAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/select01.mp3"
+        'https://taira-komori.jpn.org/sound_os2/game01/select01.mp3'
       ); // 임시
       blockAudio.play();
 
@@ -133,11 +133,22 @@ class Block {
         if (Math.random() < 0.25) {
           const itemType = Math.random() < 0.5 ? 'speed' : 'increaseball';
           items.push(
-            new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
+            new Item(
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              itemType
+            )
           );
         }
       } else if (selectTargetGame === 'game2') {
-        const itemTypes = ['increaseheart', 'decreaseheart', 'increasevanellopespeed', 'decreasevanellopespeed', 'increasemonsterspeed', 'decreasemonsterspeed'];
+        const itemTypes = [
+          'increaseheart',
+          'decreaseheart',
+          'increasevanellopespeed',
+          'decreasevanellopespeed',
+          'increasemonsterspeed',
+          'decreasemonsterspeed',
+        ];
         const randomIndex = Math.floor(Math.random() * itemTypes.length);
         const itemType = itemTypes[randomIndex];
         items.push(
@@ -145,16 +156,16 @@ class Block {
         );
       }
 
-      if (selectTargetGame == "game3") {
+      if (selectTargetGame == 'game3') {
         if (Math.random() < 0.25) {
           const itemType = Math.random();
           let type;
           if (itemType < 0.33) {
-            type = "speed";
+            type = 'speed';
           } else if (itemType < 0.66) {
-            type = "ball";
+            type = 'ball';
           } else {
-            type = "light";
+            type = 'light';
           }
           items.push(
             new Item(this.x + this.width / 2, this.y + this.height / 2, type)
@@ -164,23 +175,12 @@ class Block {
 
       return true;
     }
-  } else if (selectTargetGame === 'game2') {
-    if (Math.random() < 1.00) { // 아이템 생성 확률을 30%로 설정
-      const itemTypes = ['increaseheart', 'decreaseheart', 'increasevanellopespeed', 'decreasevanellopespeed', 'increasemonsterspeed', 'decreasemonsterspeed'];
-      const randomIndex = Math.floor(Math.random() * itemTypes.length);
-      const itemType = itemTypes[randomIndex];
-      items.push(
-        new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
-      );
-      return true;
-    }
   }
-  return false;
 
   draw(ctx) {
     if (this.visible) {
       ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-      if (selectTargetGame == "game3") this.drawHitBar(ctx); // 히트 게이지 바 그리기
+      if (selectTargetGame == 'game3') this.drawHitBar(ctx); // 히트 게이지 바 그리기
     }
   }
 
@@ -191,13 +191,13 @@ class Block {
     const barY = this.y - barHeight - 2; // 블록 위에 게이지 바를 그림
 
     // 배경 바
-    ctx.fillStyle = "red";
+    ctx.fillStyle = 'red';
     ctx.fillRect(barX, barY, barWidth, barHeight);
 
     // 현재 hitCount에 비례하는 초록색 게이지 바
     const greenBarWidth =
       (barWidth * (this.requiredHits - this.hitCount)) / this.requiredHits;
-    ctx.fillStyle = "#80E12A";
+    ctx.fillStyle = '#80E12A';
     ctx.fillRect(barX, barY, greenBarWidth, barHeight);
   }
 
