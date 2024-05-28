@@ -120,7 +120,7 @@ class Canvas2 extends Canvas {
   // 바넬로피가 먼저 도착
   endGame() {
     let game3Img = document.querySelector('#game3Img');
-    if (this.vanellope.x + this.vanellope.width < 0) {
+    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
       console.log('GameClear');
       gameMode = 'GameClear';
       this.destroy();

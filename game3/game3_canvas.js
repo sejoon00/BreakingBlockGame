@@ -108,7 +108,7 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    if (this.boss) {
+    if (this.score > 100) {
       console.log("GameClear");
       gameMode = "GameClear";
       this.destroy();

@@ -1,4 +1,48 @@
 #levelUp1 {
     display: none;
     margin: 0 auto;
+    position: relative;
+    height: 100vh;
+}
+
+#ralph1 {
+    position: absolute;
+    bottom: 30px;
+    /* transform: translateY(-50%); */
+}
+
+#speechBubble {
+    position: absolute;
+    bottom: 200px;
+    left: 400px;
+    width: 150px; /* 말풍선의 너비 조정 */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 음영 추가 */
+    text-align: center;
+}
+
+#speechBubble::after {
+    content: "";
+    position: absolute;
+    bottom: -15px; /* 아래쪽으로 향하도록 위치 조정 */
+    left: 30px; /* 가운데 위치 */
+    margin-left: -15px; /* 가운데 정렬 */
+    border-top: 15px solid #fff; /* 꼬리의 삼각형 모양 설정 */
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 0; /* 밑부분은 없도록 설정 */
+}
+
+#bgImg1 {
+    display: none;
+    background-image: './source/슈가러쉬.png';
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.text_box {
+    display: block;
 }
