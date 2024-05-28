@@ -89,6 +89,7 @@ function gotoLevelUpForGame1() {
   endGame1(); // 게임 종료
   Game1Audio.pause(); // 게임 bgm 종료
   document.querySelector('#levelUp1').style.display = 'block'; // levelup1 페이지로 이동
+  moveRalph(); // 애니메이션 함수 실행
 }
 function gotoLevelUpForGame2() {
   overPage.style.display = 'none'; // 팝업창 종료

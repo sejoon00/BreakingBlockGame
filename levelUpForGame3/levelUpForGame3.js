@@ -17,9 +17,7 @@ document.querySelector("main").insertAdjacentHTML(
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Enter") {
-        levelUp3.style.display = 'none';
-        moveToStagePage();
-  
+        levelUp3.style.display = 'none';  
       event.preventDefault(); // Escape의 기본 동작을 방지
       //실행중인 Canvas를 정지시킵니다
     }
