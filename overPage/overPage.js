@@ -20,57 +20,52 @@ document.querySelector('main').insertAdjacentHTML(
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
-let overPage = document.querySelector("#overPage");
-let gameclear = document.querySelector("#gameclear");
-let gameover = document.querySelector("#gameover");
+let overPage = document.querySelector('#overPage');
+let gameclear = document.querySelector('#gameclear');
+let gameover = document.querySelector('#gameover');
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function toggleOverPage() {
   let str = '당신의 score는 ' + canvas.score + '점입니다.';
-  if (gameMode.startsWith("Game")) {
+  if (gameMode.startsWith('Game')) {
     if (document.querySelector('#result').innerHTML != '') {
       document.querySelector('#result').innerHTML = '';
     }
-    if (gameclear.style.display = "block") {
-      gameclear.style.display = "none";
+    if ((gameclear.style.display = 'block')) {
+      gameclear.style.display = 'none';
     }
-    if (gameover.style.display = "block") {
-      gameover.style.display = "none";
+    if ((gameover.style.display = 'block')) {
+      gameover.style.display = 'none';
     }
 
     change_position(overPage);
     document.querySelector('#score').innerHTML = str;
     overPage.style.display = 'block';
 
-    if (gameMode === "GameClear")
-    {
+    if (gameMode === 'GameClear') {
       gameMode = 'Gaming';
-      
-      gameclear.style.display = "block";
+
+      gameclear.style.display = 'block';
       document.querySelector('#result').innerHTML = 'GAME CLEAR';
 
-      if (gameState === 'Gaming1') {
-      setTimeout(() => {
-        gotoLevelUpForGame1();
-      }, 3000);
-      }
-      else if (gameState === 'Gaming2') {
+      if (gameState === 'Gaming1' && isGame1Cleared == false) {
+        setTimeout(() => {
+          gotoLevelUpForGame1();
+        }, 3000);
+      } else if (isGame1Cleared === true) {
         setTimeout(() => {
           gotoLevelUpForGame2();
         }, 3000);
-      }
-      else if (gameState === 'Gaming3') {
+      } else if (gameState === 'Gaming3') {
         setTimeout(() => {
           gotoLevelUpForGame3();
         }, 3000);
       }
-    }
-    else if (gameMode === "GameOver")
-    {
+    } else if (gameMode === 'GameOver') {
       gameMode = '';
-      
-      gameover.style.display = "block";
+
+      gameover.style.display = 'block';
       document.querySelector('#result').innerHTML = 'GAME OVER';
     }
   }
@@ -105,35 +100,31 @@ function gotoLevelUpForGame3() {
 }
 
 function gameOverPlayAgain() {
-  overPage.style.display = "none";
+  overPage.style.display = 'none';
   // 게임 다시 시작
   if (gameState == 'Gaming1') {
     endGame1();
     setGame1();
-  }
-  else if (gameState == 'Gaming2') {
+  } else if (gameState == 'Gaming2') {
     endGame2();
     setGame2();
-  }
-  else if (gameState == 'Gaming3') {
+  } else if (gameState == 'Gaming3') {
     endGame3();
     setGame3();
   }
 }
 
 function gameOverSetGameHide() {
-  overPage.style.display = "none";
+  overPage.style.display = 'none';
   if (gameState == 'Gaming1') {
     endGame1();
-  }
-  else if (gameState == 'Gaming2') {
+  } else if (gameState == 'Gaming2') {
     endGame2();
-  }
-  else if (gameState == 'Gaming3') {
+  } else if (gameState == 'Gaming3') {
     endGame3();
   }
 
   //no 버튼 클릭 시 게임 hide해주고, 난이도 선택 화면으로 돌아가기
   moveToStagePage();
-  gameState = "none";
+  gameState = 'none';
 }
