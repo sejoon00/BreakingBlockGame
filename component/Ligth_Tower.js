@@ -20,12 +20,12 @@ class LightTower {
     blocks.forEach((block) => {
       if (
         block.visible &&
-        block.x >= rangeX - 50 &&
-        block.x <= rangeX + 50 &&
-        block.y >= rangeY - 50 &&
-        block.y <= rangeY + 50
+        block.x >= rangeX - 80 &&
+        block.x <= rangeX + 80 &&
+        block.y >= rangeY - 80 &&
+        block.y <= rangeY + 80
       ) {
-        block.visible = false;
+        block.requiredHits = 0;
       }
     });
     this.isDestroying = true; // 파괴 범위 표시 시작
@@ -41,10 +41,10 @@ class LightTower {
       ctx.globalAlpha = 0.5; // 반투명도 설정
       ctx.fillStyle = "white";
       ctx.fillRect(
-        this.x - 50,
-        this.y - 50,
-        this.width + 100,
-        this.height + 100
+        this.x - 60,
+        this.y - 60,
+        this.width + 120,
+        this.height + 120
       ); // 범위 그리기
       ctx.restore();
     }
