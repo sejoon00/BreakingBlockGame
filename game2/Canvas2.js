@@ -23,6 +23,8 @@ class Canvas2 extends Canvas {
 
   initGameElements() {
     super.initGameElements(); // 부모 클래스의 initGameElements 호출
+    this.increaseLife();
+    this.increaseLife();
     let startY = 80;
     let startX = 900; // 블록의 시작 x 위치
     this.vanellope = new Block(
@@ -34,7 +36,7 @@ class Canvas2 extends Canvas {
       '../game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
-    this.vanellope.blockSpeed = this.blockSpeed;
+    this.vanellope.blockSpeed = 0.7;
     this.vanellope.originalBlockSpeed = this.blockSpeed;
 
     for (let i = 0; i < 6; i++) {
