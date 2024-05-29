@@ -111,7 +111,6 @@ function goToRule1() {
   document.querySelector("#rule1").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   document.querySelector("#settings-btn").style.display = "none";
-  startPageAudio.pause(); // 노래 중단
 
   selectTargetGame = "game1";
 }
@@ -119,7 +118,6 @@ function goToRule2() {
   document.querySelector("#rule2").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   document.querySelector("#settings-btn").style.display = "none";
-  startPageAudio.pause(); // 노래 중단
 
   selectTargetGame = "game2";
 }
@@ -127,7 +125,6 @@ function goToRule3() {
   document.querySelector("#rule3").style.display = "block";
   document.querySelector("#selectGame").style.display = "none";
   document.querySelector("#settings-btn").style.display = "none";
-  startPageAudio.pause(); // 노래 중단
 
   selectTargetGame = "game3";
 }

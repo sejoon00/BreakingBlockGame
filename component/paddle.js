@@ -41,15 +41,15 @@ class Paddle {
       };
     }
 
-    // if (selectTargetGame == 'game3') {
-    //   ctx.fillStyle = 'green';
-    //   ctx.fillRect(
-    //     this.x + this.width / 2 - this.hitPointSize / 2,
-    //     this.y + this.height / 2 - this.hitPointSize / 2,
-    //     this.hitPointSize,
-    //     this.hitPointSize
-    //   );
-    // }
+    if (selectTargetGame == "game3") {
+      ctx.fillStyle = "green";
+      ctx.fillRect(
+        this.x + this.width / 2 - this.hitPointSize / 2,
+        this.y + this.height / 2 - this.hitPointSize / 2,
+        this.hitPointSize,
+        this.hitPointSize
+      );
+    }
   }
   // 이벤트 리스너 등록 (마우스 이동)
   bindMouseMove() {
