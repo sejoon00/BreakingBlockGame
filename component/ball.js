@@ -55,6 +55,7 @@ class Ball {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
         console.log("땅에 닿았음");
+        console.log("공이 바닥에 닿음");
         decreaseLife();
       }
       return;
@@ -63,7 +64,7 @@ class Ball {
     // 이동 전 충돌 검사
     blocks.forEach((block) => {
       if (block.visible && !this.hitCooldowns.has(block)) {
-        if (block.isHit(this, items, increaseScore)) {
+        if (block.isHit(this, items, increaseScore, blocks)) {
           this.setHitCooldown(block); // 충돌 쿨다운 설정
         }
       }
