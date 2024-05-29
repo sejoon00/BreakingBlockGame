@@ -5,7 +5,7 @@
   top: 0;
 	left: 0;
   text-align: center;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   padding: 30px 20px;
   z-index: 1;
@@ -23,17 +23,15 @@
 
 #score {
   font-size: 30px;
-  margin-top: 110px; /* 글씨 위치를 더 아래로 */
+  margin-top: 70px; /* 글씨 위치를 더 아래로 */
   margin-bottom: 20px;
-  font-weight: bold;
 }
 
 #gameclear {
   display: none;
   color: #0f0;
   font-size: 24px;
-  font-weight: bold;
-  margin-top: 70px;
+  margin-top: 50px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
 }
 
@@ -42,9 +40,8 @@
   color: #f00;
   font-size: 32px;
   margin-top: 20px;
-  margin-top: 70px; /* 글씨 위치를 더 아래로 */
+  margin-top: 50px; /* 글씨 위치를 더 아래로 */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
-  font-weight: bold;
 }
 
 button {
@@ -57,7 +54,6 @@ button {
   border-radius: 5px; /* 버튼 테두리 둥글게 */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
-  margin-top: 30px;
 }
 
 button:hover {

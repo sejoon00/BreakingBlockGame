@@ -51,7 +51,7 @@ function animateScore(finalScore) {
 }
 
 function toggleOverPage() {
-<<<<<<< HEAD
+
   let finalScore = canvas.score;
   if (gameMode.startsWith("Game")) {
     if (document.querySelector("#result").innerHTML != "") {
@@ -66,36 +66,32 @@ function toggleOverPage() {
 
     change_position(overPage);
     overPage.style.display = "block";
-=======
-  let str = '당신의 score는 ' + canvas.score + '점입니다.';
-  if (gameMode.startsWith('Game')) {
-    if (document.querySelector('#result').innerHTML != '') {
-      document.querySelector('#result').innerHTML = '';
-    }
-    if ((gameclear.style.display = 'block')) {
-      gameclear.style.display = 'none';
-    }
-    if ((gameover.style.display = 'block')) {
-      gameover.style.display = 'none';
-    }
+// =======
+//   let str = '당신의 score는 ' + canvas.score + '점입니다.';
+//   if (gameMode.startsWith('Game')) {
+//     if (document.querySelector('#result').innerHTML != '') {
+//       document.querySelector('#result').innerHTML = '';
+//     }
+//     if ((gameclear.style.display = 'block')) {
+//       gameclear.style.display = 'none';
+//     }
+//     if ((gameover.style.display = 'block')) {
+//       gameover.style.display = 'none';
+//     }
 
-    change_position(overPage);
-    document.querySelector('#score').innerHTML = str;
-    overPage.style.display = 'block';
->>>>>>> origin/master
+//     change_position(overPage);
+//     document.querySelector('#score').innerHTML = str;
+//     overPage.style.display = 'block';
+// >>>>>>> origin/master
 
     if (gameMode === 'GameClear') {
       overPage.style.backgroundImage = "url('../source/clear.webp')"; // 게임 클리어 배경 설정
       gameclear.style.display = 'block';
       document.querySelector('#result').innerHTML = 'GAME CLEAR';
-
-<<<<<<< HEAD
       animateScore(finalScore); // 점수 애니메이션 시작
 
       if (gameState === 'Gaming1' && isGame1Cleared === true) {
-=======
-      if (gameState === 'Gaming1') {
->>>>>>> origin/master
+
         setTimeout(() => {
           gotoLevelUpForGame1();
           isGameChanging = true;
