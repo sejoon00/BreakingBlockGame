@@ -2,8 +2,14 @@ class Ball {
   constructor(x, y, dx, dy, radius, color) {
     this.x = x;
     this.y = y;
-    this.dx = dx;
-    this.dy = dy;
+    if (selectTargetGame == "game3") {
+      this.dx = dx;
+      this.dy = dy;
+    } else {
+      this.dx = 1;
+      this.dy = 1;
+    }
+
     this.radius = 10;
     this.color = color;
     this.isRemoved = false; // 공 제거 여부를 표시하는 속성 추가
