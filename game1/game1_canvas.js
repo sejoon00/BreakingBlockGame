@@ -52,14 +52,6 @@ class Game1_canvas extends Canvas {
     }
   }
 
-  clearGame() {
-    gameMode = "GameClear";
-    this.destroy();
-    toggleOverPage();
-    isGame1Cleared = true;
-    game2Img.src = "./stagePage/SugarRush2.png";
-  }
-
   endGame() {
     let game2Img = document.querySelector("#game2Img");
     console.log(

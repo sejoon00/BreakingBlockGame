@@ -132,13 +132,8 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-<<<<<<< HEAD
-    if (this.score > 100) {
-      console.log("GameClear");
-=======
     if (this.boss.hp == 0) {
       console.log("GameClear boss hp");
->>>>>>> origin
       gameMode = "GameClear";
       this.destroy();
       toggleOverPage();
