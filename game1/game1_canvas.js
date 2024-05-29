@@ -47,7 +47,14 @@ class Game1_canvas extends Canvas {
 
   endGame() {
     let game2Img = document.querySelector("#game2Img");
-    if (this.brokenBlocks === this.blocks.length || this.score > 500) {
+    console.log(
+      "block length: " +
+        this.blocks.length +
+        ", brokenBlocks : " +
+        this.brokenBlocks
+    );
+    if (this.brokenBlocks === 18) {
+      console.log("block clear");
       console.log("GameClear");
       gameMode = "GameClear";
       this.destroy();
