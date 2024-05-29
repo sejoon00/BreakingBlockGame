@@ -119,7 +119,12 @@ class Paddle {
       const normalizedCollisionPointX = collisionPointX / (this.width / 2);
       const maxBounceAngle = Math.PI / 3; // 최대 반사 각을 지정합니다. (60도)
       const bounceAngle = normalizedCollisionPointX * maxBounceAngle;
-      ball.dx = Math.sin(bounceAngle); // x 방향으로의 속도를 각도에 따라 조정합니다.
+      // x 방향 속도의 부호를 충돌 위치에 따라 조정합니다.
+      if (collisionPointX < 0) {
+        ball.dx = -Math.abs(Math.sin(bounceAngle) * ball.dx); // 왼쪽 절반을 맞으면 dx를 -로
+      } else {
+        ball.dx = Math.abs(Math.sin(bounceAngle) * ball.dx); // 오른쪽 절반을 맞으면 dx를 +로
+      }
       // ball.dy = -Math.cos(bounceAngle); // y 방향으로의 속도를 각도에 따라 조정합니다.
       ball.dy = -ball.dy;
       return true; // 충돌이 발생했음을 반환합니다.

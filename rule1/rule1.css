@@ -1,35 +1,53 @@
-#rule1, #rule2, #rule3 {
-    display: none;
-    margin: 0 auto;
-    color: yellow;
+#rule1,
+#rule2,
+#rule3 {
+  display: none;
+  margin: 0 auto;
+  color: yellow;
 }
 
-#instruction1, #instruction2, #instruction3 {
-    margin-top: 50px;
-    width: 1000px;
-    height: 600px;
-    border: 1px double yellow;
-    align-items: center;
+#instruction1,
+#instruction2,
+#instruction3 {
+  margin-top: 50px;
+  width: 1100px;
+  height: 600px;
+  border: 1px double yellow;
+  background-color: rgb(45, 45, 45);
+
+  align-items: center;
 }
 
-#instr-title1, #instr-title2, #instr-title3 {
-    text-align: center;
-    color: blue;
-    font-weight: bold;
-    font-size: 50px;
-    margin: 30px 0;
-    font-family: "Pixelify Sans", sans-serif;
+#instr-title1,
+#instr-title2,
+#instr-title3 {
+  text-align: center;
+  color: blue;
+  font-weight: bold;
+  font-size: 50px;
+  margin: 30px 0;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .close-btn {
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    top: 20px;
-    position: relative;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  top: 20px;
+  position: relative;
 }
 
-#instr1, #instr2, #instr3 {
-    margin-left: 30px;
+#instr1,
+#instr2,
+#instr3 {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#instr1 > img {
+  margin-top: 50px;
 }

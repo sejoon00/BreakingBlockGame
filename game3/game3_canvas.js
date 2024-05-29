@@ -75,7 +75,7 @@ class Game3_canvas extends Canvas {
           this.requiredHits // 생성 시 현재 requiredHits 값 사용
         )
       );
-    }, 1500);
+    }, 1000);
 
     // 15초마다 새로 생성되는 블록의 히트 카운트 증가 및 이미지 변경
     setInterval(() => {
@@ -118,12 +118,14 @@ class Game3_canvas extends Canvas {
 
   endGame() {
     if (this.boss.hp == 0) {
-      console.log("GameClear");
+      console.log("GameClear boss hp");
       gameMode = "GameClear";
       this.destroy();
       toggleOverPage();
       game3Img.src = "../stagePage/HeroDuty2.png";
     } else if (this.lifes.length === 0) {
+      console.log("GameClear paddle hp");
+
       gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
