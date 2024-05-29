@@ -10,9 +10,8 @@ document.querySelector("main").insertAdjacentHTML(
         <div id="score"></div>
         <div id="gameclear">Go to Next Stage!</div>
         <div id="gameover">
-          <div>PLAY AGAIN</div>
-          <button onclick=gameOverPlayAgain()>YES</button>
-          <button onclick=gameOverSetGameHide()>NO</button>
+          <button onclick=gameOverPlayAgain()>PLAY AGAIN</button>
+          <button onclick=gameOverSetGameHide()>STAGE</button>
         </div>
       </div>
     `
@@ -32,9 +31,6 @@ function animateScore(finalScore) {
   const scoreElement = document.querySelector("#score");
   let currentScore = 0;
   const increment = Math.ceil(finalScore / 100); // 점수를 100번에 나누어 증가
-
-  scoreElement.style.color = "#FFA500";
-
   function updateScore() {
     if (currentScore < finalScore) {
       currentScore += increment;
@@ -64,7 +60,6 @@ function toggleOverPage() {
 
     change_position(overPage);
     overPage.style.display = "block";
-    // =======
     //   let str = '당신의 score는 ' + canvas.score + '점입니다.';
     //   if (gameMode.startsWith('Game')) {
     //     if (document.querySelector('#result').innerHTML != '') {
@@ -80,7 +75,6 @@ function toggleOverPage() {
     //     change_position(overPage);
     //     document.querySelector('#score').innerHTML = str;
     //     overPage.style.display = 'block';
-    // >>>>>>> origin/master
 
     if (gameMode === "GameClear") {
       overPage.style.backgroundImage = "url('../source/clear.webp')"; // 게임 클리어 배경 설정
