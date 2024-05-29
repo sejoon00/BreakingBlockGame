@@ -2,8 +2,8 @@
 /* 해당 페이지의 HTML 코드를 작성하고 삽압하는 구간입니다. 주석이 잘 안보이니 자세히 확인부탁드립니다.*/
 
 //민석
-document.querySelector("main").insertAdjacentHTML(
-  "afterbegin",
+document.querySelector('main').insertAdjacentHTML(
+  'afterbegin',
   `
     <div id="escPage">
         <button onclick=PopDownEscPage()>Continue</button>
@@ -17,8 +17,8 @@ document.querySelector("main").insertAdjacentHTML(
 
 //민석
 
-document.addEventListener("keydown", (event) => {
-  if (event.code === "Escape") {
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Escape') {
     toggleEscPage();
 
     event.preventDefault(); // Escape의 기본 동작을 방지
@@ -32,15 +32,15 @@ document.addEventListener("keydown", (event) => {
 
 //세준
 function toggleEscPage() {
-  if (gameState.startsWith("Gaming")) {
+  if (gameState.startsWith('Gaming') && !isGameChanging) {
     // 게임 중일때
-    const escPage = document.querySelector("#escPage");
+    const escPage = document.querySelector('#escPage');
 
-    if (escPage.style.display == "block") {
-      escPage.style.display = "none";
+    if (escPage.style.display == 'block') {
+      escPage.style.display = 'none';
       canvas.togglePause(); // 게임 재개
     } else {
-      escPage.style.display = "block";
+      escPage.style.display = 'block';
       canvas.togglePause(); // 게임 일시 중지
     }
   }
@@ -58,9 +58,9 @@ function toggleEscPage() {
 //민석
 function PopDownEscPage() {
   //계속하기 버튼 클릭시 Canvas활성화, esc창 닫기
-  if (document.querySelector("#escPage").style.display == "block") {
+  if (document.querySelector('#escPage').style.display == 'block') {
     //기존에 정지된 Canvas다시 활성화 시켜주는 코드 구현
-    document.querySelector("#escPage").style.display = "none";
+    document.querySelector('#escPage').style.display = 'none';
     canvas.togglePause(); // 게임 재개
   }
 }
@@ -79,10 +79,10 @@ function setGameHide() {
   startPageAudio.loop = true;
   startPageAudio.play();
 
-  document.querySelector("#escPage").style.display = "none";
+  document.querySelector('#escPage').style.display = 'none';
   // 특정 요소를 선택하고 제거합니다.
-  let game = document.querySelector("#game");
-  let game_canvas = document.querySelector("#game_canvas");
+  let game = document.querySelector('#game');
+  let game_canvas = document.querySelector('#game_canvas');
   console.log(game_canvas);
 
   // canvas 객체 정리
@@ -92,9 +92,9 @@ function setGameHide() {
   }
 
   if (game) {
-    game.style.display = "none";
+    game.style.display = 'none';
     game.remove();
     // game_canvas.display = "none";
   }
-  gameState = "none";
+  gameState = 'none';
 }
