@@ -11,23 +11,16 @@ class LightTower {
   }
 
   draw(ctx) {
-    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    // ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   checkAndDestroyBlocks(blocks) {
     const rangeX = this.x + this.width / 2;
     const rangeY = this.y + this.height / 2;
-    blocks.forEach((block) => {
-      if (
-        block.visible &&
-        block.x >= rangeX - 50 &&
-        block.x <= rangeX + 50 &&
-        block.y >= rangeY - 50 &&
-        block.y <= rangeY + 50
-      ) {
-        block.visible = false;
-      }
-    });
+    console.log("빛의 아이템 먹음");
+    for (let i = 0; i < 10; i++) {
+      blocks.shift();
+    }
     this.isDestroying = true; // 파괴 범위 표시 시작
     clearTimeout(this.destroyingTimer);
     this.destroyingTimer = setTimeout(() => {
@@ -41,10 +34,10 @@ class LightTower {
       ctx.globalAlpha = 0.5; // 반투명도 설정
       ctx.fillStyle = "white";
       ctx.fillRect(
-        this.x - 50,
-        this.y - 50,
-        this.width + 100,
-        this.height + 100
+        this.x - 6000,
+        this.y - 6000,
+        this.width + 10000,
+        this.height + 10000
       ); // 범위 그리기
       ctx.restore();
     }

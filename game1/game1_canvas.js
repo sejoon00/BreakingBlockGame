@@ -1,7 +1,7 @@
 class Game1_canvas extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = 'game1_canvas'; // canvas id 변경
+    this.canvas.id = "game1_canvas"; // canvas id 변경
   }
 
   // 기존 initGameElements 메서드를 재정의하여 추가 블록을 생성
@@ -29,7 +29,7 @@ class Game1_canvas extends Canvas {
             blockWidth,
             blockHeight,
             this.increaseBrokenBlocks.bind(this),
-            '../source/window.png'
+            "../source/window.png"
           )
         );
         // x좌표 조정
@@ -43,23 +43,45 @@ class Game1_canvas extends Canvas {
       // if (row === 1) startY += 100; // 3번 행
       if (row === 2) startY -= 16; // 4번 행
     }
+    window.addEventListener("keydown", this.handleKeyPress.bind(this));
+  }
+
+  handleKeyPress(event) {
+    if (event.key === "p" || event.key === "P") {
+      this.clearGame(); // 'P' 키를 누르면 게임 클리어
+    }
+  }
+
+  clearGame() {
+    gameMode = "GameClear";
+    this.destroy();
+    toggleOverPage();
+    isGame1Cleared = true;
+    game2Img.src = "./stagePage/SugarRush2.png";
   }
 
   endGame() {
-    let game2Img = document.querySelector('#game2Img');
-    if (this.brokenBlocks === this.blocks.length || this.score > 500) {
-      console.log('GameClear');
-      gameMode = 'GameClear';
+    let game2Img = document.querySelector("#game2Img");
+    console.log(
+      "block length: " +
+        this.blocks.length +
+        ", brokenBlocks : " +
+        this.brokenBlocks
+    );
+    if (this.brokenBlocks === 18) {
+      console.log("block clear");
+      console.log("GameClear");
+      gameMode = "GameClear";
       this.destroy();
       toggleOverPage();
       isGame1Cleared = true;
-      game2Img.src = './stagePage/SugarRush2.png';
+      game2Img.src = "./stagePage/SugarRush2.png";
     } else if (this.balls.length === 0 || this.lifes.length === 0) {
-      console.log('GameOver');
-      gameMode = 'GameOver';
+      console.log("GameOver");
+      gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
-      game2Img.src = './stagePage/SugarRush.png';
+      game2Img.src = "./stagePage/SugarRush.png";
     }
   }
 
@@ -109,9 +131,7 @@ class Game1_canvas extends Canvas {
       });
 
       this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
+        this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
       });
 
       this.endGame();

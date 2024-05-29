@@ -32,16 +32,14 @@ document.addEventListener("keydown", (event) => {
 
 //세준
 function toggleEscPage() {
-  if (gameState.startsWith("Gaming")) { // 게임 중일때
+  if (gameState.startsWith("Gaming")) {
+    // 게임 중일때
     const escPage = document.querySelector("#escPage");
-    
-    if (escPage.style.display == "block")
-    {
+
+    if (escPage.style.display == "block") {
       escPage.style.display = "none";
       canvas.togglePause(); // 게임 재개
-    }
-    else
-    {
+    } else {
       escPage.style.display = "block";
       canvas.togglePause(); // 게임 일시 중지
     }
@@ -74,7 +72,12 @@ function setGameHide() {
   Game1Audio.currentTime = 0;
   Game2Audio.pause();
   Game2Audio.currentTime = 0;
+  Game3Audio.pause();
+  Game3Audio.currentTime = 0;
   moveToStagePage();
+
+  startPageAudio.loop = true;
+  startPageAudio.play();
 
   document.querySelector("#escPage").style.display = "none";
   // 특정 요소를 선택하고 제거합니다.

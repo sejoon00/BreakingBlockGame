@@ -44,6 +44,7 @@ function toggleOverPage() {
     overPage.style.display = 'block';
 
     if (gameMode === 'GameClear') {
+<<<<<<< HEAD
       gameMode = 'Gaming';
 
       gameclear.style.display = 'block';
@@ -54,12 +55,25 @@ function toggleOverPage() {
           gotoLevelUpForGame1();
         }, 3000);
       } else if (isGame1Cleared === true) {
+=======
+      gameclear.style.display = 'block';
+      document.querySelector('#result').innerHTML = 'GAME CLEAR';
+
+      if (gameState === 'Gaming1') {
+        setTimeout(() => {
+          gotoLevelUpForGame1();
+          isGameChanging = true;
+        }, 3000);
+      } else if (gameState === 'Gaming2') {
+>>>>>>> origin
         setTimeout(() => {
           gotoLevelUpForGame2();
+          isGameChanging = true;
         }, 3000);
       } else if (gameState === 'Gaming3') {
         setTimeout(() => {
           gotoLevelUpForGame3();
+          isGameChanging = true;
         }, 3000);
       }
     } else if (gameMode === 'GameOver') {
@@ -84,18 +98,25 @@ function gotoLevelUpForGame1() {
   endGame1(); // 게임 종료
   Game1Audio.pause(); // 게임 bgm 종료
   document.querySelector('#levelUp1').style.display = 'block'; // levelup1 페이지로 이동
+<<<<<<< HEAD
   moveRalph(); // 애니메이션 함수 실행
+=======
+  moveKingCandyVanellope(); // 애니메이션 함수 실행
+>>>>>>> origin
 }
 function gotoLevelUpForGame2() {
   overPage.style.display = 'none'; // 팝업창 종료
   endGame2(); // 게임 종료
   Game2Audio.pause(); // 게임 bgm 종료
   document.querySelector('#levelUp2').style.display = 'block'; // levelup1 페이지로 이동
+
+  moveKingCandy();
 }
 function gotoLevelUpForGame3() {
   overPage.style.display = 'none'; // 팝업창 종료
   endGame3(); // 게임 종료
-  //Game3Audio.pause(); // 게임 bgm 종료
+  Game3Audio.pause(); // 게임 bgm 종료
+
   document.querySelector('#levelUp3').style.display = 'block'; // levelup1 페이지로 이동
 }
 

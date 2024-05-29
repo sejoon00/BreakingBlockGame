@@ -4,17 +4,32 @@ class Ball {
     this.y = y;
     this.dx = dx;
     this.dy = dy;
-    this.radius = radius;
+    this.radius = 10;
     this.color = color;
     this.isRemoved = false; // 공 제거 여부를 표시하는 속성 추가
     this.hitCooldowns = new Map(); // 충돌 쿨다운 맵 추가
+
+    this.image = new Image();
+    console.log(ballImageSrc);
+    if (ballImageSrc == "ball1") this.image.src = "../source/ball1.png";
+    else if (ballImageSrc == "ball2") this.image.src = "../source/ball2.png";
   }
 
   draw(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
+    if (this.image.complete) {
+      ctx.drawImage(
+        this.image,
+        this.x - this.radius,
+        this.y - this.radius,
+        this.radius * 2,
+        this.radius * 2
+      );
+    } else {
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
     ctx.closePath();
   }
 
@@ -32,7 +47,7 @@ class Ball {
     }
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
     if (
-      this.y + this.dy > canvas.height - 140 - this.radius &&
+      this.y + this.dy > canvas.height - 130 - this.radius &&
       selectTargetGame != "game3"
     ) {
       // 공을 제거할 플래그 설정
@@ -40,6 +55,7 @@ class Ball {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
         console.log("땅에 닿았음");
+        console.log("공이 바닥에 닿음");
         decreaseLife();
       }
       return;
@@ -48,7 +64,7 @@ class Ball {
     // 이동 전 충돌 검사
     blocks.forEach((block) => {
       if (block.visible && !this.hitCooldowns.has(block)) {
-        if (block.isHit(this, items, increaseScore)) {
+        if (block.isHit(this, items, increaseScore, blocks)) {
           this.setHitCooldown(block); // 충돌 쿨다운 설정
         }
       }

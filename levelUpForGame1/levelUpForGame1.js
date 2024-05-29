@@ -9,6 +9,8 @@ document.querySelector('main').insertAdjacentHTML(
         <div id="container">
             <div id="speechBubble">I'm Gonna Wreck It!</div>
             <img src="../source/ralph_paddle.png" id="ralph1">
+            <img src="../source/kingCandyVaenellope.png" id="kingCandyVaenellope">
+            <img src="../source/슈가러쉬.png" id="sugarRushImg">
         </div>
         <div class="text_box">
             <span class="text"></span>
@@ -25,10 +27,11 @@ let position = 0;
 let ralph, speechBubble, maxPosition;
 
 document.addEventListener('keydown', (event) => {
-  if (isGame1Cleared == true && event.code === 'Enter') {
+  if (gameState == 'Gaming1' && event.code === 'Enter' && isGameChanging) {
     levelUp1.style.display = 'none';
-    setGame2();
+    moveToStagePage();
     event.preventDefault(); // Escape의 기본 동작을 방지
+    isGameChanging = false;
   }
 });
 
@@ -36,8 +39,55 @@ setInterval(typing, 200);
 
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
+function moveKingCandyVanellope() {
+  const kingCandyVanellope = document.getElementById('kingCandyVaenellope');
+  let position = 0; // 시작 위치를 왼쪽 끝으로 설정
+  const containerWidth = document.getElementById('levelUp1').clientWidth;
+  const stopPosition = containerWidth - kingCandyVanellope.clientWidth;
+
+  function animate() {
+    position += 3; // 오른쪽으로 이동
+    kingCandyVanellope.style.left = position + 'px';
+
+    if (position < stopPosition) {
+      requestAnimationFrame(animate);
+    } else {
+      moveUp();
+    }
+  }
+
+  function moveUp() {
+    let upPosition = 0;
+    const maxUpPosition = 300;
+
+    function animateUp() {
+      upPosition += 3; // 위로 이동
+      kingCandyVanellope.style.transform = `translateY(${-upPosition}px)`;
+
+      if (upPosition < maxUpPosition) {
+        requestAnimationFrame(animateUp);
+      } else {
+        fadeOut(); // 위로 이동 후 서서히 사라지게
+      }
+    }
+
+    function fadeOut() {
+      kingCandyVanellope.style.transition = 'opacity 2s';
+      kingCandyVanellope.style.opacity = '0';
+      setTimeout(() => {
+        moveRalph(); // 킹캔디 조카가 사라지면 랄프 이동 시작
+      }, 2000); // 2초 후 랄프 이동 시작
+    }
+
+    animateUp();
+  }
+
+  animate();
+}
 function moveRalph() {
   const ralph = document.getElementById('ralph1');
+  ralph.style.display = 'block ';
+
   const speechBubble = document.getElementById('speechBubble');
   let position = 0;
   const stopPosition = 399; // 중간에 멈추는 위치
@@ -47,7 +97,6 @@ function moveRalph() {
   const bgImg1 = document.getElementById('bgImg1');
 
   function animate() {
-    console.log(maxPosition);
     if (position === stopPosition) {
       // 멈추고 말풍선 표시
       speechBubble.style.display = 'block';
@@ -69,28 +118,27 @@ function moveRalph() {
       }
       if (position < maxPosition) {
         requestAnimationFrame(animate);
+      } else {
+        fadeOutRalph(); // 랄프가 오른쪽 끝에 도달하면 서서히 사라지게
+        setTimeout(() => {
+          expandSugarRushImg(); // 랄프가 사라지면 슈가러쉬 이미지 확장 시작
+        }, 2000); // 2초 후 슈가러쉬 이미지 확장 시작
       }
     }
   }
+
+  function fadeOutRalph() {
+    ralph.style.transition = 'opacity 2s';
+    ralph.style.opacity = '0';
+  }
+
   animate();
 }
 
-let content1 = '게임 안에 갇혀버린 바넬로피. 바넬로피를 구하기 위해 ';
-
-function typing(content) {
-  const text = document.querySelector('.text');
-  text.innerHTML = ''; // Clear the text content before starting new typing animation
-  let i = 0;
-  function type() {
-    if (i < content.length) {
-      let txt = content[i++];
-      text.innerHTML += txt === '\n' ? '<br/>' : txt;
-      setTimeout(type, 100); // Adjust typing speed by changing the timeout duration
-    }
-  }
-  type();
+function expandSugarRushImg() {
+  const sugarRushImg = document.getElementById('sugarRushImg');
+  sugarRushImg.style.transition = 'width 2s, height 2s';
+  sugarRushImg.style.transition = 'bottom 2s, height 2s';
+  sugarRushImg.style.width = '100%';
+  sugarRushImg.style.bottom = '200px';
 }
-
-// 첫번째에는 랄프 혼자 슈가러쉬로 이동
-// 두번째에는 킹캔디를 따라 히어로즈듀티로 이동
-// 세번째 엔딩 페이지에는

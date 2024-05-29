@@ -1,7 +1,7 @@
 class Canvas2 extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = 'game2_canvas';
+    this.canvas.id = "game2_canvas";
     this.vanellope;
     this.villains = []; // 빌런 리스트 초기화
     this.blockSpeed = 0.5; // 블록의 이동 속도
@@ -18,6 +18,7 @@ class Canvas2 extends Canvas {
       moveState: 0,
       currentDistance: 0,
     }; // 바넬로피의 상태 저장
+    window.addEventListener("keydown", this.handleKeyPress.bind(this));
   }
 
   initGameElements() {
@@ -30,7 +31,7 @@ class Canvas2 extends Canvas {
       100,
       80,
       this.increaseBrokenBlocks.bind(this),
-      '../game2/vanellope.png'
+      "../game2/vanellope.png"
     );
     this.vanellope.isVanellope = true;
     this.vanellope.blockSpeed = this.blockSpeed;
@@ -43,7 +44,7 @@ class Canvas2 extends Canvas {
         80,
         60,
         this.increaseBrokenBlocks.bind(this),
-        '../game2/villain' + i + '.png',
+        "../game2/villain" + i + ".png",
         false // 일반 블록임을 나타내는 플래그
       );
       villainBlock.blockSpeed = this.blockSpeed;
@@ -55,7 +56,7 @@ class Canvas2 extends Canvas {
       });
     }
 
-    const bananaImageSrc = '../source/banana.png';
+    const bananaImageSrc = "../source/banana.png";
     const bananaSize = 50;
     const yellowAreaTop = 100;
     const yellowAreaBottom = this.canvas.height - 150;
@@ -79,7 +80,7 @@ class Canvas2 extends Canvas {
           150,
           150,
           this.increaseBrokenBlocks.bind(this),
-          '../game2/boss.png'
+          "../game2/boss.png"
         );
         this.boss.blockSpeed = this.blockSpeed;
         this.boss.originalBlockSpeed = this.blockSpeed;
@@ -98,19 +99,19 @@ class Canvas2 extends Canvas {
   }
 
   increaseVanellopeSpeed() {
-    this.setBlockSpeed(this.vanellope, 10.7, 2000);
+    this.setBlockSpeed(this.vanellope, 1.5, 2000);
   }
 
   decreaseVanellopeSpeed() {
-    this.setBlockSpeed(this.vanellope, 0.4, 2000);
+    this.setBlockSpeed(this.vanellope, 0.1, 2000);
   }
 
   increaseMonsterSpeed() {
-    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.7, 2000));
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 1.5, 2000));
   }
 
   decreaseMonsterSpeed() {
-    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.4, 2000));
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.1, 2000));
   }
 
   freezeBlock(block) {
@@ -160,27 +161,42 @@ class Canvas2 extends Canvas {
     }, 1000); // 1초 간격으로 깜빡임
   }
 
+  handleKeyPress(event) {
+    if (event.key === "p" || event.key === "P") {
+      this.clearGame(); // 'P' 키를 누르면 게임 클리어
+    }
+  }
+
+  clearGame() {
+    gameMode = "GameClear";
+
+    this.destroy();
+    isGame2Cleared = true;
+    toggleOverPage();
+    game3Img.src = "../stagePage/HeroDuty2.png";
+  }
+
   // 바넬로피가 먼저 도착
   endGame() {
-    let game3Img = document.querySelector('#game3Img');
-    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
-      console.log('GameClear');
-      gameMode = 'GameClear';
+    let game3Img = document.querySelector("#game3Img");
+    if (this.vanellope.x + this.vanellope.width < 0) {
+      console.log("GameClear");
+      gameMode = "GameClear";
       this.destroy();
       isGame2Cleared = true;
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty2.png';
+      game3Img.src = "../stagePage/HeroDuty2.png";
     } else if (
       this.villains.some((villain) => villain.x + villain.width < 0) ||
       (this.boss && this.boss.x + this.boss.width < 0) ||
       this.balls.length === 0 ||
       this.lifes.length === 0
     ) {
-      console.log('GameOver');
-      gameMode = 'GameOver';
+      console.log("GameOver");
+      gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty.png';
+      game3Img.src = "../stagePage/HeroDuty.png";
     }
   }
 
@@ -194,14 +210,14 @@ class Canvas2 extends Canvas {
         // 하얀색 반투명 배경으로 깜빡이기
         this.context.save();
         this.context.globalAlpha = 0.1;
-        this.context.fillStyle = 'red';
+        this.context.fillStyle = "red";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.restore();
-        this.context.font = '48px Arial';
-        this.context.fillStyle = 'red';
-        this.context.textAlign = 'center';
+        this.context.font = "48px Arial";
+        this.context.fillStyle = "red";
+        this.context.textAlign = "center";
         this.context.fillText(
-          'Warning! 보스보다 먼저 도착하세요!',
+          "Warning! 보스보다 먼저 도착하세요!",
           this.canvas.width / 2,
           this.canvas.height / 2
         );
@@ -224,13 +240,27 @@ class Canvas2 extends Canvas {
       }
 
       this.balls.forEach((ball) => {
-        if (this.vanellope.isHit(ball, this.items)) {
+        if (
+          this.vanellope.isHit(
+            ball,
+            this.items,
+            this.increaseScore.bind(this),
+            this.blocks
+          )
+        ) {
           this.vanellope.visible = true;
           this.decreaseLife(); // 생명 하나 줄이기
         }
 
         this.villains.forEach((villain) => {
-          if (villain.isHit(ball, this.items, this.increaseScore.bind(this))) {
+          if (
+            villain.isHit(
+              ball,
+              this.items,
+              this.increaseScore.bind(this),
+              this.blocks
+            )
+          ) {
             // this.decreaseLife(); // 생명 하나 줄이기
           }
         });
@@ -238,7 +268,12 @@ class Canvas2 extends Canvas {
         // 보스와의 충돌 검사
         if (
           this.boss &&
-          this.boss.isHit(ball, this.items, this.increaseScore.bind(this))
+          this.boss.isHit(
+            ball,
+            this.items,
+            this.increaseScore.bind(this),
+            this.blocks
+          )
         ) {
           this.boss = null; // 보스 제거
         }
@@ -287,10 +322,9 @@ class Canvas2 extends Canvas {
       this.bananas = this.bananas.filter((banana) => {
         banana.draw();
         let collisionDetected = false;
-
+        // 바나나 공 경로 변경 없앰
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            ball.changeDirectionRandomly();
           }
         });
 
@@ -321,19 +355,19 @@ class Canvas2 extends Canvas {
 
   collectItem2(item, ball) {
     if (item.isPaddleGetItem(this.paddle)) {
-      console.log('아이템 수집: ' + item.type); // 디버그용 로그
+      console.log("아이템 수집: " + item.type); // 디버그용 로그
 
-      if (item.type === 'increasevanellopespeed') {
+      if (item.type === "increasevanellopespeed") {
         this.increaseVanellopeSpeed();
-      } else if (item.type === 'decreasevanellopespeed') {
+      } else if (item.type === "decreasevanellopespeed") {
         this.decreaseVanellopeSpeed();
-      } else if (item.type === 'increaseheart') {
+      } else if (item.type === "increaseheart") {
         this.increaseLife();
-      } else if (item.type === 'decreaseheart') {
+      } else if (item.type === "decreaseheart") {
         this.decreaseLife();
-      } else if (item.type === 'increasemonsterspeed') {
+      } else if (item.type === "increasemonsterspeed") {
         this.increaseMonsterSpeed();
-      } else if (item.type === 'decreasemonsterspeed') {
+      } else if (item.type === "decreasemonsterspeed") {
         this.decreaseMonsterSpeed();
       }
     }
