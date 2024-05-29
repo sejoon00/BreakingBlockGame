@@ -98,19 +98,19 @@ class Canvas2 extends Canvas {
   }
 
   increaseVanellopeSpeed() {
-    this.setBlockSpeed(this.vanellope, 10.7, 2000);
+    this.setBlockSpeed(this.vanellope, 1.5, 2000);
   }
 
   decreaseVanellopeSpeed() {
-    this.setBlockSpeed(this.vanellope, 0.4, 2000);
+    this.setBlockSpeed(this.vanellope, 0.1, 2000);
   }
 
   increaseMonsterSpeed() {
-    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.7, 2000));
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 1.5, 2000));
   }
 
   decreaseMonsterSpeed() {
-    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.4, 2000));
+    this.villains.forEach((villain) => this.setBlockSpeed(villain, 0.1, 2000));
   }
 
   freezeBlock(block) {
@@ -287,10 +287,10 @@ class Canvas2 extends Canvas {
       this.bananas = this.bananas.filter((banana) => {
         banana.draw();
         let collisionDetected = false;
-
+        // 바나나 공 경로 변경 없앰
         this.balls.forEach((ball) => {
           if (banana.isColliding(ball)) {
-            ball.changeDirectionRandomly();
+           
           }
         });
 
