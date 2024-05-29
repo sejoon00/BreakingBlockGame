@@ -131,10 +131,14 @@ class Block {
       if (this.isVanellope) {
         return true;
       }
+
       let random = 0.25;
 
       if (selectTargetGame === "game1") {
         if (Math.random() < 0.25) {
+
+          console.log("아이템 확인")
+
           const itemType = Math.random() < 0.5 ? "speed" : "increaseball";
           items.push(
             new Item(
@@ -145,6 +149,7 @@ class Block {
           );
         }
       } else if (selectTargetGame === "game2") {
+
         const itemTypes = [
           "increaseheart",
           "decreaseheart",
@@ -172,7 +177,6 @@ class Block {
           );
         }
       }
-
       return true;
     }
   }
