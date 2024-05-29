@@ -5,33 +5,74 @@
   top: 0;
 	left: 0;
   text-align: center;
+  background-size: cover;
+  background-position: center;
+  padding: 30px 20px;
+  z-index: 1;
+  border: 3px solid yellow;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 #result {
   font-size: 50px;
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
-  margin-top: 70px;
+  margin-top: 100px;
+  font-weight: bold;
 }
 
 #score {
   font-size: 30px;
+  margin-top: 110px; /* 글씨 위치를 더 아래로 */
   margin-bottom: 20px;
-}
-
-.popup {
-	position: fixed;
-	background-color: white;
-  opacity: 0.9;
-	padding: 30px 20px;
-	z-index: 1;
-	border: 3px solid yellow;
+  font-weight: bold;
 }
 
 #gameclear {
   display: none;
+  color: #0f0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 70px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
 }
 
 #gameover {
   display: none;
+  color: #f00;
+  font-size: 32px;
+  margin-top: 20px;
+  margin-top: 70px; /* 글씨 위치를 더 아래로 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
+  font-weight: bold;
+}
+
+button {
+  background-color: #333; /* 버튼 배경색 */
+  color: #fff; /* 버튼 글씨색 */
+  border: 2px solid #fff; /* 버튼 테두리 */
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: "Pixelify Sans", sans-serif;
+  border-radius: 5px; /* 버튼 테두리 둥글게 */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* 부드러운 애니메이션 */
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: #555; /* 호버 시 버튼 배경색 */
+  transform: scale(1.1); /* 호버 시 버튼 확대 */
+}
+
+button:active {
+  background-color: #777; /* 클릭 시 버튼 배경색 */
+  transform: scale(1.0); /* 클릭 시 버튼 축소 */
+}
+
+.popup {
+  position: fixed;
+  padding: 30px 20px;
+  z-index: 1;
+  border-radius: 10px;
 }
