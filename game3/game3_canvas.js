@@ -101,7 +101,7 @@ class Game3_canvas extends Canvas {
           this.endGame.bind(this)
         ); // 보스 위치 조정
       }, 2000);
-    }, 1000);
+    }, 15000);
   }
 
   showWarning() {
