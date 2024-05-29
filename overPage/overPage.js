@@ -71,7 +71,7 @@ function toggleOverPage() {
         setTimeout(() => {
           gotoLevelUpForGame1();
           isGameChanging = true;
-        }, 3000000);
+        }, 3000);
       } else if (gameState === "Gaming2") {
         setTimeout(() => {
           gotoLevelUpForGame2();
