@@ -17,22 +17,27 @@
   font-size: 50px;
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
-  margin-top: 100px;
   font-weight: bold;
+  color: #CB0B0B;
+  text-shadow: 2px 0px #fff, 0px 2px #fff, -2px 0px #fff, 0px -2px #fff;
 }
 
 #score {
   font-size: 30px;
-  margin-top: 70px; /* 글씨 위치를 더 아래로 */
+  margin-top: 160px; /* 글씨 위치를 더 아래로 */
   margin-bottom: 20px;
+  color: #ffa000;
+  font-weight: bold;
+  text-shadow: 2px 0px #fff, 0px 2px #fff, -2px 0px #fff, 0px -2px #fff;
 }
 
 #gameclear {
   display: none;
-  color: #0f0;
+  color: #CB0B0B;
+  text-shadow: 2px 0px #fff, 0px 2px #fff, -2px 0px #fff, 0px -2px #fff;
   font-size: 24px;
-  margin-top: 50px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 #gameover {
@@ -40,7 +45,7 @@
   color: #f00;
   font-size: 32px;
   margin-top: 20px;
-  margin-top: 50px; /* 글씨 위치를 더 아래로 */
+  margin-top: 130px; /* 글씨 위치를 더 아래로 */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
 }
 

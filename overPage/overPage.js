@@ -7,12 +7,11 @@ document.querySelector('main').insertAdjacentHTML(
   `
       <div id="overPage" class="popup">
         <div id="result"></div>
-        <div id="score"></div>
         <div id="gameclear">Go to Next Stage!</div>
+        <div id="score"></div>
         <div id="gameover">
-          <div>PLAY AGAIN</div>
-          <button onclick=gameOverPlayAgain()>YES</button>
-          <button onclick=gameOverSetGameHide()>NO</button>
+          <button onclick=gameOverPlayAgain()>PLAY AGAIN</button>
+          <button onclick=gameOverSetGameHide()>MENU</button>
         </div>
       </div>
     `
@@ -32,17 +31,14 @@ function animateScore(finalScore) {
   const scoreElement = document.querySelector('#score');
   let currentScore = 0;
   const increment = Math.ceil(finalScore / 100); // 점수를 100번에 나누어 증가
-
-  scoreElement.style.color = '#FFA500';
-
   function updateScore() {
     if (currentScore < finalScore) {
       currentScore += increment;
       if (currentScore > finalScore) currentScore = finalScore;
-      scoreElement.innerHTML = '당신의 score는 ' + currentScore + '점입니다.';
+      scoreElement.innerHTML = "당신의 score는 " + '<br>' + currentScore + "점입니다.";
       requestAnimationFrame(updateScore);
     } else {
-      scoreElement.innerHTML = '당신의 score는 ' + finalScore + '점입니다.'; // 최종 점수 설정
+      scoreElement.innerHTML = "당신의 score는 " + '<br>' + finalScore + "점입니다."; // 최종 점수 설정
     }
   }
 
@@ -63,26 +59,9 @@ function toggleOverPage() {
     }
 
     change_position(overPage);
-    overPage.style.display = 'block';
-    // =======
-    //   let str = '당신의 score는 ' + canvas.score + '점입니다.';
-    //   if (gameMode.startsWith('Game')) {
-    //     if (document.querySelector('#result').innerHTML != '') {
-    //       document.querySelector('#result').innerHTML = '';
-    //     }
-    //     if ((gameclear.style.display = 'block')) {
-    //       gameclear.style.display = 'none';
-    //     }
-    //     if ((gameover.style.display = 'block')) {
-    //       gameover.style.display = 'none';
-    //     }
+    overPage.style.display = "block";
 
-    //     change_position(overPage);
-    //     document.querySelector('#score').innerHTML = str;
-    //     overPage.style.display = 'block';
-    // >>>>>>> origin/master
-
-    if (gameMode === 'GameClear') {
+    if (gameMode === "GameClear") {
       overPage.style.backgroundImage = "url('../source/clear.webp')"; // 게임 클리어 배경 설정
       gameclear.style.display = 'block';
       document.querySelector('#result').innerHTML = 'GAME CLEAR';
@@ -108,8 +87,7 @@ function toggleOverPage() {
       overPage.style.backgroundImage = "url('../source/gameover.webp')"; // 게임 오버 배경 설정
       gameMode = '';
 
-      gameover.style.display = 'block';
-      //document.querySelector('#result').innerHTML = 'GAME OVER';
+      gameover.style.display = "block";
 
       animateScore(finalScore); // 점수 애니메이션 시작
     }

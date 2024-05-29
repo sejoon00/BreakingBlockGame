@@ -35,6 +35,8 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+setInterval(typing, 200);
+
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function moveKingCandyVanellope() {
