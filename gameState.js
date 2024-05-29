@@ -12,3 +12,5 @@ isGame2Cleared = true;
 isGame3Cleared = false;
 
 ballImageSrc = "ball1";
+
+isGameChanging = false;

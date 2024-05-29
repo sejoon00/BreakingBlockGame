@@ -1,3 +1,43 @@
 #levelUp2 {
-    display: none;
+  display: none;
+  margin: 0 auto;
+  position: relative;
+  height: 100vh;
+}
+
+#kingCandy {
+  position: absolute;
+  width: 250px;
+  left: 0px;
+  bottom: 50px;
+  z-index: 100;
+}
+
+#heroDuty {
+  position: absolute;
+  width: 400px;
+  right: 0px;
+  bottom: 350px;
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+}
+
+.jump {
+  animation: jump 0.5s ease-in-out;
+}
+
+#ralphAndVanellope {
+  display: none;
+  position: absolute;
+  width: 300px;
+  left: 0px;
+  bottom: 100px;
 }
