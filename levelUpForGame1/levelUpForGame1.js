@@ -33,8 +33,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// setInterval(typing, 200);
-
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function moveRalph() {
@@ -73,22 +71,6 @@ function moveRalph() {
     }
   }
   animate();
-}
-
-let content1 = "게임 안에 갇혀버린 바넬로피. 바넬로피를 구하기 위해 ";
-
-function typing(content) {
-  const text = document.querySelector(".text");
-  text.innerHTML = ""; // Clear the text content before starting new typing animation
-  let i = 0;
-  function type() {
-    if (i < content.length) {
-      let txt = content[i++];
-      text.innerHTML += txt === "\n" ? "<br/>" : txt;
-      setTimeout(type, 100); // Adjust typing speed by changing the timeout duration
-    }
-  }
-  type();
 }
 
 // 첫번째에는 랄프 혼자 슈가러쉬로 이동
