@@ -67,6 +67,22 @@ class Canvas {
       this.lifes.pop(); // 생명 배열에서 하나를 제거합니다.
     }
   }
+  // 곤용 increaseLife
+  increaseLife() {
+    console.log('생명+1');
+
+    const newX = 10 + this.lifes.length * 40;
+
+    const newLife = new Life(
+      this.canvas,
+      '../source/full_heart.png',
+      30,
+      newX,
+      10
+    );
+
+    this.lifes.push(newLife);
+  }
 
   drawScore() {
     // <<<<<<< HEAD
@@ -179,11 +195,15 @@ class Canvas {
         item.update(this.canvas);
       });
 
+<<<<<<< HEAD
       this.items.forEach((item) => {
         this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
       });
 
       this.drawScore();
+=======
+      this.drawScore(); // 점수 그리기 추가
+>>>>>>> origin/#game2
       requestAnimationFrame(update);
     };
     update();
