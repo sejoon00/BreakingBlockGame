@@ -1,9 +1,9 @@
 class Canvas {
   constructor(backgroundimageUrl) {
     this.backgroundimageUrl = backgroundimageUrl;
-    this.canvas = document.createElement("canvas");
-    this.canvas.id = "game_canvas";
-    this.context = this.canvas.getContext("2d");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'game_canvas';
+    this.context = this.canvas.getContext('2d');
     this.backgroundimage = new Image();
     this.ballInitialX;
     this.ballInitialY;
@@ -15,7 +15,7 @@ class Canvas {
     this.score = 0; // 점수 초기화
     this.brokenBlocks = 0; // 부서진 블록 수 초기화
 
-    window.addEventListener("resize", this.resizeCanvas.bind(this));
+    window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.backgroundimage.onload = () => {
       this.resizeCanvas(); // 초기 크기 조정
       this.ballInitialX = this.canvas.width / 2;
@@ -38,21 +38,21 @@ class Canvas {
   }
 
   resizeCanvas() {
-    let gameWidth = window.getComputedStyle(document.querySelector("#game"));
+    let gameWidth = window.getComputedStyle(document.querySelector('#game'));
     this.canvas.width = parseFloat(gameWidth.width);
     this.canvas.height = this.canvas.width * 0.75;
     this.drawBackground(); // 캔버스 크기가 변경될 때마다 배경 다시 그리기
   }
 
   appendTo(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.appendChild(this.canvas);
   }
 
   removeFrom(element) {
-    if (typeof element === "string") {
+    if (typeof element === 'string') {
       element = document.querySelector(element);
     }
     element.removeChild(this.canvas);
@@ -69,13 +69,13 @@ class Canvas {
   }
   // 곤용 increaseLife
   increaseLife() {
-    console.log("생명+1");
+    console.log('생명+1');
 
     const newX = 10 + this.lifes.length * 40;
 
     const newLife = new Life(
       this.canvas,
-      "../source/full_heart.png",
+      '../source/full_heart.png',
       30,
       newX,
       10
@@ -93,20 +93,20 @@ class Canvas {
     //   }
     // =======
     // 첫 번째 줄 스타일
-    this.context.font = "bold 22px Pixelify Sans";
-    this.context.fillStyle = "red";
+    this.context.font = 'bold 22px Pixelify Sans';
+    this.context.fillStyle = 'red';
     this.context.lineWidth = 2;
-    this.context.fillText("SCORE", this.canvas.width - 100, 23);
+    this.context.fillText('SCORE', this.canvas.width - 100, 23);
 
     // 두 번째 줄 스타일
-    this.context.font = "18px Verdana";
-    this.context.fillStyle = "white";
+    this.context.font = '18px Verdana';
+    this.context.fillStyle = 'white';
     this.context.lineWidth = 1;
     this.context.fillText(this.score, this.canvas.width - 95, 40);
   }
 
   destroy() {
-    window.removeEventListener("resize", this.resizeCanvas.bind(this));
+    window.removeEventListener('resize', this.resizeCanvas.bind(this));
     this.balls = [];
     this.blocks = [];
     this.items = [];
@@ -116,7 +116,7 @@ class Canvas {
 
   initGameElements() {
     let speed = 2;
-    if (selectTargetGame == "game3") speed = 7;
+    if (selectTargetGame == 'game3') speed = 3;
     this.balls.push(
       new Ball(
         this.ballInitialX,
@@ -124,7 +124,7 @@ class Canvas {
         speed,
         -speed,
         10,
-        "#0095DD"
+        '#0095DD'
       )
     );
     this.paddle = new Paddle(this.canvas, 100, 60, 10);
@@ -132,7 +132,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
-        new Life(this.canvas, "../source/full_heart.png", 30, 10 + i * 40, 10)
+        new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
   }
