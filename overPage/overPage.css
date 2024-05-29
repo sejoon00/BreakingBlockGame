@@ -17,8 +17,9 @@
   font-size: 50px;
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
-  margin-top: 100px;
   font-weight: bold;
+  color: #CB0B0B;
+  text-shadow: 2px 0px #fff, 0px 2px #fff, -2px 0px #fff, 0px -2px #fff;
 }
 
 #score {
@@ -32,10 +33,11 @@
 
 #gameclear {
   display: none;
-  color: #0f0;
+  color: #CB0B0B;
+  text-shadow: 2px 0px #fff, 0px 2px #fff, -2px 0px #fff, 0px -2px #fff;
   font-size: 24px;
-  margin-top: 50px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 글씨 그림자 */
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 #gameover {
