@@ -91,8 +91,9 @@ function gotoLevelUpForGame2() {
   overPage.style.display = 'none'; // 팝업창 종료
   endGame2(); // 게임 종료
   Game2Audio.pause(); // 게임 bgm 종료
-
   document.querySelector('#levelUp2').style.display = 'block'; // levelup1 페이지로 이동
+
+  moveKingCandy();
 }
 function gotoLevelUpForGame3() {
   overPage.style.display = 'none'; // 팝업창 종료

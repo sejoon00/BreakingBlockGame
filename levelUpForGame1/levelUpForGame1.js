@@ -48,7 +48,6 @@ function moveRalph() {
   const bgImg1 = document.getElementById('bgImg1');
 
   function animate() {
-    console.log(maxPosition);
     if (position === stopPosition) {
       // 멈추고 말풍선 표시
       speechBubble.style.display = 'block';
