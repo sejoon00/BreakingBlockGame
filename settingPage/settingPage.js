@@ -45,6 +45,10 @@ function moveToGameWithRalph() {
 }
 
 function moveToGameWithVanellope() {
+  console.log(isGame2Cleared);
+  if (isGame2Cleared && isGame1Cleared) {
+    settingVanellope.src = "./source/vanellope.png";
+  }
   if (selectTargetGame == "game1") {
     goToGame1ByVanellope();
   } else if (selectTargetGame == "game2") {
@@ -89,10 +93,18 @@ function goToGame2ByRalph() {
 }
 
 function goToGame2ByVanellope() {
-  lockMessage.style.display = "block";
-  setTimeout(() => {
-    lockMessage.style.display = "none";
-  }, 2000); // Character is locked! 메시지 출력
+  if (isGame2Cleared) {
+    gameState = "Gaming2"; //게임중으로 상태 변경
+    document.querySelector("#settingPage").style.display = "none";
+    selectCharacter = "Vanellope";
+    setGame2();
+    document.querySelector("#game").style.display = "block";
+  } else {
+    lockMessage.style.display = "block";
+    setTimeout(() => {
+      lockMessage.style.display = "none";
+    }, 2000); // Character is locked! 메시지 출력
+  }
 }
 
 function goToGame3ByRalph() {

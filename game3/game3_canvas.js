@@ -27,6 +27,7 @@ class Game3_canvas extends Canvas {
       200,
       "../source/light_tower.png"
     );
+    window.addEventListener("keydown", this.handleKeyPress.bind(this));
   }
 
   drawPath() {
@@ -114,6 +115,20 @@ class Game3_canvas extends Canvas {
         this.isWarningVisible = false;
       }
     }, 1000); // 250ms 간격으로 깜빡임
+  }
+
+  handleKeyPress(event) {
+    if (event.key === "p" || event.key === "P") {
+      this.clearGame(); // 'P' 키를 누르면 게임 클리어
+    }
+  }
+
+  clearGame() {
+    gameMode = "GameClear";
+
+    this.destroy();
+    toggleOverPage();
+    game3Img.src = "../stagePage/HeroDuty2.png";
   }
 
   endGame() {

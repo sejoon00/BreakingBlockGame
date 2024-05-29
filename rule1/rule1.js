@@ -32,4 +32,7 @@ function goToSettingPageForGame11() {
   document.querySelector("#settingPage").style.display = "block";
   document.querySelector("#rule1").style.display = "none";
   selectTargetGame = "game1";
+  if (isGame2Cleared && isGame1Cleared) {
+    settingVanellope.src = "./source/vanellope.png";
+  }
 }
