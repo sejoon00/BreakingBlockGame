@@ -30,7 +30,7 @@ class Block {
       const dx = target.x - this.x;
       const dy = target.y - this.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const speed = 0.5; // 블록 이동 속도
+      const speed = 0.8; // 블록 이동 속도
 
       if (distance < speed) {
         this.x = target.x;
@@ -126,28 +126,34 @@ class Block {
       if (this.isVanellope) {
         return true;
       }
+      let random = 0.25;
 
       // 25% 확률로 아이템 생성
-      if (Math.random() < 0.25) {
-        const itemType = Math.random() < 0.5 ? "speed" : "ball";
-        items.push(
-          new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
-        );
-      }
+      // if(selectTargetGame == "game3")
+      //   random = 0.1
 
       if (selectTargetGame == "game3") {
         if (Math.random() < 0.25) {
           const itemType = Math.random();
           let type;
-          if (itemType < 0.33) {
-            type = "speed";
-          } else if (itemType < 0.66) {
+          if (itemType < 0.5) {
             type = "ball";
           } else {
             type = "light";
           }
           items.push(
             new Item(this.x + this.width / 2, this.y + this.height / 2, type)
+          );
+        }
+      } else {
+        if (Math.random() < random) {
+          const itemType = Math.random() < 0.5 ? "speed" : "ball";
+          items.push(
+            new Item(
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              itemType
+            )
           );
         }
       }

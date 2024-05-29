@@ -69,10 +69,24 @@ class Canvas {
   }
 
   drawScore() {
-    this.context.font = "24px Arial";
-    this.context.fillStyle = "yellow";
+    // <<<<<<< HEAD
+    //     this.context.font = "24px Arial";
+    //     this.context.fillStyle = "yellow";
+    //     this.context.lineWidth = 2;
+    //     this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
+    //   }
+    // =======
+    // 첫 번째 줄 스타일
+    this.context.font = "bold 22px Pixelify Sans";
+    this.context.fillStyle = "red";
     this.context.lineWidth = 2;
-    this.context.fillText("Score: " + this.score, this.canvas.width - 150, 35);
+    this.context.fillText("SCORE", this.canvas.width - 100, 23);
+
+    // 두 번째 줄 스타일
+    this.context.font = "18px Verdana";
+    this.context.fillStyle = "white";
+    this.context.lineWidth = 1;
+    this.context.fillText(this.score, this.canvas.width - 95, 40);
   }
 
   destroy() {
@@ -85,8 +99,17 @@ class Canvas {
   }
 
   initGameElements() {
+    let speed = 2;
+    if (selectTargetGame == "game3") speed = 7;
     this.balls.push(
-      new Ball(this.ballInitialX, this.ballInitialY, 1, -1, 10, "#0095DD")
+      new Ball(
+        this.ballInitialX,
+        this.ballInitialY,
+        speed,
+        -speed,
+        10,
+        "#0095DD"
+      )
     );
     this.paddle = new Paddle(this.canvas, 100, 60, 10);
     this.paddle.bindMouseMove();
@@ -112,37 +135,6 @@ class Canvas {
 
   increaseBrokenBlocks() {
     this.brokenBlocks++;
-
-    if (
-      this.brokenBlocks === this.blocks.length ||
-      (this.score > 700 && selectTargetGame == "game1")
-    ) {
-      this.endGame(); // 모든 블록이 부서졌을 때 게임 종료
-    }
-  }
-
-  endGame() {
-    console.log("GameClear");
-    gameMode = "GameClear";
-    this.destroy();
-    toggleOverPage();
-    isGame1Cleared = true;
-    let game2Img = document.querySelector("#game2Img");
-    if (isGame1Cleared) {
-      game2Img.src = "./stagePage/SugarRush2.png";
-    } else {
-      game2Img.src = "./stagePage/SugarRush.png";
-    }
-  }
-
-  // 공이 배열에 하나도 없을 때 확인하는 함수
-  checkBallandLife() {
-    if (this.balls.length === 0 || this.lifes.length === 0) {
-      console.log("GameOver");
-      gameMode = "GameOver";
-      this.destroy();
-      toggleOverPage();
-    }
   }
 
   startGameLoop() {
@@ -188,9 +180,7 @@ class Canvas {
       });
 
       this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
+        this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
       });
 
       this.drawScore();

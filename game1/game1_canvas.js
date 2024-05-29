@@ -8,41 +8,58 @@ class Game1_canvas extends Canvas {
   initGameElements() {
     super.initGameElements();
     // 추가로 필요한 블록이나 요소를 여기에 추가
+
     // 블록의 시작 y 위치
     let startY = 116;
     const blockWidth = 38;
-    const blockHeight = 28;
+    const blockHeight = 60;
     const blockSpacingX = 45; // 블록 간 x 간격
-    const blockSpacingY = 30; // 블록 간 y 간격
+    const blockSpacingY = 60; // 블록 간 y 간격
 
     // 블록 배치
     for (let row = 0; row < 4; row++) {
-      for (let innerRow = 0; innerRow < 2; innerRow++) {
-        let startX = 297; // 블록의 시작 x 위치
-        let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
+      let startX = 296; // 블록의 시작 x 위치
+      let numBlocks = row < 2 ? 5 : 4; // 각 행의 블록 수
 
-        for (let i = 0; i < numBlocks; i++) {
-          this.blocks.push(
-            new Block(
-              startX,
-              startY,
-              blockWidth,
-              blockHeight,
-              this.increaseBrokenBlocks.bind(this),
-              "../source/window.png "
-            )
-          );
-          // x좌표 조정
-          if (i === 0) startX += blockWidth + 40;
-          else startX += blockWidth + blockSpacingX;
-          if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
-        }
-        // 다음 행으로 이동
-        startY += blockHeight + 5; // innerRow 5px 간격
+      for (let i = 0; i < numBlocks; i++) {
+        this.blocks.push(
+          new Block(
+            startX,
+            startY,
+            blockWidth,
+            blockHeight,
+            this.increaseBrokenBlocks.bind(this),
+            "../source/window.png"
+          )
+        );
+        // x좌표 조정
+        if (i === 0) startX += blockWidth + 40;
+        else startX += blockWidth + blockSpacingX;
+        if (row > 1 && i === 1) startX += blockWidth + blockSpacingX;
       }
-      startY += blockHeight + blockSpacingY; // Row 30px 간격
-      if (row === 1) startY -= 5;
-      if (row === 2) startY -= 16;
+      // 다음 행으로 이동
+      startY += blockHeight + blockSpacingY; // 1번 행과 2번 행 사이 100px 간격
+      if (row === 0) startY += 5; // 2번 행
+      // if (row === 1) startY += 100; // 3번 행
+      if (row === 2) startY -= 16; // 4번 행
+    }
+  }
+
+  endGame() {
+    let game2Img = document.querySelector("#game2Img");
+    if (this.brokenBlocks === this.blocks.length) {
+      console.log("GameClear");
+      gameMode = "GameClear";
+      this.destroy();
+      toggleOverPage();
+      isGame1Cleared = true;
+      game2Img.src = "./stagePage/SugarRush2.png";
+    } else if (this.balls.length === 0 || this.lifes.length === 0) {
+      console.log("GameOver");
+      gameMode = "GameOver";
+      this.destroy();
+      toggleOverPage();
+      game2Img.src = "./stagePage/SugarRush.png";
     }
   }
 
@@ -92,12 +109,10 @@ class Game1_canvas extends Canvas {
       });
 
       this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
+        this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
       });
 
-      this.checkBallandLife();
+      this.endGame();
       this.drawScore();
       requestAnimationFrame(update);
     };

@@ -7,7 +7,7 @@ class Bullet {
     this.dx = dx;
     this.dy = dy;
     this.radius = 5;
-    this.speed = 1;
+    this.speed = 2;
     this.isRemoved = false;
   }
 

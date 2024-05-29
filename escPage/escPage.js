@@ -32,16 +32,14 @@ document.addEventListener("keydown", (event) => {
 
 //세준
 function toggleEscPage() {
-  if (gameState.startsWith("Gaming")) { // 게임 중일때
+  if (gameState.startsWith("Gaming")) {
+    // 게임 중일때
     const escPage = document.querySelector("#escPage");
-    
-    if (escPage.style.display == "block")
-    {
+
+    if (escPage.style.display == "block") {
       escPage.style.display = "none";
       canvas.togglePause(); // 게임 재개
-    }
-    else
-    {
+    } else {
       escPage.style.display = "block";
       canvas.togglePause(); // 게임 일시 중지
     }

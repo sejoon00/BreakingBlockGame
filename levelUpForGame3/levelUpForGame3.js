@@ -14,20 +14,16 @@ document.querySelector("main").insertAdjacentHTML(
   // ------------------------------------ javascript ------------------------------------
   /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
   let levelUp3 = document.querySelector('#levelUp3');
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Enter") {
+        levelUp3.style.display = 'none';
+        moveToStagePage();
+  
+      event.preventDefault(); // Escape의 기본 동작을 방지
+      //실행중인 Canvas를 정지시킵니다
+    }
+  });
   
   // ---------------------------------- javascript function ----------------------------------
   /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
-  
-  const checkDisplayAndSetTimeout3 = () => {
-    const interval = setInterval(() => {
-        if (window.getComputedStyle(levelUp3).display === 'block') {
-        clearInterval(interval);
-        setTimeout(() => {
-            levelUp3.style.display = 'none';
-            moveToStagePage();
-        }, 5000);
-        }
-    }, 100); // 100ms 간격으로 체크
-  };
-
-  checkDisplayAndSetTimeout3();

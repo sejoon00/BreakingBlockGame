@@ -1,7 +1,7 @@
 class Canvas2 extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = 'game2_canvas';
+    this.canvas.id = "game2_canvas";
     this.vanellope;
     this.villains = []; // 빌런 리스트 초기화
     this.blockSpeed = 0.5; // 블록의 이동 속도
@@ -24,7 +24,7 @@ class Canvas2 extends Canvas {
       100,
       80,
       this.increaseBrokenBlocks.bind(this),
-      '../game2/vanellope.png'
+      "../game2/vanellope.png"
     );
     this.vanellope.isVanellope = true;
 
@@ -35,7 +35,7 @@ class Canvas2 extends Canvas {
         80,
         60,
         this.increaseBrokenBlocks.bind(this),
-        '../game2/villain' + i + '.png',
+        "../game2/villain" + i + ".png",
         false // 일반 블록임을 나타내는 플래그
       );
       this.villains.push(villainBlock);
@@ -45,7 +45,7 @@ class Canvas2 extends Canvas {
       });
     }
 
-    const bananaImageSrc = '../source/banana.png';
+    const bananaImageSrc = "../source/banana.png";
     const bananaSize = 50;
     const yellowAreaTop = 100;
     const yellowAreaBottom = this.canvas.height - 200;
@@ -69,7 +69,7 @@ class Canvas2 extends Canvas {
           150,
           150,
           this.increaseBrokenBlocks.bind(this),
-          '../game2/boss.png'
+          "../game2/boss.png"
         );
       }, 2000);
     }, 5000);
@@ -119,42 +119,25 @@ class Canvas2 extends Canvas {
 
   // 바넬로피가 먼저 도착
   endGame() {
-    let villainsReached = false;
-    for (let villain of this.villains) {
-      if (villain.x + villain.width < 0) {
-        villainsReached = true;
-        break;
-      }
-    }
-
-    if (this.vanellope.x + this.vanellope.width < 0 || this.score >= 100) {
-      console.log('GameClear');
-      gameMode = 'GameClear';
+    let game3Img = document.querySelector("#game3Img");
+    if (this.vanellope.x + this.vanellope.width < 0) {
+      console.log("GameClear");
+      gameMode = "GameClear";
       this.destroy();
-      toggleOverPage();
       isGame2Cleared = true;
-      let game3Img = document.querySelector('#game3Img');
-      let settingVanellope = document.querySelector('#settingVanellope');
-      if (isGame2Cleared) {
-        game3Img.src = '../stagePage/HeroDuty2.png';
-      } else {
-        game3Img.src = '../stagePage/HeroDuty.png';
-      }
-
-      if (isGame2Cleared && isGame1Cleared) {
-        settingVanellope.src = './source/vanellope.png';
-      } else {
-        settingVanellope.src = './source/lockedVanellope.png.png';
-      }
+      toggleOverPage();
+      game3Img.src = "../stagePage/HeroDuty2.png";
     } else if (
-      villainsReached ||
+      this.villains.some((villain) => villain.x + villain.width < 0) ||
+      (this.boss && this.boss.x + this.boss.width < 0) ||
       this.balls.length === 0 ||
       this.lifes.length === 0
     ) {
-      console.log('GameOver');
-      gameMode = 'GameOver';
+      console.log("GameOver");
+      gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
+      game3Img.src = "../stagePage/HeroDuty.png";
     }
   }
 
@@ -168,14 +151,14 @@ class Canvas2 extends Canvas {
         // 하얀색 반투명 배경으로 깜빡이기
         this.context.save();
         this.context.globalAlpha = 0.1;
-        this.context.fillStyle = 'red';
+        this.context.fillStyle = "red";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.restore();
-        this.context.font = '48px Arial';
-        this.context.fillStyle = 'red';
-        this.context.textAlign = 'center';
+        this.context.font = "48px Arial";
+        this.context.fillStyle = "red";
+        this.context.textAlign = "center";
         this.context.fillText(
-          'Warning! 보스보다 먼저 도착하세요!',
+          "Warning! 보스보다 먼저 도착하세요!",
           this.canvas.width / 2,
           this.canvas.height / 2
         );
@@ -254,9 +237,7 @@ class Canvas2 extends Canvas {
       });
 
       this.items.forEach((item) => {
-        this.balls.forEach((ball) =>
-          this.paddle.collectItem(item, ball, this.balls)
-        );
+        this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
       });
 
       // 바나나 그리기 및 충돌 처리

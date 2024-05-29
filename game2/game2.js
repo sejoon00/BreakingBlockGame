@@ -32,12 +32,12 @@ function setGame2() {
 
   Game2Audio.loop = true;
   Game2Audio.volume = 0.3;
+  Game2Audio.currentTime = 0;
   Game2Audio.play();
-
-  
 }
 
 function endGame2() {
+  Game2Audio.pause();
   let game = document.querySelector("#game");
   canvas.removeFrom(game);
 }
