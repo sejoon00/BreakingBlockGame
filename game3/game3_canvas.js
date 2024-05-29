@@ -100,7 +100,7 @@ class Game3_canvas extends Canvas {
           this.endGame.bind(this)
         ); // 보스 위치 조정
       }, 2000);
-    }, 30000);
+    }, 1000);
   }
 
   showWarning() {
@@ -135,6 +135,7 @@ class Game3_canvas extends Canvas {
 
   startGameLoop() {
     const update = () => {
+      console.log("life:" + this.lifes.length);
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -155,6 +156,8 @@ class Game3_canvas extends Canvas {
         block.draw(this.context); // 블록 그리기
         if (block.isOutOfBounds(this.canvas.height)) {
           block.visible = false;
+          console.log("블럭이 바닥에 닿음");
+
           this.decreaseLife(); // 블록이 바닥에 닿으면 생명 감소
         }
       });
@@ -221,6 +224,8 @@ class Game3_canvas extends Canvas {
         this.boss.bullets.forEach((bullet) => {
           bullet.draw(); // 총알을 그리도록 추가
           if (this.paddle.isCollidingWithBullet(bullet)) {
+            console.log("보스 총알에 맞음");
+
             this.decreaseLife();
             bullet.isRemoved = true;
           }
@@ -229,7 +234,7 @@ class Game3_canvas extends Canvas {
 
       // 보스 몬스터가 일정 시간마다 총알 발사
       if (this.boss && !this.boss.isRemoved) {
-        if (Date.now() % 1000 < 16) {
+        if (Date.now() % 1000 < 10) {
           this.boss.shoot();
         }
       }

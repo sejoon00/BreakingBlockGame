@@ -99,7 +99,6 @@ function goToGame3ByRalph() {
   gameState = "Gaming3"; //게임중으로 상태 변경
 
   document.querySelector("#settingPage").style.display = "none";
-  gameState = "Gaming3";
   selectCharacter = "Ralph";
   setGame3();
   document.querySelector("#game").style.display = "block";

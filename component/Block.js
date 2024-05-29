@@ -67,7 +67,7 @@ class Block {
     }
   }
 
-  isHit(ball, items, increaseScore) {
+  isHit(ball, items, increaseScore, blocks) {
     if (!this.visible) return false;
 
     // 간단한 AABB 충돌 검사
@@ -109,6 +109,11 @@ class Block {
       }
 
       this.visible = false; // 블럭을 보이지 않게 설정
+      // 특정 블록을 배열에서 제거
+      const index = blocks.findIndex((block) => block === this);
+      if (index > -1) {
+        blocks.splice(index, 1);
+      }
 
       // 부서진 블록 수 증가
       if (this.increaseBrokenBlocks) {
@@ -131,7 +136,9 @@ class Block {
 
       if (selectTargetGame === "game1") {
         if (Math.random() < 0.25) {
+
           console.log("아이템 확인")
+
           const itemType = Math.random() < 0.5 ? "speed" : "increaseball";
           items.push(
             new Item(
@@ -141,9 +148,8 @@ class Block {
             )
           );
         }
-      } 
+      } else if (selectTargetGame === "game2") {
 
-      else if (selectTargetGame === "game2") {
         const itemTypes = [
           "increaseheart",
           "decreaseheart",
@@ -157,9 +163,7 @@ class Block {
         items.push(
           new Item(this.x + this.width / 2, this.y + this.height / 2, itemType)
         );
-      }
-
-      else if (selectTargetGame == "game3") {
+      } else if (selectTargetGame == "game3") {
         if (Math.random() < 0.25) {
           const itemType = Math.random();
           let type;
