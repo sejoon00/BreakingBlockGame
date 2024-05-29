@@ -162,17 +162,10 @@ class Canvas2 extends Canvas {
 
   // 바넬로피가 먼저 도착
   endGame() {
-<<<<<<< HEAD
     let game3Img = document.querySelector("#game3Img");
     if (this.vanellope.x + this.vanellope.width < 0) {
       console.log("GameClear");
       gameMode = "GameClear";
-=======
-    let game3Img = document.querySelector('#game3Img');
-    if (this.vanellope.x + this.vanellope.width < 0 || this.score > 100) {
-      console.log('GameClear');
-      gameMode = 'GameClear';
->>>>>>> origin/#game2
       this.destroy();
       isGame2Cleared = true;
       toggleOverPage();
@@ -287,11 +280,7 @@ class Canvas2 extends Canvas {
       });
 
       this.items.forEach((item) => {
-<<<<<<< HEAD
-        this.balls.forEach((ball) => this.paddle.collectItem(item, this.balls));
-=======
         this.balls.forEach((ball) => this.collectItem2(item, ball));
->>>>>>> origin/#game2
       });
 
       // 바나나 그리기
@@ -332,19 +321,19 @@ class Canvas2 extends Canvas {
 
   collectItem2(item, ball) {
     if (item.isPaddleGetItem(this.paddle)) {
-      console.log('아이템 수집: ' + item.type); // 디버그용 로그
+      console.log("아이템 수집: " + item.type); // 디버그용 로그
 
-      if (item.type === 'increasevanellopespeed') {
+      if (item.type === "increasevanellopespeed") {
         this.increaseVanellopeSpeed();
-      } else if (item.type === 'decreasevanellopespeed') {
+      } else if (item.type === "decreasevanellopespeed") {
         this.decreaseVanellopeSpeed();
-      } else if (item.type === 'increaseheart') {
+      } else if (item.type === "increaseheart") {
         this.increaseLife();
-      } else if (item.type === 'decreaseheart') {
+      } else if (item.type === "decreaseheart") {
         this.decreaseLife();
-      } else if (item.type === 'increasemonsterspeed') {
+      } else if (item.type === "increasemonsterspeed") {
         this.increaseMonsterSpeed();
-      } else if (item.type === 'decreasemonsterspeed') {
+      } else if (item.type === "decreasemonsterspeed") {
         this.decreaseMonsterSpeed();
       }
     }
