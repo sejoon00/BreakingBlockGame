@@ -21,10 +21,10 @@ class Game3_canvas extends Canvas {
     this.requiredHits = 1; // 초기 부서지기 위해 필요한 횟수
     this.blockImageSrc = "../source/Cy-Bug.png"; // 초기 블록 이미지
     this.lightTower = new LightTower(
-      750,
-      150,
+      700,
       100,
-      100,
+      200,
+      200,
       "../source/light_tower.png"
     );
   }
