@@ -52,6 +52,14 @@ class Game1_canvas extends Canvas {
     }
   }
 
+  clearGame() {
+    gameMode = "GameClear";
+    this.destroy();
+    isGame1Cleared = true;
+    toggleOverPage();
+    game2Img.src = "./stagePage/SugarRush2.png";
+  }
+
   endGame() {
     let game2Img = document.querySelector("#game2Img");
     console.log(
@@ -65,8 +73,8 @@ class Game1_canvas extends Canvas {
       console.log("GameClear");
       gameMode = "GameClear";
       this.destroy();
-      toggleOverPage();
       isGame1Cleared = true;
+      toggleOverPage();
       game2Img.src = "./stagePage/SugarRush2.png";
     } else if (this.balls.length === 0 || this.lifes.length === 0) {
       console.log("GameOver");

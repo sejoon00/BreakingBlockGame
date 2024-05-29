@@ -193,14 +193,6 @@ class Canvas2 extends Canvas {
       this.balls.length === 0 ||
       this.lifes.length === 0
     ) {
-      if (this.villains.some((villain) => villain.x + villain.width < 0))
-        console.log("빌런먼저도착");
-      if (this.boss && this.boss.x + this.boss.width < 0)
-        console.log("보스 먼저 도착");
-      if (this.balls.length === 0)
-        console.log("공없음");
-      if (this.lifes.length === 0)
-        console.log("생명없음");
       console.log("GameOver");
       gameMode = "GameOver";
       this.destroy();
