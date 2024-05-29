@@ -12,7 +12,7 @@ class Ball {
     this.image = new Image();
     console.log(ballImageSrc);
     if (ballImageSrc == "ball1") this.image.src = "../source/ball1.png";
-    else this.image.src = "../source/ball2.png";
+    else if (ballImageSrc == "ball2") this.image.src = "../source/ball2.png";
   }
 
   draw(ctx) {

@@ -72,7 +72,12 @@ function setGameHide() {
   Game1Audio.currentTime = 0;
   Game2Audio.pause();
   Game2Audio.currentTime = 0;
+  Game3Audio.pause();
+  Game3Audio.currentTime = 0;
   moveToStagePage();
+
+  startPageAudio.loop = true;
+  startPageAudio.play();
 
   document.querySelector("#escPage").style.display = "none";
   // 특정 요소를 선택하고 제거합니다.
