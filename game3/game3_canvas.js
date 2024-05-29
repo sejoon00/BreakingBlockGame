@@ -44,7 +44,7 @@ class Game3_canvas extends Canvas {
   launchBall() {
     const ballX = this.paddle.x + this.paddle.width / 2;
     const ballY = this.paddle.y - 10; // 패들 위에서 발사
-    const ballSpeed = 7;
+    const ballSpeed = 3;
 
     const directionX = Math.random() < 0.5 ? -1 : 1;
     const ball = new Ball(
