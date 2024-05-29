@@ -224,13 +224,27 @@ class Canvas2 extends Canvas {
       }
 
       this.balls.forEach((ball) => {
-        if (this.vanellope.isHit(ball, this.items)) {
+        if (
+          this.vanellope.isHit(
+            ball,
+            this.items,
+            this.increaseScore.bind(this),
+            this.blocks
+          )
+        ) {
           this.vanellope.visible = true;
           this.decreaseLife(); // 생명 하나 줄이기
         }
 
         this.villains.forEach((villain) => {
-          if (villain.isHit(ball, this.items, this.increaseScore.bind(this))) {
+          if (
+            villain.isHit(
+              ball,
+              this.items,
+              this.increaseScore.bind(this),
+              this.blocks
+            )
+          ) {
             // this.decreaseLife(); // 생명 하나 줄이기
           }
         });
@@ -238,7 +252,12 @@ class Canvas2 extends Canvas {
         // 보스와의 충돌 검사
         if (
           this.boss &&
-          this.boss.isHit(ball, this.items, this.increaseScore.bind(this))
+          this.boss.isHit(
+            ball,
+            this.items,
+            this.increaseScore.bind(this),
+            this.blocks
+          )
         ) {
           this.boss = null; // 보스 제거
         }
