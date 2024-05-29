@@ -25,7 +25,6 @@ document.addEventListener(
     if (event.code === "Space") {
       moveToStagePage();
       event.preventDefault(); // 스페이스바의 기본 동작을 방지합니다.
-      startPageAudio.pause(); // 노래 중단
     }
   },
   { once: true }
@@ -47,6 +46,8 @@ function moveToStagePage() {
   document.querySelector("#startPage").style.display = "none";
   gameState = "stagePage";
   document.querySelector("#selectGame").style.display = "block";
+  document.querySelector("#settings-btn").style.display = "block";
+
   clearInterval(changecolor);
 }
 

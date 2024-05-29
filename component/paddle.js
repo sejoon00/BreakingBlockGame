@@ -14,20 +14,20 @@ class Paddle {
   // 막대기 그리기 함수
   //draw() -> draw(selectCharacter)
   draw() {
-    const ctx = this.canvas.getContext('2d');
+    const ctx = this.canvas.getContext("2d");
     //곤용
 
-    if (selectCharacter === 'Ralph') {
-      this.image.src = '../source/ralph_paddle.png';
-      if (selectTargetGame == 'game3')
-        this.image.src = '../source/stage3_ralph.png';
+    if (selectCharacter === "Ralph") {
+      this.image.src = "../source/ralph_paddle.png";
+      if (selectTargetGame == "game3")
+        this.image.src = "../source/stage3_ralph.png";
     } else {
-      this.image.src = '../source/vanellope_paddle.png';
+      this.image.src = "../source/vanellope_paddle.png";
     }
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // 수정 완
+    ctx.fillStyle = "rgba(0, 0, 0, 0)"; // 수정 완
     ctx.fill();
     ctx.closePath();
 
@@ -41,19 +41,19 @@ class Paddle {
       };
     }
 
-    if (selectTargetGame == 'game3') {
-      ctx.fillStyle = 'green';
-      ctx.fillRect(
-        this.x + this.width / 2 - this.hitPointSize / 2,
-        this.y + this.height / 2 - this.hitPointSize / 2,
-        this.hitPointSize,
-        this.hitPointSize
-      );
-    }
+    // if (selectTargetGame == 'game3') {
+    //   ctx.fillStyle = 'green';
+    //   ctx.fillRect(
+    //     this.x + this.width / 2 - this.hitPointSize / 2,
+    //     this.y + this.height / 2 - this.hitPointSize / 2,
+    //     this.hitPointSize,
+    //     this.hitPointSize
+    //   );
+    // }
   }
   // 이벤트 리스너 등록 (마우스 이동)
   bindMouseMove() {
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener("mousemove", (e) => {
       const relativeX = e.clientX - this.canvas.offsetLeft;
       if (relativeX > 0 && relativeX < this.canvas.width) {
         this.x = relativeX - this.width / 2;
@@ -63,10 +63,10 @@ class Paddle {
 
   // 막대기 이동 함수
   movePaddle(direction) {
-    if (direction === 'left' && this.x > 0) {
+    if (direction === "left" && this.x > 0) {
       this.x -= this.speed;
     } else if (
-      direction === 'right' &&
+      direction === "right" &&
       this.x < this.canvas.width - this.width
     ) {
       this.x += this.speed;
@@ -127,10 +127,11 @@ class Paddle {
     return false; // 충돌이 발생하지 않았음을 반환합니다.
   }
 
-  // 아이템 수집 함수 
-  collectItem(item, ball, balls) {
+  // 아이템 수집 함수
+  collectItem(item, balls) {
     if (item.isPaddleGetItem(this)) {
       console.log("아이템 수집: " + item.type);
+
       if (item.type === "speed") {
         // 속도 증가 아이템 효과
         balls.forEach((b) => {
@@ -141,10 +142,14 @@ class Paddle {
         });
       } else if (item.type === "increaseball") {
         // 공 개수 증가 아이템 효과
-        let ballY;
-        if (ball.dy > 0) ballY = -ball.dy;
+        const ballX = this.x + this.width / 2;
+        const ballY = this.y - 10; // 패들 위에서 발사
+        let ballSpeed = 2;
+
+        if (selectTargetGame == "game3") ballSpeed = 7;
+        const directionX = Math.random() < 0.5 ? -1 : 1;
         balls.push(
-          new Ball(ball.x, ball.y, -ball.dx, ballY, ball.radius, ball.color)
+          new Ball(ballX, ballY, directionX * ballSpeed, ballSpeed, 10)
         );
       }
       return true;

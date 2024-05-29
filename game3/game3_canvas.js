@@ -1,7 +1,7 @@
 class Game3_canvas extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = 'game3_canvas'; // canvas id 변경
+    this.canvas.id = "game3_canvas"; // canvas id 변경
     this.path = [
       { x: 50, y: 0 },
       { x: 50, y: 100 },
@@ -19,13 +19,13 @@ class Game3_canvas extends Canvas {
     this.isWarningVisible = false; // 경고 메시지 표시 여부
     this.lastBallTime = Date.now(); // 마지막으로 공이 발사된 시간
     this.requiredHits = 1; // 초기 부서지기 위해 필요한 횟수
-    this.blockImageSrc = '../source/Cy-Bug.png'; // 초기 블록 이미지
+    this.blockImageSrc = "../source/Cy-Bug.png"; // 초기 블록 이미지
     this.lightTower = new LightTower(
       750,
       150,
       100,
       100,
-      '../source/light_tower.png'
+      "../source/light_tower.png"
     );
   }
 
@@ -35,7 +35,7 @@ class Game3_canvas extends Canvas {
     for (let i = 1; i < this.path.length; i++) {
       this.context.lineTo(this.path[i].x, this.path[i].y);
     }
-    this.context.strokeStyle = 'green';
+    this.context.strokeStyle = "green";
     this.context.lineWidth = 5;
     this.context.stroke();
   }
@@ -43,8 +43,17 @@ class Game3_canvas extends Canvas {
   launchBall() {
     const ballX = this.paddle.x + this.paddle.width / 2;
     const ballY = this.paddle.y - 10; // 패들 위에서 발사
-    const ballSpeed = 2;
-    const ball = new Ball(ballX, ballY, ballSpeed, -ballSpeed, 10, 'blue'); // 공 객체 생성
+    const ballSpeed = 7;
+
+    const directionX = Math.random() < 0.5 ? -1 : 1;
+    const ball = new Ball(
+      ballX,
+      ballY,
+      directionX * ballSpeed,
+      -ballSpeed,
+      10,
+      "blue"
+    ); // 공 객체 생성
     this.balls.push(ball);
   }
 
@@ -66,19 +75,19 @@ class Game3_canvas extends Canvas {
           this.requiredHits // 생성 시 현재 requiredHits 값 사용
         )
       );
-    }, 500);
+    }, 1500);
 
     // 15초마다 새로 생성되는 블록의 히트 카운트 증가 및 이미지 변경
     setInterval(() => {
       this.requiredHits++;
       if (this.requiredHits === 2) {
-        this.blockImageSrc = '../source/Cy-Bug2.webp';
+        this.blockImageSrc = "../source/Cy-Bug2.webp";
       } else if (this.requiredHits >= 3) {
-        this.blockImageSrc = '../source/Cy-Bug3.webp';
+        this.blockImageSrc = "../source/Cy-Bug3.webp";
       }
     }, 20000);
 
-    console.log('Blocks will be added continuously in Game3_canvas');
+    console.log("Blocks will be added continuously in Game3_canvas");
 
     // 보스 몬스터 생성 (15초 후 등장)
     setTimeout(() => {
@@ -108,18 +117,17 @@ class Game3_canvas extends Canvas {
   }
 
   endGame() {
-    if (this.boss) {
+    if (this.boss.hp == 0) {
       console.log("GameClear");
       gameMode = "GameClear";
       this.destroy();
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty2.png';
-    }
-    else if (this.lifes.length === 0) {
+      game3Img.src = "../stagePage/HeroDuty2.png";
+    } else if (this.lifes.length === 0) {
       gameMode = "GameOver";
       this.destroy();
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty.png';
+      game3Img.src = "../stagePage/HeroDuty.png";
     }
   }
 
@@ -132,7 +140,7 @@ class Game3_canvas extends Canvas {
         // 하얀색 반투명 배경으로 깜빡이기
         this.context.save();
         this.context.globalAlpha = 0.4;
-        this.context.fillStyle = 'red';
+        this.context.fillStyle = "red";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.restore();
       } else {
@@ -188,8 +196,8 @@ class Game3_canvas extends Canvas {
       this.items.forEach((item) => {
         this.balls.forEach((ball) => {
           if (
-            this.paddle.collectItem(item, ball, this.balls) &&
-            item.type === 'light'
+            this.paddle.collectItem(item, this.balls) &&
+            item.type === "light"
           ) {
             this.lightTower.checkAndDestroyBlocks(this.blocks);
             this.lightTower.drawDestroyingRange(this.context); // LightTower 파괴 범위 그리기 추가
@@ -226,11 +234,11 @@ class Game3_canvas extends Canvas {
 
       // 경고 메시지 표시
       if (this.isWarningVisible) {
-        this.context.font = '48px Arial';
-        this.context.fillStyle = 'red';
-        this.context.textAlign = 'center';
+        this.context.font = "48px Arial";
+        this.context.fillStyle = "red";
+        this.context.textAlign = "center";
         this.context.fillText(
-          'Warning! 보스를 해치우세요',
+          "Warning! 보스를 해치우세요",
           this.canvas.width / 2,
           this.canvas.height / 2
         );
