@@ -18,7 +18,7 @@ let levelUp2 = document.querySelector('#levelUp2');
 document.addEventListener("keydown", (event) => {
   if (event.code === "Enter") {
       levelUp2.style.display = 'none';
-      setGame3();
+      //setGame3();
 
     event.preventDefault(); // Escape의 기본 동작을 방지
     //실행중인 Canvas를 정지시킵니다

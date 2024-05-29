@@ -18,6 +18,7 @@ function setGame2() {
       </div>
     `
   );
+  console.log('Game2 start');
   // 특정 요소를 선택합니다.
   let game = document.querySelector("#game");
 
