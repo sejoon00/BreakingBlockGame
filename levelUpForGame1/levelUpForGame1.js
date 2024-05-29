@@ -27,7 +27,7 @@ let ralph, speechBubble, maxPosition;
 document.addEventListener('keydown', (event) => {
   if (isGame1Cleared == true && event.code === 'Enter') {
     levelUp1.style.display = 'none';
-    setGame2();
+    moveToStagePage();
     event.preventDefault(); // Escape의 기본 동작을 방지
   }
 });
