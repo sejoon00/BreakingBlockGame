@@ -16,24 +16,43 @@ document.querySelector("main").insertAdjacentHTML(
       </div>
       <div id="stageLockMessage">This stage is locked!</div>
     </div>
-    <button id="settings-btn">Settings</button>
+    <button id="settings-btn" font-size: 35px;">Settings</button>
 
     <div id="popup-overlay"></div>
     <div id="popup">
-      <h2>Settings</h2>
-      <p>Here you can configure your settings.</p>
-      <label>Choose BGM:</label><br>
-      <input type="radio" id="bgm1" name="bgm" value="bgm1" checked>
-      <label for="bgm1">BGM 1</label><br>
-      <input type="radio" id="bgm2" name="bgm" value="bgm2">
-      <label for="bgm2">BGM 2</label><br>
-      
-      <label>Choose Ball Image:</label><br>
-      <input type="radio" id="ball1" name="ball" value="ball1" checked>
-      <label for="ball1">Ball 1</label><br>
-      <input type="radio" id="ball2" name="ball" value="ball2">
-      <label for="ball2">Ball 2</label><br>
-      <button id="close-popup">Close</button>
+      <div id="popup-container">
+        <h2>Settings</h2>
+        <p style="margin-top: 30px; font-size: 25px;">게임 환경 설정</p>
+        <label style="margin-top: 50px; font-size: 25px;">Choose BGM:</label><br>
+        <div>
+        <label class="custom-checkbox" >
+          <input type="radio" id="bgm1" name="bgm" value="bgm1" checked>
+          <label for="bgm1">BGM 1</label><br>
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-checkbox">
+          <input type="radio" id="bgm2" name="bgm" value="bgm2">
+          <label for="bgm2">BGM 2</label><br>
+          <span class="checkmark"></span>
+        </label>
+        
+        </div>
+
+        <label style="margin-top: 50px; font-size: 25px;">Choose Ball Image:</label><br>
+        <div>
+        <label class="custom-checkbox">
+          <input type="radio" id="ball1" name="ball" value="ball1" checked>
+          <label for="ball1"><img src="../source/ball1.png"></img></label><br>
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-checkbox">
+          <input type="radio" id="ball2" name="ball" value="ball2">
+          <label for="ball2"><img src="../source/ball2.png"></img></label><br>
+          <span class="checkmark"></span>
+          </label>
+        </div>
+        <button id="close-popup">Close</button>
+      </div>
     </div>
     `
 );
