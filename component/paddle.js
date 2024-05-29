@@ -145,7 +145,7 @@ class Paddle {
             b.dy *= 1.5;
           }
         });
-      } else if (item.type === "increaseball") {
+      } else if (item.type === "increaseball" || item.type === "ball") {
         // 공 개수 증가 아이템 효과
         const ballX = this.x + this.width / 2;
         const ballY = this.y - 10; // 패들 위에서 발사
