@@ -16,8 +16,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   border: 8px solid #b2b2b2;
-  font-family: "Pixelify Sans", sans-serif;
-  background: url('../source/escbackground.png');
+  font-family: 'Pixelify Sans', sans-serif;
+  background: url('./source/escbackground.png');
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -31,25 +31,26 @@
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  background-color: #A0522D;
-  border: 2px solid #8B4513;
+  background-color: #a0522d;
+  border: 2px solid #8b4513;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-  font-family: "Pixelify Sans", sans-serif;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease,
+    font-size 0.3s ease;
+  font-family: 'Pixelify Sans', sans-serif;
 }
 
 #escPage button:hover {
-  background-color: #CD853F;
+  background-color: #cd853f;
   transform: translateY(-2px);
-  color: #FFD700;
+  color: #ffd700;
   font-size: 26px;
 }
 
 #escPage button:active {
-  background-color: #CD853F;
+  background-color: #cd853f;
   transform: translateY(0);
-  color: #FFD700;
+  color: #ffd700;
   font-size: 26px;
 }

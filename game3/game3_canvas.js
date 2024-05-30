@@ -1,7 +1,7 @@
 class Game3_canvas extends Canvas {
   constructor(backgroundimageUrl) {
     super(backgroundimageUrl);
-    this.canvas.id = "game3_canvas"; // canvas id 변경
+    this.canvas.id = 'game3_canvas'; // canvas id 변경
     this.path = [
       { x: 50, y: 0 },
       { x: 50, y: 100 },
@@ -19,15 +19,15 @@ class Game3_canvas extends Canvas {
     this.isWarningVisible = false; // 경고 메시지 표시 여부
     this.lastBallTime = Date.now(); // 마지막으로 공이 발사된 시간
     this.requiredHits = 1; // 초기 부서지기 위해 필요한 횟수
-    this.blockImageSrc = "../source/Cy-Bug.png"; // 초기 블록 이미지
+    this.blockImageSrc = './source/Cy-Bug.png'; // 초기 블록 이미지
     this.lightTower = new LightTower(
       700,
       100,
       200,
       200,
-      "../source/light_tower.png"
+      './source/light_tower.png'
     );
-    window.addEventListener("keydown", this.handleKeyPress.bind(this));
+    window.addEventListener('keydown', this.handleKeyPress.bind(this));
   }
 
   drawPath() {
@@ -36,7 +36,7 @@ class Game3_canvas extends Canvas {
     for (let i = 1; i < this.path.length; i++) {
       this.context.lineTo(this.path[i].x, this.path[i].y);
     }
-    this.context.strokeStyle = "green";
+    this.context.strokeStyle = 'green';
     this.context.lineWidth = 5;
     this.context.stroke();
   }
@@ -53,7 +53,7 @@ class Game3_canvas extends Canvas {
       directionX * ballSpeed,
       -ballSpeed,
       10,
-      "blue"
+      'blue'
     ); // 공 객체 생성
     this.balls.push(ball);
   }
@@ -82,13 +82,13 @@ class Game3_canvas extends Canvas {
     setInterval(() => {
       this.requiredHits++;
       if (this.requiredHits === 2) {
-        this.blockImageSrc = "../source/Cy-Bug2.webp";
+        this.blockImageSrc = './source/Cy-Bug2.webp';
       } else if (this.requiredHits >= 3) {
-        this.blockImageSrc = "../source/Cy-Bug3.webp";
+        this.blockImageSrc = './source/Cy-Bug3.webp';
       }
     }, 20000);
 
-    console.log("Blocks will be added continuously in Game3_canvas");
+    console.log('Blocks will be added continuously in Game3_canvas');
 
     // 보스 몬스터 생성 (15초 후 등장)
     setTimeout(() => {
@@ -118,39 +118,39 @@ class Game3_canvas extends Canvas {
   }
 
   handleKeyPress(event) {
-    if (event.key === "p" || event.key === "P") {
+    if (event.key === 'p' || event.key === 'P') {
       this.clearGame(); // 'P' 키를 누르면 게임 클리어
     }
   }
 
   clearGame() {
-    gameMode = "GameClear";
+    gameMode = 'GameClear';
 
     this.destroy();
     toggleOverPage();
-    game3Img.src = "../stagePage/HeroDuty2.png";
+    game3Img.src = './stagePage/HeroDuty2.png';
   }
 
   endGame() {
     if (this.boss.hp == 0) {
-      console.log("GameClear boss hp");
-      gameMode = "GameClear";
+      console.log('GameClear boss hp');
+      gameMode = 'GameClear';
       this.destroy();
       toggleOverPage();
-      game3Img.src = "../stagePage/HeroDuty2.png";
+      game3Img.src = './stagePage/HeroDuty2.png';
     } else if (this.lifes.length === 0) {
-      console.log("GameClear paddle hp");
+      console.log('GameClear paddle hp');
 
-      gameMode = "GameOver";
+      gameMode = 'GameOver';
       this.destroy();
       toggleOverPage();
-      game3Img.src = "../stagePage/HeroDuty.png";
+      game3Img.src = './stagePage/HeroDuty.png';
     }
   }
 
   startGameLoop() {
     const update = () => {
-      console.log("life:" + this.lifes.length);
+      console.log('life:' + this.lifes.length);
       if (this.isPaused) return; // 게임이 일시 중지된 경우 업데이트 중지
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -158,7 +158,7 @@ class Game3_canvas extends Canvas {
         // 하얀색 반투명 배경으로 깜빡이기
         this.context.save();
         this.context.globalAlpha = 0.4;
-        this.context.fillStyle = "red";
+        this.context.fillStyle = 'red';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.restore();
       } else {
@@ -171,7 +171,7 @@ class Game3_canvas extends Canvas {
         block.draw(this.context); // 블록 그리기
         if (block.isOutOfBounds(this.canvas.height)) {
           block.visible = false;
-          console.log("블럭이 바닥에 닿음");
+          console.log('블럭이 바닥에 닿음');
 
           this.decreaseLife(); // 블록이 바닥에 닿으면 생명 감소
         }
@@ -217,7 +217,7 @@ class Game3_canvas extends Canvas {
         this.balls.forEach((ball) => {
           if (
             this.paddle.collectItem(item, this.balls) &&
-            item.type === "light"
+            item.type === 'light'
           ) {
             this.lightTower.checkAndDestroyBlocks(this.blocks);
             this.lightTower.drawDestroyingRange(this.context); // LightTower 파괴 범위 그리기 추가
@@ -239,7 +239,7 @@ class Game3_canvas extends Canvas {
         this.boss.bullets.forEach((bullet) => {
           bullet.draw(); // 총알을 그리도록 추가
           if (this.paddle.isCollidingWithBullet(bullet)) {
-            console.log("보스 총알에 맞음");
+            console.log('보스 총알에 맞음');
 
             this.decreaseLife();
             bullet.isRemoved = true;
@@ -256,11 +256,11 @@ class Game3_canvas extends Canvas {
 
       // 경고 메시지 표시
       if (this.isWarningVisible) {
-        this.context.font = "48px Arial";
-        this.context.fillStyle = "red";
-        this.context.textAlign = "center";
+        this.context.font = '48px Pixelify Sans';
+        this.context.fillStyle = 'red';
+        this.context.textAlign = 'center';
         this.context.fillText(
-          "Warning! 보스를 해치우세요",
+          'Warning! Defeat the boss!          ',
           this.canvas.width / 2,
           this.canvas.height / 2
         );

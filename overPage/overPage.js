@@ -35,10 +35,12 @@ function animateScore(finalScore) {
     if (currentScore < finalScore) {
       currentScore += increment;
       if (currentScore > finalScore) currentScore = finalScore;
-      scoreElement.innerHTML = "당신의 score는 " + '<br>' + currentScore + "점입니다.";
+      scoreElement.innerHTML =
+        '당신의 score는 ' + '<br>' + currentScore + '점입니다.';
       requestAnimationFrame(updateScore);
     } else {
-      scoreElement.innerHTML = "당신의 score는 " + '<br>' + finalScore + "점입니다."; // 최종 점수 설정
+      scoreElement.innerHTML =
+        '당신의 score는 ' + '<br>' + finalScore + '점입니다.'; // 최종 점수 설정
     }
   }
 
@@ -59,10 +61,10 @@ function toggleOverPage() {
     }
 
     change_position(overPage);
-    overPage.style.display = "block";
+    overPage.style.display = 'block';
 
-    if (gameMode === "GameClear") {
-      overPage.style.backgroundImage = "url('../source/clear.webp')"; // 게임 클리어 배경 설정
+    if (gameMode === 'GameClear') {
+      overPage.style.backgroundImage = "url('./source/clear.webp')"; // 게임 클리어 배경 설정
       gameclear.style.display = 'block';
       document.querySelector('#result').innerHTML = 'GAME CLEAR';
       animateScore(finalScore); // 점수 애니메이션 시작
@@ -84,10 +86,10 @@ function toggleOverPage() {
         }, 3000);
       }
     } else if (gameMode === 'GameOver') {
-      overPage.style.backgroundImage = "url('../source/gameover.webp')"; // 게임 오버 배경 설정
+      overPage.style.backgroundImage = "url('./source/gameover.webp')"; // 게임 오버 배경 설정
       gameMode = '';
 
-      gameover.style.display = "block";
+      gameover.style.display = 'block';
 
       animateScore(finalScore); // 점수 애니메이션 시작
     }

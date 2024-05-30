@@ -2,7 +2,7 @@ class Ball {
   constructor(x, y, dx, dy, radius, color) {
     this.x = x;
     this.y = y;
-    if (selectTargetGame == "game3") {
+    if (selectTargetGame == 'game3') {
       this.dx = dx;
       this.dy = dy;
     } else {
@@ -17,8 +17,8 @@ class Ball {
 
     this.image = new Image();
     console.log(ballImageSrc);
-    if (ballImageSrc == "ball1") this.image.src = "../source/ball1.png";
-    else if (ballImageSrc == "ball2") this.image.src = "../source/ball2.png";
+    if (ballImageSrc == 'ball1') this.image.src = './source/ball1.png';
+    else if (ballImageSrc == 'ball2') this.image.src = './source/ball2.png';
   }
 
   draw(ctx) {
@@ -54,14 +54,14 @@ class Ball {
     // 캔버스 하단 경계 체크 (공이 화면 아래로 떨어지는 경우)
     if (
       this.y + this.dy > canvas.height - 130 - this.radius &&
-      selectTargetGame != "game3"
+      selectTargetGame != 'game3'
     ) {
       // 공을 제거할 플래그 설정
       if (!this.isRemoved) {
         // 생명 감소 로직이 한 번만 실행되도록 조건 추가
         this.isRemoved = true;
-        console.log("땅에 닿았음");
-        console.log("공이 바닥에 닿음");
+        console.log('땅에 닿았음');
+        console.log('공이 바닥에 닿음');
         decreaseLife();
       }
       return;
@@ -80,7 +80,7 @@ class Ball {
       this.setHitCooldown(paddle); // 충돌 쿨다운 설정
 
       let paddleAudio = new Audio(
-        "https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3"
+        'https://taira-komori.jpn.org/sound_os2/game01/jump09.mp3'
       );
       paddleAudio.play();
     }
@@ -123,7 +123,7 @@ class Ball {
       }
     }
 
-    this.draw(canvas.getContext("2d"));
+    this.draw(canvas.getContext('2d'));
   }
 
   setHitCooldown(target) {

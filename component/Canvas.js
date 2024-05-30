@@ -75,7 +75,7 @@ class Canvas {
 
     const newLife = new Life(
       this.canvas,
-      '../source/full_heart.png',
+      './source/full_heart.png',
       30,
       newX,
       10
@@ -132,7 +132,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       this.lifes.push(
-        new Life(this.canvas, '../source/full_heart.png', 30, 10 + i * 40, 10)
+        new Life(this.canvas, './source/full_heart.png', 30, 10 + i * 40, 10)
       );
     }
   }

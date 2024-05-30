@@ -33,7 +33,7 @@ class Canvas2 extends Canvas {
       100,
       80,
       this.increaseBrokenBlocks.bind(this),
-      '../game2/vanellope.png'
+      './game2/vanellope.png'
     );
     this.vanellope.isVanellope = true;
     this.vanellope.blockSpeed = 0.7;
@@ -46,7 +46,7 @@ class Canvas2 extends Canvas {
         80,
         60,
         this.increaseBrokenBlocks.bind(this),
-        '../game2/villain' + i + '.png',
+        './game2/villain' + i + '.png',
         false // 일반 블록임을 나타내는 플래그
       );
       villainBlock.blockSpeed = this.blockSpeed;
@@ -58,7 +58,7 @@ class Canvas2 extends Canvas {
       });
     }
 
-    const bananaImageSrc = '../source/banana.png';
+    const bananaImageSrc = './source/banana.png';
     const bananaSize = 50;
     const yellowAreaTop = 100;
     const yellowAreaBottom = this.canvas.height - 150;
@@ -82,7 +82,7 @@ class Canvas2 extends Canvas {
           150,
           150,
           this.increaseBrokenBlocks.bind(this),
-          '../game2/boss.png'
+          './game2/boss.png'
         );
         this.boss.blockSpeed = this.blockSpeed;
         this.boss.originalBlockSpeed = this.blockSpeed;
@@ -175,7 +175,7 @@ class Canvas2 extends Canvas {
     this.destroy();
     isGame2Cleared = true;
     toggleOverPage();
-    game3Img.src = '../stagePage/HeroDuty2.png';
+    game3Img.src = './stagePage/HeroDuty2.png';
   }
 
   // 바넬로피가 먼저 도착
@@ -188,7 +188,7 @@ class Canvas2 extends Canvas {
       this.destroy();
       isGame2Cleared = true;
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty2.png';
+      game3Img.src = './stagePage/HeroDuty2.png';
     } else if (
       this.villains.some((villain) => villain.x + villain.width < 0) ||
       (this.boss && this.boss.x + this.boss.width < 0) ||
@@ -199,7 +199,7 @@ class Canvas2 extends Canvas {
       gameMode = 'GameOver';
       this.destroy();
       toggleOverPage();
-      game3Img.src = '../stagePage/HeroDuty.png';
+      game3Img.src = './stagePage/HeroDuty.png';
     }
   }
 
@@ -216,11 +216,11 @@ class Canvas2 extends Canvas {
         this.context.fillStyle = 'red';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.restore();
-        this.context.font = '48px Arial';
+        this.context.font = '48px Pixelify Sans ';
         this.context.fillStyle = 'red';
         this.context.textAlign = 'center';
         this.context.fillText(
-          'Warning! 보스보다 먼저 도착하세요!',
+          'Warning! Arrive before the boss!          ',
           this.canvas.width / 2,
           this.canvas.height / 2
         );
