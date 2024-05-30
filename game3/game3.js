@@ -3,12 +3,12 @@
 
 // ------------------------------------ javascript ------------------------------------
 /* 해당 페이지의 javascript 코드를 작성하고 삽압하는 구간입니다.*/
-let Game3Audio = new Audio("./source/Game3BGM.mp3");
+let Game3Audio = new Audio('./source/Game3BGM.mp3');
 // ---------------------------------- javascript function ----------------------------------
 /* 해당 페이지의 javascript에서 사용하는 function을 정의하는 구간입니다.*/
 function setGame3() {
-  document.querySelector("main").insertAdjacentHTML(
-    "afterbegin",
+  document.querySelector('main').insertAdjacentHTML(
+    'afterbegin',
     `
       <div id="game">
         <div id="game_container">
@@ -17,7 +17,7 @@ function setGame3() {
         `
   );
   // 특정 요소를 선택합니다.
-  let game = document.querySelector("#game");
+  let game = document.querySelector('#game');
   Game3Audio.loop = true;
   Game3Audio.volume = 0.3;
   Game3Audio.currentTime = 0;
@@ -28,11 +28,11 @@ function setGame3() {
   }
 
   // 새로운 Canvas 객체를 생성하고 해당 요소에 추가합니다.
-  canvas = new Game3_canvas("../source/game3Background4.webp");
+  canvas = new Game3_canvas('./source/game3Background4.webp');
   canvas.appendTo(game);
 }
 
 function endGame3() {
-  let game = document.querySelector("#game");
+  let game = document.querySelector('#game');
   canvas.removeFrom(game);
 }

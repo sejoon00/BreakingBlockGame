@@ -6,9 +6,9 @@ document.querySelector('main').insertAdjacentHTML(
   'afterbegin',
   `
   <section id="levelUp2">
-  <img src="../source/kingCandy.png" id="kingCandy">
-  <img src="../source/heroDuty.png" id="heroDuty">
-  <img src="../source/ralphAndVanellope.png" id="ralphAndVanellope">
+  <img src="./source/kingCandy.png" id="kingCandy">
+  <img src="./source/heroDuty.png" id="heroDuty">
+  <img src="./source/ralphAndVanellope.png" id="ralphAndVanellope">
 
   </section>
 `

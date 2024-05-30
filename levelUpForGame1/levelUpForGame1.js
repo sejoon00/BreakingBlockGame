@@ -8,9 +8,9 @@ document.querySelector('main').insertAdjacentHTML(
     <section id="levelUp1">
         <div id="container">
             <div id="speechBubble">I'm Gonna Wreck It!</div>
-            <img src="../source/ralph_paddle.png" id="ralph1">
-            <img src="../source/kingCandyVaenellope.png" id="kingCandyVaenellope">
-            <img src="../source/슈가러쉬.png" id="sugarRushImg">
+            <img src="./source/ralph_paddle.png" id="ralph1">
+            <img src="./source/kingCandyVaenellope.png" id="kingCandyVaenellope">
+            <img src="./source/슈가러쉬.png" id="sugarRushImg">
         </div>
         <div class="text_box">
             <span class="text"></span>
