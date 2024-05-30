@@ -17,7 +17,7 @@
   border-radius: 10px;
   border: 8px solid #b2b2b2;
   font-family: 'Pixelify Sans', sans-serif;
-  background: url('./source/escbackground.png');
+  background: url('../source/escbackground.png');
   flex-direction: column;
   justify-content: center;
   align-items: center;
